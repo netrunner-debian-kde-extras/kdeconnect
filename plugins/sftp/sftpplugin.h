@@ -44,8 +44,8 @@ Q_SIGNALS:
     Q_SCRIPTABLE void unmounted();
     
 public Q_SLOTS:
-    virtual bool receivePackage(const NetworkPackage& np);
-    virtual void connected();
+    virtual bool receivePackage(const NetworkPackage& np) override;
+    virtual void connected() override;
 
     Q_SCRIPTABLE void mount();
     Q_SCRIPTABLE void unmount();
@@ -58,7 +58,7 @@ public Q_SLOTS:
 
 private Q_SLOTS:
     void onMounted();
-    void onUnmounted(bool idleTimeout);
+    void onUnmounted();
     void onFailed(const QString& message);
     
 private:

@@ -31,10 +31,10 @@ SocketLineReader::SocketLineReader(QTcpSocket* socket, QObject* parent)
 
 void SocketLineReader::dataReceived()
 {
-    while(mSocket->canReadLine()) {
+    while (mSocket->canReadLine()) {
         const QByteArray line = mSocket->readLine();
-        if (line.length() > 1) {
-            mPackages.enqueue(line);//we don't want single \n
+        if (line.length() > 1) { //we don't want a single \n
+            mPackages.enqueue(line);
         }
     }
 

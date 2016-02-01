@@ -21,15 +21,14 @@
 #ifndef SHARE_CONFIG_H
 #define SHARE_CONFIG_H
 
-#include <kcmodule.h>
-#include <ksharedconfig.h>
+#include "kcmplugin/kdeconnectpluginkcm.h"
 
 namespace Ui {
     class ShareConfigUi;
 }
 
 class ShareConfig
-    : public KCModule
+    : public KdeConnectPluginKcm
 {
     Q_OBJECT
 public:
@@ -37,13 +36,12 @@ public:
     virtual ~ShareConfig();
 
 public Q_SLOTS:
-    virtual void save();
-    virtual void load();
-    virtual void defaults();
+    virtual void save() override;
+    virtual void load() override;
+    virtual void defaults() override;
 
 private:
     Ui::ShareConfigUi* m_ui;
-    KSharedConfigPtr m_cfg;
 
 };
 

@@ -26,7 +26,6 @@
 #include <QUdpSocket>
 
 #include "../linkprovider.h"
-#include "netaddress.h"
 
 class LanLinkProvider
     : public LinkProvider
@@ -37,13 +36,13 @@ public:
     LanLinkProvider();
     ~LanLinkProvider();
 
-    QString name() { return "LanLinkProvider"; }
-    int priority() { return PRIORITY_HIGH; }
+    QString name() override { return "LanLinkProvider"; }
+    int priority() override { return PRIORITY_HIGH; }
 
 public Q_SLOTS:
-    virtual void onNetworkChange(QNetworkSession::State state);
-    virtual void onStart();
-    virtual void onStop();
+    virtual void onNetworkChange() override;
+    virtual void onStart() override;
+    virtual void onStop() override;
     void connected();
     void connectError();
 

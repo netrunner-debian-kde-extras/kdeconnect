@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2014.
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2014, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2015-01-22 02:01+0000\n"
-"PO-Revision-Date: 2014-06-18 20:18+0200\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-10-24 19:09+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,71 +15,78 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 2.0\n"
 
-#: device.cpp:186
+#: device.cpp:193
 msgid "Already paired"
 msgstr "Redan ihopparade"
 
-#: device.cpp:189
+#: device.cpp:196
 msgid "Pairing already requested for this device"
 msgstr "Ihopparning redan begärd för apparaten"
 
-#: device.cpp:193
+#: device.cpp:207
 msgid "Device not reachable"
 msgstr "Apparaten kan inte nås"
 
-#: device.cpp:206
+#: device.cpp:218
 msgid "Error contacting device"
 msgstr "Fel vid försök att kontakta apparaten"
 
-#: device.cpp:244
+#: device.cpp:256
 msgid "Timed out"
 msgstr "Tidsgräns överskriden"
 
-#: device.cpp:343 device.cpp:395
+#: device.cpp:347 device.cpp:389
 msgid "Canceled by other peer"
 msgstr "Avbruten av motparten"
 
-#: device.cpp:359
+#: device.cpp:363
 msgid "Received incorrect key"
 msgstr "Mottog felaktig nyckel"
 
-#: device.cpp:376
-#, kde-format
-msgid "Pairing request from %1"
-msgstr "Begäran om ihopparning från %1"
-
-#: device.cpp:377
-msgid "Accept"
-msgstr "Acceptera"
-
-#: device.cpp:377
-msgid "Reject"
-msgstr "Avslå"
-
-#: device.cpp:437
+#: device.cpp:428
 msgid "Canceled by the user"
 msgstr "Avbruten av användaren"
 
-#: filetransferjob.cpp:59 filetransferjob.cpp:120
-msgid "Receiving file over KDE-Connect"
+#: filetransferjob.cpp:63 filetransferjob.cpp:80
+msgid "Receiving file over KDE Connect"
 msgstr "Tar emot fil via KDE-anslut"
 
-#: filetransferjob.cpp:60 filetransferjob.cpp:121
+#: filetransferjob.cpp:64 filetransferjob.cpp:81
 msgctxt "File transfer origin"
 msgid "From"
 msgstr "Från"
 
-#: filetransferjob.cpp:67
-msgid "Incoming file exists"
-msgstr "Inkommande fil finns"
+#: filetransferjob.cpp:69
+msgid "Filename already present"
+msgstr "Filnamnet finns redan"
 
-#: filetransferjob.cpp:123
+#: filetransferjob.cpp:82
 msgctxt "File transfer destination"
 msgid "To"
 msgstr "Till"
 
-#: filetransferjob.cpp:196
-msgid "Received incomplete file"
-msgstr "Mottog ofullständig fil"
+#: filetransferjob.cpp:101
+#, kde-format
+msgid "Received incomplete file: %1"
+msgstr "Mottog ofullständig fil: %1"
+
+#: kdeconnectconfig.cpp:64
+msgid "KDE Connect failed to start"
+msgstr "KDE-anslut misslyckades starta"
+
+#: kdeconnectconfig.cpp:65
+msgid ""
+"Could not find support for RSA in your QCA installation. If your "
+"distribution provides separate packages for QCA-ossl and QCA-gnupg, make "
+"sure you have them installed and try again."
+msgstr ""
+"Kunde inte hitta stöd för RSA i installationen av QCA. Om distributionen "
+"tillhandahåller separata paket för QCA-ossl och QCA-gnupg, försäkra dig om "
+"att de är installerade och försök igen."
+
+#: kdeconnectconfig.cpp:101
+#, kde-format
+msgid "Could not store private key file: %1"
+msgstr "Kunde inte lagra privat nyckelfil: %1"

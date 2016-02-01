@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2015-01-22 02:01+0000\n"
-"PO-Revision-Date: 2015-01-07 11:01+0100\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-09-13 21:01+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
 "Language: nl\n"
@@ -17,16 +17,24 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: battery/batteryplugin.cpp:77
+#: battery/batteryplugin.cpp:78
 #, kde-format
 msgctxt "device name: low battery"
-msgid "%1: low battery"
+msgid "%1: Low Battery"
 msgstr "%1: laag batterijniveau"
 
-#: battery/batteryplugin.cpp:78
+#: battery/batteryplugin.cpp:79
 #, kde-format
 msgid "Battery at %1%"
 msgstr "Batterij op %1%"
+
+#: mousepad/mousepadplugin.cpp:116
+msgid "KDE Connect"
+msgstr "KDE Connect"
+
+#: mousepad/mousepadplugin.cpp:116
+msgid "Use your phone as a touchpad and keyboard"
+msgstr "Uw telefoon gebruiken als een touchpad en toetsenbord"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, PauseMusicConfigUi)
 #: pausemusic/pausemusic_config.ui:17
@@ -63,65 +71,40 @@ msgstr "Mediaspelers pauzeren"
 msgid "Mute system sound"
 msgstr "Systeemgeluid dempen"
 
-#: ping/pingplugin.cpp:51
+#: ping/pingplugin.cpp:54
 msgid "Ping!"
 msgstr "Ping!"
 
-#: sftp/mounter.cpp:176
+#: sftp/mounter.cpp:156
 msgid "Failed to start sshfs"
 msgstr "Starten van sshfs is mislukt"
 
-#: sftp/mounter.cpp:198
+#: sftp/mounter.cpp:170
 msgid "Error when accessing to filesystem"
 msgstr "Fout bij toegang tot bestandssysteem"
 
-#: sftp/mounter.cpp:209
+#: sftp/mounter.cpp:179
 msgid "Failed to mount filesystem: device not responding"
 msgstr "Bestandssysteem aankoppelen is mislukt: apparaat geeft geen respons"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, ShareConfigUi)
-#. i18n: ectx: property (windowTitle), widget (QWidget, SftpConfigUi)
-#: sftp/sftp_config.ui:17 share/share_config.ui:17
-msgid "Share plugin settings"
-msgstr "Plug-in-instellingen van delen"
-
-#. i18n: ectx: property (title), widget (QGroupBox, error)
-#: sftp/sftp_config.ui:23
-msgid "Error"
-msgstr "Fout"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: sftp/sftp_config.ui:45
-msgid "sshfs not found in PATH"
-msgstr "sshfs niet in PATH gevonden"
-
-#. i18n: ectx: property (text), widget (QCheckBox, idle)
-#: sftp/sftp_config.ui:86
-msgid "Disconnect when idle"
-msgstr "Verbinding verbreken bij niets doen"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: sftp/sftp_config.ui:115
-msgid "Timeout:"
-msgstr "Tijdslimiet:"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, timeout)
-#: sftp/sftp_config.ui:131
-msgid " min"
-msgstr " min"
-
-#: sftp/sftpplugin.cpp:160
+#: sftp/sftpplugin.cpp:150
 msgid "All files"
 msgstr "Alle bestanden"
 
-#: sftp/sftpplugin.cpp:161
+#: sftp/sftpplugin.cpp:151
 msgid "Camera pictures"
 msgstr "Afbeeldingen van camera"
 
-#: sftp/sftpplugin.cpp:208
-#, kde-format
-msgid "Device %1"
-msgstr "Apparaat %1"
+#: share/share_config.cpp:38
+msgid "&percnt;1 in the path will be replaced with the specific device name."
+msgstr ""
+"%percent;1 in het pad zal worden vervangen door de gespecificeerd "
+"apparaatnaam."
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, ShareConfigUi)
+#: share/share_config.ui:17
+msgid "Share plugin settings"
+msgstr "Plug-in-instellingen van delen"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: share/share_config.ui:23
@@ -133,45 +116,30 @@ msgstr "Bezig met ontvangen"
 msgid "Save files in:"
 msgstr "Bestanden opslaan in:"
 
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: share/share_config.ui:53
-#, no-c-format, kde-format
-msgid "%1  in the path will be replaced with the specific device name."
-msgstr ""
-"%1 in het pad zal worden vervangen door de gespecificeerd apparaatnaam."
-
-#: share/shareplugin.cpp:135
-msgid "Transfer finished"
-msgstr "Overdracht is voltooid"
-
-#: share/shareplugin.cpp:137
-msgid "Open destination folder"
-msgstr "Doelmap openen"
-
-#: telephony/telephonyplugin.cpp:41
+#: telephony/telephonyplugin.cpp:44
 msgid "unknown number"
 msgstr "onbekend nummer"
 
-#: telephony/telephonyplugin.cpp:50
+#: telephony/telephonyplugin.cpp:54
 #, kde-format
 msgid "Incoming call from %1"
 msgstr "Inkomend gesprek van %1"
 
-#: telephony/telephonyplugin.cpp:54
+#: telephony/telephonyplugin.cpp:58
 #, kde-format
 msgid "Missed call from %1"
-msgstr "Gemist gesprek van %1"
+msgstr "Gemiste oproep van %1"
 
-#: telephony/telephonyplugin.cpp:59
+#: telephony/telephonyplugin.cpp:64
 #, kde-format
-msgid "SMS from %1: %2"
-msgstr "SMS van %1: %2"
+msgid "SMS from %1<br>%2"
+msgstr "SMS van %1<br>%2"
 
-#: telephony/telephonyplugin.cpp:68
+#: telephony/telephonyplugin.cpp:74
 #, kde-format
-msgid "Unknown telephony event: %2"
-msgstr "Onbekende telefoongebeurtenis: %2"
+msgid "Unknown telephony event: %1"
+msgstr "Onbekende telefoongebeurtenis: %1"
 
-#: telephony/telephonyplugin.cpp:81
-msgid "Mute call"
+#: telephony/telephonyplugin.cpp:87
+msgid "Mute Call"
 msgstr "Oproep dempen"

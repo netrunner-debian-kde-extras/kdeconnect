@@ -25,7 +25,7 @@
 #include <QVector>
 #include <QNetworkSession>
 
-#include "../networkpackage.h"
+#include "core/networkpackage.h"
 
 class DeviceLink;
 
@@ -49,7 +49,7 @@ public:
 public Q_SLOTS:
     virtual void onStart() = 0;
     virtual void onStop() = 0;
-    virtual void onNetworkChange(QNetworkSession::State state) = 0;
+    virtual void onNetworkChange() = 0;
 
 Q_SIGNALS:
     //NOTE: The provider will destroy the DeviceLink when it's no longer accessible,

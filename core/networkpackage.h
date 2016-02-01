@@ -30,28 +30,29 @@
 #include <QIODevice>
 #include <QtCrypto>
 #include <QSharedPointer>
-#include <qjson/parser.h>
-#include <KUrl>
+#include <QUrl>
 
 #include "kdeconnectcore_export.h"
-#include "kdebugnamespace.h"
 #include "default_args.h"
 
 class FileTransferJob;
 
+// TODO: investigate if we can turn into Q_GADGET, drop QObject
 class KDECONNECTCORE_EXPORT NetworkPackage : public QObject
 {
     Q_OBJECT
     Q_PROPERTY( QString id READ id WRITE setId )
     Q_PROPERTY( QString type READ type WRITE setType )
     Q_PROPERTY( QVariantMap body READ body WRITE setBody )
+    Q_PROPERTY( QVariantMap payloadTransferInfo READ payloadTransferInfo WRITE setPayloadTransferInfo )
+    Q_PROPERTY( qint64 payloadSize READ payloadSize WRITE setPayloadSize )
 
 public:
 
     const static QCA::EncryptionAlgorithm EncryptionAlgorithm;
     const static int ProtocolVersion;
 
-    NetworkPackage(const QString& type);
+    explicit NetworkPackage(const QString& type);
 
     static void createIdentityPackage(NetworkPackage*);
 
@@ -78,7 +79,7 @@ public:
     void setPayload(const QSharedPointer<QIODevice>& device, qint64 payloadSize) { mPayload = device; mPayloadSize = payloadSize; Q_ASSERT(mPayloadSize >= -1); }
     bool hasPayload() const { return (mPayloadSize != 0); }
     qint64 payloadSize() const { return mPayloadSize; } //-1 means it is an endless stream
-    FileTransferJob* createPayloadTransferJob(const KUrl& destination) const;
+    FileTransferJob* createPayloadTransferJob(const QUrl &destination) const;
 
     //To be called by a particular DeviceLink
     QVariantMap payloadTransferInfo() const { return mPayloadTransferInfo; }

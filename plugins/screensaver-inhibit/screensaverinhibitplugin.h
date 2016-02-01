@@ -25,7 +25,7 @@
 
 #include <core/kdeconnectplugin.h>
 
-class KDE_EXPORT ScreensaverInhibitPlugin
+class Q_DECL_EXPORT ScreensaverInhibitPlugin
     : public KdeConnectPlugin
 {
     Q_OBJECT
@@ -35,8 +35,8 @@ public:
     virtual ~ScreensaverInhibitPlugin();
 
 public Q_SLOTS:
-    virtual bool receivePackage(const NetworkPackage& np);
-    virtual void connected();
+    virtual bool receivePackage(const NetworkPackage& np) override;
+    virtual void connected() override;
 
 private:
     uint inhibitCookie;

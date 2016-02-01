@@ -37,12 +37,12 @@ class SocketLineReader
     Q_OBJECT
 
 public:
-    SocketLineReader(QTcpSocket* socket, QObject* parent = 0);
+    explicit SocketLineReader(QTcpSocket* socket, QObject* parent = nullptr);
 
     QByteArray readLine() { return mPackages.dequeue(); }
     qint64 write(const QByteArray& data) { return mSocket->write(data); }
-    QHostAddress peerAddress() { return mSocket->peerAddress(); }
-    qint64 bytesAvailable() { return mPackages.size(); }
+    QHostAddress peerAddress() const { return mSocket->peerAddress(); }
+    qint64 bytesAvailable() const { return mPackages.size(); }
 
 Q_SIGNALS:
     void readyRead();

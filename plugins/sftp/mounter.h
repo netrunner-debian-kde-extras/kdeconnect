@@ -25,7 +25,6 @@
 #include <KProcess>
 
 #include "sftpplugin.h"
-#include "mountloop.h"
 
 class Mounter
     : public QObject
@@ -33,7 +32,7 @@ class Mounter
     Q_OBJECT
 public:
   
-    explicit Mounter(SftpPlugin *sftp, int idleTimeout);
+    explicit Mounter(SftpPlugin *sftp);
     virtual ~Mounter();
     
     bool wait();
@@ -41,7 +40,7 @@ public:
     
 Q_SIGNALS:
     void mounted();
-    void unmounted(bool idleTimeout);    
+    void unmounted();
     void failed(const QString& message);
    
 private Q_SLOTS:
@@ -50,24 +49,16 @@ private Q_SLOTS:
     void onError(QProcess::ProcessError error);
     void onFinished(int exitCode, QProcess::ExitStatus exitStatus);
     void onMountTimeout();
-    void onIdleTimeout();
-    void readProcessOut();
     void start();
 
-private: 
-    int generateId();
-    void cleanMountPoint();
+private:
     void unmount();
     
 private:
     SftpPlugin* m_sftp;
-    QScopedPointer<KProcess> m_proc;
-    int m_id;
-    const QString m_mpoint;
+    KProcess* m_proc;
     QTimer m_connectTimer;
-    QTimer m_idleTimer;
-    QDateTime m_lastActivity;
-    MountLoop m_loop;
+    QString m_mountPoint;
     bool m_started;
 };
 

@@ -23,15 +23,13 @@
 
 #include <QFile>
 
-#include <core/kdebugnamespace.h>
-
 class AutoClosingQFile : public QFile
 {
     Q_OBJECT
 public:
 
-    AutoClosingQFile(const QString &name);
-    virtual qint64 readData(char* data, qint64 maxlen) {
+    explicit AutoClosingQFile(const QString &name);
+    qint64 readData(char* data, qint64 maxlen) Q_DECL_OVERRIDE {
         qint64 read = QFile::readData(data, maxlen);
         if (read == -1 || read == bytesAvailable()) {
             close();

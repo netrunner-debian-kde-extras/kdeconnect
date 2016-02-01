@@ -25,13 +25,12 @@
 #include <QSet>
 #include <QMap>
 
-#include <KDEDModule>
-#include <KPluginFactory>
 #include "kdeconnectcore_export.h"
 
-class DaemonPrivate;
 class NetworkPackage;
 class DeviceLink;
+class Device;
+class QNetworkAccessManager;
 
 class KDECONNECTCORE_EXPORT Daemon
     : public QObject
@@ -40,18 +39,31 @@ class KDECONNECTCORE_EXPORT Daemon
     Q_CLASSINFO("D-Bus Interface", "org.kde.kdeconnect.daemon")
 
 public:
-    Daemon(QObject *parent);
+    explicit Daemon(QObject *parent);
     ~Daemon();
 
 public Q_SLOTS:
+    /**
+     * Returns the daemon.
+     *
+     * Note this can't be called before constructing the Daemon.
+     */
+    static Daemon* instance();
 
     //After calling this, signal deviceDiscovered will be triggered for each device
     Q_SCRIPTABLE void setDiscoveryEnabled(bool b);
 
     Q_SCRIPTABLE void forceOnNetworkChange();
 
+    Q_SCRIPTABLE QString announcedName();
+    Q_SCRIPTABLE void setAnnouncedName(QString name);
+
     //Returns a list of ids. The respective devices can be manipulated using the dbus path: "/modules/kdeconnect/Devices/"+id
     Q_SCRIPTABLE QStringList devices(bool onlyReachable = false, bool onlyVisible = false) const;
+
+    virtual void requestPairing(Device *d) = 0;
+    virtual void reportError(const QString &title, const QString &description) = 0;
+    virtual QNetworkAccessManager* networkAccessManager();
 
 Q_SIGNALS:
     Q_SCRIPTABLE void deviceAdded(const QString& id);
@@ -60,10 +72,10 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void onNewDeviceLink(const NetworkPackage& identityPackage, DeviceLink* dl);
-    void onDeviceReachableStatusChanged();
+    void onDeviceStatusChanged();
 
 private:
-    QScopedPointer<DaemonPrivate> d;
+    QScopedPointer<struct DaemonPrivate> d;
 };
 
 #endif

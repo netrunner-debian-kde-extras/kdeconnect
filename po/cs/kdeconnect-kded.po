@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Vít Pelčák <vit@pelcak.org>, 2013, 2014.
+# Vít Pelčák <vit@pelcak.org>, 2013, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-06-18 01:56+0000\n"
-"PO-Revision-Date: 2014-06-23 10:11+0200\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-03-30 15:11+0100\n"
 "Last-Translator: Vít Pelčák <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,20 +15,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 2.0\n"
 
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Vít Pelčák"
+#: kdeconnectd.cpp:80
+#, kde-format
+msgid "Pairing request from %1"
+msgstr "Požadavek na párování od %1"
 
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "vit@pelcak.org"
+#: kdeconnectd.cpp:81
+msgid "Accept"
+msgstr "Přijmout"
 
-#: kdeconnectd.cpp:63
-msgid "kdeconnect"
-msgstr "kdeconnect"
-
-#: kdeconnectd.cpp:65
-msgid "Connect your devices and KDE"
-msgstr "Propojte svoje zařízení a KDE"
+#: kdeconnectd.cpp:81
+msgid "Reject"
+msgstr "Odmítnout"

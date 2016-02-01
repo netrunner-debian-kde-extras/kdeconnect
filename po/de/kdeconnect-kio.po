@@ -1,12 +1,9 @@
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-#
 # Burkhard Lück <lueck@hube-lueck.de>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-10-11 01:54+0000\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
 "PO-Revision-Date: 2014-02-15 10:51+0100\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -17,30 +14,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.5\n"
 
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Burkhard Lück"
-
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "lueck@hube-lueck.de"
-
-#: kiokdeconnect.cpp:39
-msgid "kiokdeconnect"
-msgstr "kiokdeconnect"
-
-#: kiokdeconnect.cpp:93
+#: kiokdeconnect.cpp:84
 msgid "Listing devices..."
 msgstr "Geräte werden aufgelistet ..."
 
-#: kiokdeconnect.cpp:131
+#: kiokdeconnect.cpp:121
 msgid "Accessing device..."
 msgstr "Zugriff auf Geräte ..."
 
-#: kiokdeconnect.cpp:144
+#: kiokdeconnect.cpp:134
 msgid "Could not mount device filesystem"
 msgstr "Dateisystem des Geräts kann nicht eingebunden werden"
 
-#: kiokdeconnect.cpp:189
+#: kiokdeconnect.cpp:178
 msgid "Could not contact background service."
 msgstr "Keine Verbindung zum Hintergrund-Dienst."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2015-01-22 02:01+0000\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
 "PO-Revision-Date: 2015-01-15 14:01+0300\n"
 "Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
 "Language-Team: Arabic <kde-i18n-doc@kde.org>\n"
@@ -18,16 +18,26 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: battery/batteryplugin.cpp:77
-#, kde-format
+#: battery/batteryplugin.cpp:78
+#, fuzzy, kde-format
+#| msgctxt "device name: low battery"
+#| msgid "%1: low battery"
 msgctxt "device name: low battery"
-msgid "%1: low battery"
+msgid "%1: Low Battery"
 msgstr "%1: البطّاريّة ضعيفة"
 
-#: battery/batteryplugin.cpp:78
+#: battery/batteryplugin.cpp:79
 #, kde-format
 msgid "Battery at %1%"
 msgstr "البطّاريّة عند %1%"
+
+#: mousepad/mousepadplugin.cpp:116
+msgid "KDE Connect"
+msgstr ""
+
+#: mousepad/mousepadplugin.cpp:116
+msgid "Use your phone as a touchpad and keyboard"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, PauseMusicConfigUi)
 #: pausemusic/pausemusic_config.ui:17
@@ -64,65 +74,40 @@ msgstr "ألبث مشغّلات الوسائط"
 msgid "Mute system sound"
 msgstr "اكتمل صوت النّظام"
 
-#: ping/pingplugin.cpp:51
+#: ping/pingplugin.cpp:54
 msgid "Ping!"
 msgstr "وخزة!"
 
-#: sftp/mounter.cpp:176
+#: sftp/mounter.cpp:156
 msgid "Failed to start sshfs"
 msgstr "فشل بدء sshfs"
 
-#: sftp/mounter.cpp:198
+#: sftp/mounter.cpp:170
 msgid "Error when accessing to filesystem"
 msgstr "خطأ أثناء النّفاذ إلى نظام الملفّات"
 
-#: sftp/mounter.cpp:209
+#: sftp/mounter.cpp:179
 msgid "Failed to mount filesystem: device not responding"
 msgstr "فشل ضمّ نظام الملفّات: الجهاز لا يستجيب"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, ShareConfigUi)
-#. i18n: ectx: property (windowTitle), widget (QWidget, SftpConfigUi)
-#: sftp/sftp_config.ui:17 share/share_config.ui:17
-msgid "Share plugin settings"
-msgstr "إعدادات ملحقة المشاركة"
-
-#. i18n: ectx: property (title), widget (QGroupBox, error)
-#: sftp/sftp_config.ui:23
-msgid "Error"
-msgstr "خطأ"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: sftp/sftp_config.ui:45
-msgid "sshfs not found in PATH"
-msgstr "لم يُعثر على sshf في PATH"
-
-#. i18n: ectx: property (text), widget (QCheckBox, idle)
-#: sftp/sftp_config.ui:86
-msgid "Disconnect when idle"
-msgstr "اقطع الاتّصال عند الخمول"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: sftp/sftp_config.ui:115
-msgid "Timeout:"
-msgstr "المهلة:"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, timeout)
-#: sftp/sftp_config.ui:131
-msgid " min"
-msgstr " دق"
-
-#: sftp/sftpplugin.cpp:160
+#: sftp/sftpplugin.cpp:150
 msgid "All files"
 msgstr "كلّ الملفّات"
 
-#: sftp/sftpplugin.cpp:161
+#: sftp/sftpplugin.cpp:151
 msgid "Camera pictures"
 msgstr "صور الكاميرا"
 
-#: sftp/sftpplugin.cpp:208
-#, kde-format
-msgid "Device %1"
-msgstr "الجهاز %1"
+#: share/share_config.cpp:38
+#, fuzzy
+#| msgid "%1  in the path will be replaced with the specific device name."
+msgid "&percnt;1 in the path will be replaced with the specific device name."
+msgstr "%1 هو المسار الذي سيُستبدَل باسم الجهاز المحدّد."
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, ShareConfigUi)
+#: share/share_config.ui:17
+msgid "Share plugin settings"
+msgstr "إعدادات ملحقة المشاركة"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: share/share_config.ui:23
@@ -134,44 +119,32 @@ msgstr "الاستقبال"
 msgid "Save files in:"
 msgstr "احفظ الملفّات في:"
 
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: share/share_config.ui:53
-#, no-c-format, kde-format
-msgid "%1  in the path will be replaced with the specific device name."
-msgstr "%1 هو المسار الذي سيُستبدَل باسم الجهاز المحدّد."
-
-#: share/shareplugin.cpp:135
-msgid "Transfer finished"
-msgstr "اكتمل النّقل"
-
-#: share/shareplugin.cpp:137
-msgid "Open destination folder"
-msgstr "افتح مجلّد المقصد"
-
-#: telephony/telephonyplugin.cpp:41
+#: telephony/telephonyplugin.cpp:44
 msgid "unknown number"
 msgstr "رقم مجهول"
 
-#: telephony/telephonyplugin.cpp:50
+#: telephony/telephonyplugin.cpp:54
 #, kde-format
 msgid "Incoming call from %1"
 msgstr "مكالمة واردة من %1"
 
-#: telephony/telephonyplugin.cpp:54
+#: telephony/telephonyplugin.cpp:58
 #, kde-format
 msgid "Missed call from %1"
 msgstr "مكالمة فائتة من %1"
 
-#: telephony/telephonyplugin.cpp:59
-#, kde-format
-msgid "SMS from %1: %2"
+#: telephony/telephonyplugin.cpp:64
+#, fuzzy, kde-format
+#| msgid "SMS from %1: %2"
+msgid "SMS from %1<br>%2"
 msgstr "رسالة SMS من %1: ‏%2"
 
-#: telephony/telephonyplugin.cpp:68
-#, kde-format
-msgid "Unknown telephony event: %2"
+#: telephony/telephonyplugin.cpp:74
+#, fuzzy, kde-format
+#| msgid "Unknown telephony event: %2"
+msgid "Unknown telephony event: %1"
 msgstr "حدث هاتفيّ مجهول: %2"
 
-#: telephony/telephonyplugin.cpp:81
-msgid "Mute call"
+#: telephony/telephonyplugin.cpp:87
+msgid "Mute Call"
 msgstr ""

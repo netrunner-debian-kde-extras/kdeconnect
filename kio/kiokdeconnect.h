@@ -22,23 +22,26 @@
 #define KIOKDECONNECT_H
 
 #include <QObject>
+#include <QLoggingCategory>
 
 #include <kio/slavebase.h>
 
 #include "interfaces/dbusinterfaces.h"
 
+Q_DECLARE_LOGGING_CATEGORY(KDECONNECT_KIO)
+
 class KioKdeconnect : public QObject, public KIO::SlaveBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
     KioKdeconnect(const QByteArray &pool, const QByteArray &app);
 
-    void get(const KUrl &url);
-    void listDir(const KUrl &url);
-    void stat(const KUrl &url);
+    void get(const QUrl &url) override;
+    void listDir(const QUrl &url) override;
+    void stat(const QUrl &url) override;
 
-    void setHost(const QString &constHostname, quint16 port, const QString &user, const QString &pass);
+    void setHost(const QString &constHostname, quint16 port, const QString &user, const QString &pass) override;
 
     void listAllDevices(); //List all devices exported by m_dbusInterface
     void listDevice(); //List m_currentDevice

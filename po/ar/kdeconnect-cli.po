@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-11-11 02:05+0000\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
 "PO-Revision-Date: 2015-01-11 19:12+0300\n"
 "Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
 "Language-Team: Arabic <kde-i18n-doc@kde.org>\n"
@@ -26,67 +26,143 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "safa1996alfulaij@gmail.com"
 
-#: kdeconnect-cli.cpp:34
+#: kdeconnect-cli.cpp:41
 msgid "KDE Connect CLI tool"
 msgstr "أداة سطر أوامر لكدي المتّصل"
 
-#: kdeconnect-cli.cpp:35
-msgid "(C) 2013 Aleix Pol Gonzalez"
+#: kdeconnect-cli.cpp:43
+msgid "(C) 2015 Aleix Pol Gonzalez"
 msgstr ""
 
-#: kdeconnect-cli.cpp:36
+#: kdeconnect-cli.cpp:46
 msgid "Aleix Pol Gonzalez"
 msgstr ""
 
-#: kdeconnect-cli.cpp:37
+#: kdeconnect-cli.cpp:47
 msgid "Albert Vaca Cintora"
 msgstr ""
 
-#: kdeconnect-cli.cpp:41
-msgid "List all devices."
+#: kdeconnect-cli.cpp:49
+#, fuzzy
+#| msgid "List all devices."
+msgid "List all devices"
 msgstr "اسرد كلّ الأجهزة."
 
-#: kdeconnect-cli.cpp:42
-msgid "Search for devices in the network and re-establish connections."
+#: kdeconnect-cli.cpp:50
+msgid "List available (paired and reachable) devices"
+msgstr ""
+
+#: kdeconnect-cli.cpp:51
+msgid ""
+"Make --list-devices or --list-available print only the devices id, to ease "
+"scripting"
+msgstr ""
+
+#: kdeconnect-cli.cpp:52
+#, fuzzy
+#| msgid "Search for devices in the network and re-establish connections."
+msgid "Search for devices in the network and re-establish connections"
 msgstr "ابحث عن الأجهزة في الشّبكة وأعد إنشاء الاتّصالات."
 
-#: kdeconnect-cli.cpp:43
-msgid "Request pairing to a said device."
+#: kdeconnect-cli.cpp:53
+#, fuzzy
+#| msgid "Request pairing to a said device."
+msgid "Request pairing to a said device"
 msgstr "اطلب الاقتران بجهاز ما."
 
-#: kdeconnect-cli.cpp:44
-msgid "Stop pairing to a said device."
+#: kdeconnect-cli.cpp:54
+#, fuzzy
+#| msgid "Stop pairing to a said device."
+msgid "Stop pairing to a said device"
 msgstr "أزل الاقتران بجهاز ما."
 
-#: kdeconnect-cli.cpp:45
-msgid "Send a ping to said device."
+#: kdeconnect-cli.cpp:55
+#, fuzzy
+#| msgid "Send a ping to said device."
+msgid "Sends a ping to said device"
 msgstr "أرسل وخزة إلى جهاز ما."
 
-#: kdeconnect-cli.cpp:46
-msgid "Same as ping but you can customize the message shown."
+#: kdeconnect-cli.cpp:56
+#, fuzzy
+#| msgid "Same as ping but you can customize the message shown."
+msgid "Same as ping but you can set the message to display"
 msgstr "نفس ping لكنّك تستطيع تخصيص الرّسالة الظّاهرة."
 
-#: kdeconnect-cli.cpp:47
-msgid "Share a file to a said device."
+#: kdeconnect-cli.cpp:56
+msgid "message"
+msgstr ""
+
+#: kdeconnect-cli.cpp:57
+#, fuzzy
+#| msgid "Share a file to a said device."
+msgid "Share a file to a said device"
 msgstr "شارك ملفًّا مع جهاز ما."
 
-#: kdeconnect-cli.cpp:48
-msgid "Display the notifications on a said device."
+#: kdeconnect-cli.cpp:58
+#, fuzzy
+#| msgid "Display the notifications on a said device."
+msgid "Display the notifications on a said device"
 msgstr "اعرض الإخطارات في جهاز ما."
 
-#: kdeconnect-cli.cpp:50
-msgid "Device ID."
+#: kdeconnect-cli.cpp:59
+msgid "Lock the specified device"
+msgstr ""
+
+#: kdeconnect-cli.cpp:60
+#, fuzzy
+#| msgid "Device ID."
+msgid "Device ID"
 msgstr "معرّف الجهاز."
 
-#: kdeconnect-cli.cpp:80
+#: kdeconnect-cli.cpp:85
+msgid "(paired and reachable)"
+msgstr ""
+
+#: kdeconnect-cli.cpp:87
+msgid "(reachable)"
+msgstr ""
+
+#: kdeconnect-cli.cpp:89
+msgid "(paired)"
+msgstr ""
+
+#: kdeconnect-cli.cpp:95
+#, fuzzy, kde-format
+#| msgid "No device specified"
+msgid "1 device found"
+msgid_plural "%1 devices found"
+msgstr[0] "لم يحدّد أيّ جهاز"
+msgstr[1] "لم يحدّد أيّ جهاز"
+msgstr[2] "لم يحدّد أيّ جهاز"
+msgstr[3] "لم يحدّد أيّ جهاز"
+msgstr[4] "لم يحدّد أيّ جهاز"
+msgstr[5] "لم يحدّد أيّ جهاز"
+
+#: kdeconnect-cli.cpp:97
+#, fuzzy
+#| msgid "No device specified"
+msgid "No devices found"
+msgstr "لم يحدّد أيّ جهاز"
+
+#: kdeconnect-cli.cpp:105
 msgid "No device specified"
 msgstr "لم يحدّد أيّ جهاز"
 
-#: kdeconnect-cli.cpp:92
+#: kdeconnect-cli.cpp:116
 #, kde-format
 msgid "Couldn't share %1"
 msgstr "تعذّرت مشاركة %1"
 
-#: kdeconnect-cli.cpp:125
-msgid "Nothing to be done with the device"
+#: kdeconnect-cli.cpp:121
+msgid "Already paired"
+msgstr ""
+
+#: kdeconnect-cli.cpp:129
+msgid "Already not paired"
+msgstr ""
+
+#: kdeconnect-cli.cpp:150
+#, fuzzy
+#| msgid "Nothing to be done with the device"
+msgid "Nothing to be done"
 msgstr "لا شيء لفعله مع الجهاز"

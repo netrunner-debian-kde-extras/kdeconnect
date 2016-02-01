@@ -34,15 +34,15 @@ class UploadJob
 {
     Q_OBJECT
 public:
-    UploadJob(const QSharedPointer<QIODevice>& source);
-    virtual void start();
+    explicit UploadJob(const QSharedPointer<QIODevice>& source);
+    virtual void start() override;
     QVariantMap getTransferInfo();
 
 private:
     QSharedPointer<QIODevice> mInput;
     QTcpServer* mServer;
     QTcpSocket* mSocket;
-    qint16 mPort;
+    quint16 mPort;
 
 private Q_SLOTS:
     void readyRead();

@@ -18,16 +18,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <qalgorithms.h>
-
-#include "kdebugnamespace.h"
 #include "uploadjob.h"
+
+#include <qalgorithms.h>
+#include <QtGlobal>
+
+#include "core_debug.h"
 
 UploadJob::UploadJob(const QSharedPointer<QIODevice>& source): KJob()
 {
     mInput = source;
     mServer = new QTcpServer(this);
-    mSocket = 0;
+    mSocket = nullptr;
+    mPort = 0;
 
     connect(mInput.data(), SIGNAL(readyRead()), this, SLOT(readyRead()));
     connect(mInput.data(), SIGNAL(aboutToClose()), this, SLOT(aboutToClose()));
@@ -36,10 +39,10 @@ UploadJob::UploadJob(const QSharedPointer<QIODevice>& source): KJob()
 void UploadJob::start()
 {
     mPort = 1739;
-    while(!mServer->listen(QHostAddress::Any, mPort)) {
+    while (!mServer->listen(QHostAddress::Any, mPort)) {
         mPort++;
         if (mPort > 1764) { //No ports available?
-            kDebug(debugArea()) << "Error opening a port in range 1739-1764 for file transfer";
+            qWarning(KDECONNECT_CORE) << "Error opening a port in range 1739-1764 for file transfer";
             mPort = 0;
             return;
         }
@@ -91,10 +94,10 @@ void UploadJob::aboutToClose()
 
 QVariantMap UploadJob::getTransferInfo()
 {
+    Q_ASSERT(mPort != 0);
+
     QVariantMap ret;
-
     ret["port"] = mPort;
-
     return ret;
 }
 

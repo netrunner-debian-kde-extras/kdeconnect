@@ -27,7 +27,7 @@
 
 #define PACKAGE_TYPE_PING QLatin1String("kdeconnect.ping")
 
-class KDE_EXPORT PingPlugin
+class Q_DECL_EXPORT PingPlugin
     : public KdeConnectPlugin
 {
     Q_OBJECT
@@ -36,13 +36,13 @@ class KDE_EXPORT PingPlugin
 public:
     explicit PingPlugin(QObject *parent, const QVariantList &args);
     virtual ~PingPlugin();
-    
+
     Q_SCRIPTABLE void sendPing();
     Q_SCRIPTABLE void sendPing(const QString& customMessage);
 
 public Q_SLOTS:
-    virtual bool receivePackage(const NetworkPackage& np);
-    virtual void connected();
+    virtual bool receivePackage(const NetworkPackage& np) override;
+    virtual void connected() override;
 
 private:
     QString dbusPath() const;

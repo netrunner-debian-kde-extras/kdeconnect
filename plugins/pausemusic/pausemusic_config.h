@@ -21,15 +21,14 @@
 #ifndef PAUSEMUSIC_CONFIG_H
 #define PAUSEMUSIC_CONFIG_H
 
-#include <kcmodule.h>
-#include <ksharedconfig.h>
+#include "kcmplugin/kdeconnectpluginkcm.h"
 
 namespace Ui {
     class PauseMusicConfigUi;
 }
 
 class PauseMusicConfig
-    : public KCModule
+    : public KdeConnectPluginKcm
 {
     Q_OBJECT
 public:
@@ -37,13 +36,12 @@ public:
     virtual ~PauseMusicConfig();
 
 public Q_SLOTS:
-    virtual void save();
-    virtual void load();
-    virtual void defaults();
+    virtual void save() override;
+    virtual void load() override;
+    virtual void defaults() override;
 
 private:
     Ui::PauseMusicConfigUi* m_ui;
-    KSharedConfigPtr m_cfg;
 
 };
 

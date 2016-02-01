@@ -21,13 +21,15 @@
 #ifndef TELEPHONYPLUGIN_H
 #define TELEPHONYPLUGIN_H
 
-#include <knotification.h>
+#include <QLoggingCategory>
+
+#include <KNotification>
 
 #include <core/kdeconnectplugin.h>
 
-#include <KStatusNotifierItem>
-
 #define PACKAGE_TYPE_TELEPHONY QLatin1String("kdeconnect.telephony")
+
+Q_DECLARE_LOGGING_CATEGORY(KDECONNECT_PLUGIN_TELEPHONY)
 
 class TelephonyPlugin
     : public KdeConnectPlugin
@@ -38,8 +40,8 @@ public:
     explicit TelephonyPlugin(QObject *parent, const QVariantList &args);
 
 public Q_SLOTS:
-    virtual bool receivePackage(const NetworkPackage& np);
-    virtual void connected() { }
+    virtual bool receivePackage(const NetworkPackage& np) override;
+    virtual void connected() override { }
     void sendMutePackage();
 
 private:

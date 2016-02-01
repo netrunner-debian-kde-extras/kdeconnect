@@ -1,5 +1,6 @@
 /**
  * Copyright 2014 Ahmed I. Khalil <ahmedibrahimkhali@gmail.com>
+ * Copyright 2015 Martin Gräßlin <mgraesslin@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -19,14 +20,22 @@
  */
 
 #include "mousepadplugin.h"
-
-#include <core/networkpackage.h>
+#include <KPluginFactory>
+#include <KLocalizedString>
+#include <QDebug>
+#include <QGuiApplication>
+#include <QX11Info>
 #include <X11/extensions/XTest.h>
 #include <X11/keysym.h>
 #include <fakekey/fakekey.h>
 
-K_PLUGIN_FACTORY( KdeConnectPluginFactory, registerPlugin< MousepadPlugin >(); )
-K_EXPORT_PLUGIN( KdeConnectPluginFactory("kdeconnect_mousepad", "kdeconnect-plugins") )
+#if HAVE_WAYLAND
+#include <KWayland/Client/connection_thread.h>
+#include <KWayland/Client/fakeinput.h>
+#include <KWayland/Client/registry.h>
+#endif
+
+K_PLUGIN_FACTORY_WITH_JSON( KdeConnectPluginFactory, "kdeconnect_mousepad.json", registerPlugin< MousepadPlugin >(); )
 
 enum MouseButtons {
     LeftMouseButton = 1,
@@ -77,24 +86,43 @@ template <typename T, size_t N>
 size_t arraySize(T(&arr)[N]) { (void)arr; return N; }
 
 MousepadPlugin::MousepadPlugin(QObject* parent, const QVariantList& args)
-    : KdeConnectPlugin(parent, args), m_display(0), m_fakekey(0)
+    : KdeConnectPlugin(parent, args), m_fakekey(nullptr), m_x11(QX11Info::isPlatformX11())
+#if HAVE_WAYLAND
+    , m_waylandInput(nullptr)
+    , m_waylandAuthenticationRequested(false)
+#endif
 {
-
+#if HAVE_WAYLAND
+    setupWaylandIntegration();
+#endif
 }
 
 MousepadPlugin::~MousepadPlugin()
 {
-    if (m_display) {
-        XCloseDisplay(m_display);
-        m_display = 0;
-    }
     if (m_fakekey) {
         free(m_fakekey);
-        m_fakekey = 0;
+        m_fakekey = nullptr;
     }
 }
 
 bool MousepadPlugin::receivePackage(const NetworkPackage& np)
+{
+    if (m_x11) {
+        return handlePackageX11(np);
+    }
+#if HAVE_WAYLAND
+    if (m_waylandInput) {
+        if (!m_waylandAuthenticationRequested) {
+            m_waylandInput->authenticate(i18n("KDE Connect"), i18n("Use your phone as a touchpad and keyboard"));
+            m_waylandAuthenticationRequested = true;
+        }
+        handPackageWayland(np);
+    }
+#endif
+    return false;
+}
+
+bool MousepadPlugin::handlePackageX11(const NetworkPackage &np)
 {
     //qDebug() << np.serialize();
 
@@ -114,42 +142,38 @@ bool MousepadPlugin::receivePackage(const NetworkPackage& np)
     int specialKey = np.get<int>("specialKey", 0);
 
     if (isSingleClick || isDoubleClick || isMiddleClick || isRightClick || isSingleHold || isScroll || !key.isEmpty() || specialKey) {
-
-        if(!m_display) {
-            m_display = XOpenDisplay(NULL);
-            if(!m_display) {
-                kDebug(debugArea()) << "Failed to open X11 display";
-                return false;
-            }
+        Display *display = QX11Info::display();
+        if(!display) {
+            return false;
         }
 
         if (isSingleClick) {
-            XTestFakeButtonEvent(m_display, LeftMouseButton, True, 0);
-            XTestFakeButtonEvent(m_display, LeftMouseButton, False, 0);
+            XTestFakeButtonEvent(display, LeftMouseButton, True, 0);
+            XTestFakeButtonEvent(display, LeftMouseButton, False, 0);
         } else if (isDoubleClick) {
-            XTestFakeButtonEvent(m_display, LeftMouseButton, True, 0);
-            XTestFakeButtonEvent(m_display, LeftMouseButton, False, 0);
-            XTestFakeButtonEvent(m_display, LeftMouseButton, True, 0);
-            XTestFakeButtonEvent(m_display, LeftMouseButton, False, 0);
+            XTestFakeButtonEvent(display, LeftMouseButton, True, 0);
+            XTestFakeButtonEvent(display, LeftMouseButton, False, 0);
+            XTestFakeButtonEvent(display, LeftMouseButton, True, 0);
+            XTestFakeButtonEvent(display, LeftMouseButton, False, 0);
         } else if (isMiddleClick) {
-            XTestFakeButtonEvent(m_display, MiddleMouseButton, True, 0);
-            XTestFakeButtonEvent(m_display, MiddleMouseButton, False, 0);
+            XTestFakeButtonEvent(display, MiddleMouseButton, True, 0);
+            XTestFakeButtonEvent(display, MiddleMouseButton, False, 0);
         } else if (isRightClick) {
-            XTestFakeButtonEvent(m_display, RightMouseButton, True, 0);
-            XTestFakeButtonEvent(m_display, RightMouseButton, False, 0);
+            XTestFakeButtonEvent(display, RightMouseButton, True, 0);
+            XTestFakeButtonEvent(display, RightMouseButton, False, 0);
         } else if (isSingleHold){
             //For drag'n drop
-            XTestFakeButtonEvent(m_display, LeftMouseButton, True, 0);
+            XTestFakeButtonEvent(display, LeftMouseButton, True, 0);
         } else if (isSingleRelease){
             //For drag'n drop. NEVER USED (release is done by tapping, which actually triggers a isSingleClick). Kept here for future-proofnes.
-            XTestFakeButtonEvent(m_display, LeftMouseButton, False, 0);
+            XTestFakeButtonEvent(display, LeftMouseButton, False, 0);
         } else if (isScroll) {
             if (dy < 0) {
-                XTestFakeButtonEvent(m_display, MouseWheelDown, True, 0);
-                XTestFakeButtonEvent(m_display, MouseWheelDown, False, 0);
+                XTestFakeButtonEvent(display, MouseWheelDown, True, 0);
+                XTestFakeButtonEvent(display, MouseWheelDown, False, 0);
             } else if (dy > 0) {
-                XTestFakeButtonEvent(m_display, MouseWheelUp, True, 0);
-                XTestFakeButtonEvent(m_display, MouseWheelUp, False, 0);
+                XTestFakeButtonEvent(display, MouseWheelUp, True, 0);
+                XTestFakeButtonEvent(display, MouseWheelUp, False, 0);
             }
         } else if (!key.isEmpty() || specialKey) {
 
@@ -157,44 +181,47 @@ bool MousepadPlugin::receivePackage(const NetworkPackage& np)
             bool alt = np.get<bool>("alt", false);
             bool shift = np.get<bool>("shift", false);
 
-            if (ctrl) XTestFakeKeyEvent (m_display, XKeysymToKeycode(m_display, XK_Control_L), True, 0);
-            if (alt) XTestFakeKeyEvent (m_display, XKeysymToKeycode(m_display, XK_Alt_L), True, 0);
-            if (shift) XTestFakeKeyEvent (m_display, XKeysymToKeycode(m_display, XK_Shift_L), True, 0);
+            if (ctrl) XTestFakeKeyEvent (display, XKeysymToKeycode(display, XK_Control_L), True, 0);
+            if (alt) XTestFakeKeyEvent (display, XKeysymToKeycode(display, XK_Alt_L), True, 0);
+            if (shift) XTestFakeKeyEvent (display, XKeysymToKeycode(display, XK_Shift_L), True, 0);
 
             if (specialKey)
             {
-                if (specialKey > (int)arraySize(SpecialKeysMap)) {
-                    kDebug(debugArea()) << "Unsupported special key identifier";
+                if (specialKey >= (int)arraySize(SpecialKeysMap)) {
+                    qWarning() << "Unsupported special key identifier";
                     return false;
                 }
 
-                int keycode = XKeysymToKeycode(m_display, SpecialKeysMap[specialKey]);
+                int keycode = XKeysymToKeycode(display, SpecialKeysMap[specialKey]);
 
-                XTestFakeKeyEvent (m_display, keycode, True, 0);
-                XTestFakeKeyEvent (m_display, keycode, False, 0);
+                XTestFakeKeyEvent (display, keycode, True, 0);
+                XTestFakeKeyEvent (display, keycode, False, 0);
 
             } else {
 
                 if (!m_fakekey) {
-                    m_fakekey = fakekey_init(m_display);
+                    m_fakekey = fakekey_init(display);
                     if (!m_fakekey) {
-                        kDebug(debugArea()) << "Failed to initialize libfakekey";
+                        qWarning() << "Failed to initialize libfakekey";
                         return false;
                     }
                 }
 
                 //We use fakekey here instead of XTest (above) because it can handle utf characters instead of keycodes.
-                fakekey_press(m_fakekey, (const unsigned char*)key.toUtf8().constData(), -1, 0);
-                fakekey_release(m_fakekey);
+                for (int i=0;i<key.length();i++) {
+                    QByteArray utf8 = QString(key.at(i)).toUtf8();
+                    fakekey_press(m_fakekey, (const uchar*)utf8.constData(), utf8.size(), 0);
+                    fakekey_release(m_fakekey);
+                }
             }
 
-            if (ctrl) XTestFakeKeyEvent (m_display, XKeysymToKeycode(m_display, XK_Control_L), False, 0);
-            if (alt) XTestFakeKeyEvent (m_display, XKeysymToKeycode(m_display, XK_Alt_L), False, 0);
-            if (shift) XTestFakeKeyEvent (m_display, XKeysymToKeycode(m_display, XK_Shift_L), False, 0);
+            if (ctrl) XTestFakeKeyEvent (display, XKeysymToKeycode(display, XK_Control_L), False, 0);
+            if (alt) XTestFakeKeyEvent (display, XKeysymToKeycode(display, XK_Alt_L), False, 0);
+            if (shift) XTestFakeKeyEvent (display, XKeysymToKeycode(display, XK_Shift_L), False, 0);
 
         }
 
-        XFlush(m_display);
+        XFlush(display);
 
     } else { //Is a mouse move event
         QPoint point = QCursor::pos();
@@ -202,3 +229,73 @@ bool MousepadPlugin::receivePackage(const NetworkPackage& np)
     }
     return true;
 }
+
+#if HAVE_WAYLAND
+void MousepadPlugin::setupWaylandIntegration()
+{
+    if (!QGuiApplication::platformName().startsWith(QLatin1String("wayland"), Qt::CaseInsensitive)) {
+        // not wayland
+        return;
+    }
+    using namespace KWayland::Client;
+    ConnectionThread *connection = ConnectionThread::fromApplication(this);
+    if (!connection) {
+        // failed to get the Connection from Qt
+        return;
+    }
+    Registry *registry = new Registry(this);
+    registry->create(connection);
+    connect(registry, &Registry::fakeInputAnnounced, this,
+        [this, registry] (quint32 name, quint32 version) {
+            m_waylandInput = registry->createFakeInput(name, version, this);
+        }
+    );
+    registry->setup();
+}
+
+bool MousepadPlugin::handPackageWayland(const NetworkPackage &np)
+{
+    const float dx = np.get<float>("dx", 0);
+    const float dy = np.get<float>("dy", 0);
+
+    const bool isSingleClick = np.get<bool>("singleclick", false);
+    const bool isDoubleClick = np.get<bool>("doubleclick", false);
+    const bool isMiddleClick = np.get<bool>("middleclick", false);
+    const bool isRightClick = np.get<bool>("rightclick", false);
+    const bool isSingleHold = np.get<bool>("singlehold", false);
+    const bool isSingleRelease = np.get<bool>("singlerelease", false);
+    const bool isScroll = np.get<bool>("scroll", false);
+    const QString key = np.get<QString>("key", "");
+    const int specialKey = np.get<int>("specialKey", 0);
+
+    if (isSingleClick || isDoubleClick || isMiddleClick || isRightClick || isSingleHold || isScroll || !key.isEmpty() || specialKey) {
+
+        if (isSingleClick) {
+            m_waylandInput->requestPointerButtonClick(Qt::LeftButton);
+        } else if (isDoubleClick) {
+            m_waylandInput->requestPointerButtonClick(Qt::LeftButton);
+            m_waylandInput->requestPointerButtonClick(Qt::LeftButton);
+        } else if (isMiddleClick) {
+            m_waylandInput->requestPointerButtonClick(Qt::MiddleButton);
+        } else if (isRightClick) {
+            m_waylandInput->requestPointerButtonClick(Qt::RightButton);
+        } else if (isSingleHold){
+            //For drag'n drop
+            m_waylandInput->requestPointerButtonPress(Qt::LeftButton);
+        } else if (isSingleRelease){
+            //For drag'n drop. NEVER USED (release is done by tapping, which actually triggers a isSingleClick). Kept here for future-proofnes.
+            m_waylandInput->requestPointerButtonRelease(Qt::LeftButton);
+        } else if (isScroll) {
+            m_waylandInput->requestPointerAxis(Qt::Vertical, dy);
+        } else if (!key.isEmpty() || specialKey) {
+            // TODO: implement key support
+        }
+
+    } else { //Is a mouse move event
+        m_waylandInput->requestPointerMove(QSizeF(dx, dy));
+    }
+    return true;
+}
+#endif
+
+#include "mousepadplugin.moc"

@@ -1,10 +1,13 @@
+find_package(KF5 REQUIRED COMPONENTS Notifications)
+
 set(kdeconnect_telephony_SRCS
     telephonyplugin.cpp
 )
 
-kde4_add_plugin(kdeconnect_telephony ${kdeconnect_telephony_SRCS})
+kdeconnect_add_plugin(kdeconnect_telephony JSON kdeconnect_telephony.json SOURCES ${kdeconnect_telephony_SRCS})
 
-target_link_libraries(kdeconnect_telephony kdeconnectcore ${KDE4_KDEUI_LIBS})
-
-install(TARGETS kdeconnect_telephony DESTINATION ${PLUGIN_INSTALL_DIR} )
-install(FILES kdeconnect_telephony.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+target_link_libraries(kdeconnect_telephony
+    kdeconnectcore
+    KF5::I18n
+    KF5::Notifications
+)

@@ -23,9 +23,10 @@
 
 #include <QObject>
 #include <QClipboard>
-
+#include <QLoggingCategory>
 #include <core/kdeconnectplugin.h>
 
+Q_DECLARE_LOGGING_CATEGORY(KDECONNECT_PLUGIN_CLIPBOARD)
 #define PACKAGE_TYPE_CLIPBOARD QLatin1String("kdeconnect.clipboard")
 
 class ClipboardPlugin
@@ -37,14 +38,14 @@ public:
     explicit ClipboardPlugin(QObject *parent, const QVariantList &args);
 
 public Q_SLOTS:
-    virtual bool receivePackage(const NetworkPackage& np);
-    virtual void connected() { }
+    virtual bool receivePackage(const NetworkPackage& np) override;
+    virtual void connected() override { }
     
 private Q_SLOTS:
     void clipboardChanged(QClipboard::Mode mode);
 
 private:
-    bool ignore_next_clipboard_change;
+    QString currentContent;
     QClipboard *clipboard;
 };
 

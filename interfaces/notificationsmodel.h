@@ -47,18 +47,19 @@ public:
         DbusInterfaceRole,
     };
 
-    NotificationsModel(QObject* parent = 0);
+    explicit NotificationsModel(QObject* parent = nullptr);
     virtual ~NotificationsModel();
 
     QString deviceId() const;
     void setDeviceId(const QString& deviceId);
 
-    virtual QVariant data(const QModelIndex& index, int role) const;
-    virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
+    virtual QVariant data(const QModelIndex& index, int role) const override;
+    virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
     NotificationDbusInterface* getNotification(const QModelIndex& index) const;
 
     Q_INVOKABLE bool isAnyDimissable() const;
+    virtual QHash<int, QByteArray> roleNames() const override;
 
 public Q_SLOTS:
     void dismissAll();
@@ -67,6 +68,7 @@ private Q_SLOTS:
     void notificationAdded(const QString& id);
     void notificationRemoved(const QString& id);
     void refreshNotificationList();
+    void receivedNotifications(QDBusPendingCallWatcher* watcher);
 
 Q_SIGNALS:
     void deviceIdChanged(const QString& value);
@@ -74,6 +76,8 @@ Q_SIGNALS:
     void rowsChanged();
 
 private:
+    void clearNotifications();
+
     DeviceNotificationsDbusInterface* m_dbusInterface;
     QList<NotificationDbusInterface*> m_notificationList;
     QString m_deviceId;

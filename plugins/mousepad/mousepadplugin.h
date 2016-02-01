@@ -21,15 +21,23 @@
 #ifndef MOUSEPADPLUGIN_H
 #define MOUSEPADPLUGIN_H
 
-#include <QObject>
-#include <QApplication>
-
+#include <QtGui/QCursor>
 #include <core/kdeconnectplugin.h>
-#include <X11/Xlib.h>
+#include <config-mousepad.h>
 
 #define PACKAGE_TYPE_MOUSEPAD QLatin1String("kdeconnect.mousepad")
 
 struct FakeKey;
+
+#if HAVE_WAYLAND
+namespace KWayland
+{
+namespace Client
+{
+class FakeInput;
+}
+}
+#endif
 
 class MousepadPlugin
     : public KdeConnectPlugin
@@ -40,14 +48,22 @@ public:
     explicit MousepadPlugin(QObject *parent, const QVariantList &args);
     virtual ~MousepadPlugin();
 
-public Q_SLOTS:
-    virtual bool receivePackage(const NetworkPackage& np);
-    virtual void connected() { }
+    virtual bool receivePackage(const NetworkPackage& np) override;
+    virtual void connected() override { }
 
 private:
-    Display *m_display;
-    FakeKey* m_fakekey;
+    bool handlePackageX11(const NetworkPackage& np);
+#if HAVE_WAYLAND
+    void setupWaylandIntegration();
+    bool handPackageWayland(const NetworkPackage& np);
+#endif
 
+    FakeKey* m_fakekey;
+    const bool m_x11;
+#if HAVE_WAYLAND
+    KWayland::Client::FakeInput *m_waylandInput;
+    bool m_waylandAuthenticationRequested;
+#endif
 };
 
 #endif

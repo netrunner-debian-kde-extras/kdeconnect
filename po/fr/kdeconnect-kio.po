@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-10-11 01:54+0000\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
 "PO-Revision-Date: 2014-02-24 14:13+0100\n"
 "Last-Translator: Nicolas Ménard <nico.menard@gmail.com>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
@@ -20,30 +20,18 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Nicolas MÉNARD"
-
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "nico.menard@gmail.com"
-
-#: kiokdeconnect.cpp:39
-msgid "kiokdeconnect"
-msgstr "kiokdeconnect"
-
-#: kiokdeconnect.cpp:93
+#: kiokdeconnect.cpp:84
 msgid "Listing devices..."
 msgstr "Recherche de périphériques..."
 
-#: kiokdeconnect.cpp:131
+#: kiokdeconnect.cpp:121
 msgid "Accessing device..."
 msgstr "Accès au périphérique..."
 
-#: kiokdeconnect.cpp:144
+#: kiokdeconnect.cpp:134
 msgid "Could not mount device filesystem"
 msgstr "Impossible de monter le système de fichiers du périphérique"
 
-#: kiokdeconnect.cpp:189
+#: kiokdeconnect.cpp:178
 msgid "Could not contact background service."
 msgstr "Impossible de contacter le service d'arrière plan."

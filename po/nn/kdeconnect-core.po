@@ -1,0 +1,94 @@
+# Translation of kdeconnect-core to Norwegian Nynorsk
+#
+# Karl Ove Hufthammer <karl@huftis.org>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-09-09 19:12+0100\n"
+"Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
+"Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
+"Language: nn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: device.cpp:193
+msgid "Already paired"
+msgstr "Alt para"
+
+#: device.cpp:196
+msgid "Pairing already requested for this device"
+msgstr "Parring er alt førespurd for denne eininga"
+
+#: device.cpp:207
+msgid "Device not reachable"
+msgstr "Får ikkje kontakt med eininga"
+
+#: device.cpp:218
+msgid "Error contacting device"
+msgstr "Feil ved kopling til eininga"
+
+#: device.cpp:256
+msgid "Timed out"
+msgstr "Tidsavbrot"
+
+#: device.cpp:347 device.cpp:389
+msgid "Canceled by other peer"
+msgstr "Avbroten av den andre eininga"
+
+#: device.cpp:363
+msgid "Received incorrect key"
+msgstr "Mottak feil nøkkel"
+
+#: device.cpp:428
+msgid "Canceled by the user"
+msgstr "Avslått av brukaren"
+
+#: filetransferjob.cpp:63 filetransferjob.cpp:80
+msgid "Receiving file over KDE Connect"
+msgstr ""
+
+#: filetransferjob.cpp:64 filetransferjob.cpp:81
+msgctxt "File transfer origin"
+msgid "From"
+msgstr "Frå"
+
+#: filetransferjob.cpp:69
+msgid "Filename already present"
+msgstr "Filnamnet finst frå før"
+
+#: filetransferjob.cpp:82
+msgctxt "File transfer destination"
+msgid "To"
+msgstr "Til"
+
+#: filetransferjob.cpp:101
+#, kde-format
+msgid "Received incomplete file: %1"
+msgstr "Mottak ufullstendig fil: %1"
+
+#: kdeconnectconfig.cpp:64
+msgid "KDE Connect failed to start"
+msgstr "Klarte ikkje starta KDE Connect"
+
+#: kdeconnectconfig.cpp:65
+msgid ""
+"Could not find support for RSA in your QCA installation. If your "
+"distribution provides separate packages for QCA-ossl and QCA-gnupg, make "
+"sure you have them installed and try again."
+msgstr ""
+"Fann ikkje støtte for RSA i den installerte QCA-versjonen. Viss "
+"distribusjonen din har eigne pakkar for QCA-ossl og QCA-gnupg, sjå til at "
+"desse er installert, og prøv så på nytt."
+
+#: kdeconnectconfig.cpp:101
+#, kde-format
+msgid "Could not store private key file: %1"
+msgstr "Klarte ikkje lagra privatnøkkelfila: %1"

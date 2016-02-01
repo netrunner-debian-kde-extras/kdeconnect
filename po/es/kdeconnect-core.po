@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Victor Rodrigo Cordoba <vrcordoba@gmail.com>, 2014.
+# Victor Rodrigo Cordoba <vrcordoba@gmail.com>, 2014, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2015-01-22 02:01+0000\n"
-"PO-Revision-Date: 2014-06-20 16:28+0200\n"
-"Last-Translator: Victor Rodrigo Cordoba <vrcordoba@gmail.com>\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-11-07 11:26+0100\n"
+"Last-Translator: Víctor Rodrigo Córdoba <vrcordoba@gmail.com>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -17,69 +17,76 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: device.cpp:186
+#: device.cpp:193
 msgid "Already paired"
 msgstr "Ya conectado"
 
-#: device.cpp:189
+#: device.cpp:196
 msgid "Pairing already requested for this device"
 msgstr "Conexión ya solicitada para este dispositivo"
 
-#: device.cpp:193
+#: device.cpp:207
 msgid "Device not reachable"
 msgstr "Dispositivo no accesible"
 
-#: device.cpp:206
+#: device.cpp:218
 msgid "Error contacting device"
 msgstr "Error al contactar con el dispositivo"
 
-#: device.cpp:244
+#: device.cpp:256
 msgid "Timed out"
 msgstr "Se alcanzó el tiempo máximo de espera"
 
-#: device.cpp:343 device.cpp:395
+#: device.cpp:347 device.cpp:389
 msgid "Canceled by other peer"
 msgstr "Cancelado por otro par"
 
-#: device.cpp:359
+#: device.cpp:363
 msgid "Received incorrect key"
 msgstr "Se recibió una clave incorrecta"
 
-#: device.cpp:376
-#, kde-format
-msgid "Pairing request from %1"
-msgstr "Petición de conexión por parte de %1"
-
-#: device.cpp:377
-msgid "Accept"
-msgstr "Aceptar"
-
-#: device.cpp:377
-msgid "Reject"
-msgstr "Rechazar"
-
-#: device.cpp:437
+#: device.cpp:428
 msgid "Canceled by the user"
 msgstr "Cancelado por el usuario"
 
-#: filetransferjob.cpp:59 filetransferjob.cpp:120
-msgid "Receiving file over KDE-Connect"
-msgstr "Recibiendo archivo a través de KDE-Connect"
+#: filetransferjob.cpp:63 filetransferjob.cpp:80
+msgid "Receiving file over KDE Connect"
+msgstr "Recibiendo archivo a través de KDE Connect"
 
-#: filetransferjob.cpp:60 filetransferjob.cpp:121
+#: filetransferjob.cpp:64 filetransferjob.cpp:81
 msgctxt "File transfer origin"
 msgid "From"
 msgstr "Desde"
 
-#: filetransferjob.cpp:67
-msgid "Incoming file exists"
-msgstr "El archivo entrante ya existe"
+#: filetransferjob.cpp:69
+msgid "Filename already present"
+msgstr "Nombre de archivo ya presente"
 
-#: filetransferjob.cpp:123
+#: filetransferjob.cpp:82
 msgctxt "File transfer destination"
 msgid "To"
 msgstr "Hacia"
 
-#: filetransferjob.cpp:196
-msgid "Received incomplete file"
-msgstr "Se recibió un archivo incompleto"
+#: filetransferjob.cpp:101
+#, kde-format
+msgid "Received incomplete file: %1"
+msgstr "Recibido archivo incompleto: %1"
+
+#: kdeconnectconfig.cpp:64
+msgid "KDE Connect failed to start"
+msgstr "KDE Connect falló al iniciarse"
+
+#: kdeconnectconfig.cpp:65
+msgid ""
+"Could not find support for RSA in your QCA installation. If your "
+"distribution provides separate packages for QCA-ossl and QCA-gnupg, make "
+"sure you have them installed and try again."
+msgstr ""
+"No se pudo encontrar la implementación de RSA en su instalación QCA. Si su "
+"distribución proporciona paquetes separados para QCA-ossl y QCA-gnupg, "
+"asegúrese de que están instalados e intente de nuevo."
+
+#: kdeconnectconfig.cpp:101
+#, kde-format
+msgid "Could not store private key file: %1"
+msgstr "No se pudo almacenar archivo de clave privada: %1"

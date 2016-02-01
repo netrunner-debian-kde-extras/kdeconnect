@@ -21,13 +21,13 @@
 #ifndef DEVICESMODEL_H
 #define DEVICESMODEL_H
 
-#include <QAbstractItemModel>
 #include <QAbstractListModel>
 #include <QPixmap>
 #include <QList>
 
 #include "interfaces/kdeconnectinterfaces_export.h"
 
+class QDBusPendingCallWatcher;
 class DaemonDbusInterface;
 class DeviceDbusInterface;
 
@@ -44,45 +44,52 @@ public:
         IconModelRole   = Qt::DecorationRole,
         StatusModelRole = Qt::InitialSortOrderRole,
         IdModelRole     = Qt::UserRole,
-        IconNameRole
+        IconNameRole,
+        DeviceRole
     };
-    enum StatusFlag {
-        StatusUnknown   = 0x00,
-        StatusPaired    = 0x01,
-        StatusReachable = 0x02
+    Q_ENUMS(ModelRoles);
+    enum StatusFilterFlag {
+        NoFilter   = 0x00,
+        Paired     = 0x01,
+        Reachable  = 0x02
     };
-    Q_DECLARE_FLAGS(StatusFlags, StatusFlag)
-    Q_FLAGS(StatusFlags)
-    Q_ENUMS(StatusFlag)
+    Q_DECLARE_FLAGS(StatusFilterFlags, StatusFilterFlag)
+    Q_FLAGS(StatusFilterFlags)
+    Q_ENUMS(StatusFilterFlag)
 
-    DevicesModel(QObject *parent = 0);
+    explicit DevicesModel(QObject *parent = nullptr);
     virtual ~DevicesModel();
 
     void setDisplayFilter(int flags);
     int displayFilter() const;
 
-    virtual QVariant data(const QModelIndex& index, int role) const;
-    virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
+    virtual QVariant data(const QModelIndex& index, int role) const override;
+    virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
-    DeviceDbusInterface* getDevice(const QModelIndex& index) const;
-
-public Q_SLOTS:
-    void deviceStatusChanged(const QString& id);
+    Q_SCRIPTABLE DeviceDbusInterface* getDevice(int row) const;
+    virtual QHash<int, QByteArray> roleNames() const override;
 
 private Q_SLOTS:
     void deviceAdded(const QString& id);
     void deviceRemoved(const QString& id);
+    void deviceUpdated(const QString& id, bool isVisible);
     void refreshDeviceList();
+    void receivedDeviceList(QDBusPendingCallWatcher* watcher);
+    void nameChanged(const QString& newName);
 
 Q_SIGNALS:
     void rowsChanged();
 
 private:
+    int rowForDevice(const QString& id) const;
+    void clearDevices();
+    void appendDevice(DeviceDbusInterface* dev);
+
     DaemonDbusInterface* m_dbusInterface;
-    QList<DeviceDbusInterface*> m_deviceList;
-    StatusFlags m_displayFilter;
+    QVector<DeviceDbusInterface*> m_deviceList;
+    StatusFilterFlag m_displayFilter;
 };
 
-//Q_DECLARE_OPERATORS_FOR_FLAGS(DevicesModel::StatusFlags)
+//Q_DECLARE_OPERATORS_FOR_FLAGS(DevicesModel::StatusFilterFlag)
 
 #endif // DEVICESMODEL_H

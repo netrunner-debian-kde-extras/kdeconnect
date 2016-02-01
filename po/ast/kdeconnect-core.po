@@ -1,0 +1,94 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# enolp <enolp@softastur.org>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-07-11 12:53+0100\n"
+"Last-Translator: enolp <enolp@softastur.org>\n"
+"Language-Team: Spanish <alminsitradores@softastur.org>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: device.cpp:193
+msgid "Already paired"
+msgstr "Yá ta empareyáu"
+
+#: device.cpp:196
+msgid "Pairing already requested for this device"
+msgstr "Yá se solicitó l'empareyamientu pa esti preséu"
+
+#: device.cpp:207
+msgid "Device not reachable"
+msgstr "Nun ye algamable'l preséu"
+
+#: device.cpp:218
+msgid "Error contacting device"
+msgstr "Fallu contautando col preséu"
+
+#: device.cpp:256
+msgid "Timed out"
+msgstr "Tiempu escosao"
+
+#: device.cpp:347 device.cpp:389
+msgid "Canceled by other peer"
+msgstr "Encaboxáu pola otra parte"
+
+#: device.cpp:363
+msgid "Received incorrect key"
+msgstr "Recibióse la clave incorreuta"
+
+#: device.cpp:428
+msgid "Canceled by the user"
+msgstr "Encaboxáu pol usuariu"
+
+#: filetransferjob.cpp:63 filetransferjob.cpp:80
+#, fuzzy
+#| msgid "Receiving file over KDE-Connect"
+msgid "Receiving file over KDE Connect"
+msgstr "Recibiendo ficheru sobro KDE-Connect"
+
+#: filetransferjob.cpp:64 filetransferjob.cpp:81
+msgctxt "File transfer origin"
+msgid "From"
+msgstr "Dende"
+
+#: filetransferjob.cpp:69
+msgid "Filename already present"
+msgstr "Yá ta presente'l nome de ficheru"
+
+#: filetransferjob.cpp:82
+msgctxt "File transfer destination"
+msgid "To"
+msgstr "A"
+
+#: filetransferjob.cpp:101
+#, kde-format
+msgid "Received incomplete file: %1"
+msgstr "Recibióse'l ficheru imcompletu: %1"
+
+#: kdeconnectconfig.cpp:64
+msgid "KDE Connect failed to start"
+msgstr "KDE Connect falló al aniciase"
+
+#: kdeconnectconfig.cpp:65
+msgid ""
+"Could not find support for RSA in your QCA installation. If your "
+"distribution provides separate packages for QCA-ossl and QCA-gnupg, make "
+"sure you have them installed and try again."
+msgstr ""
+"Nun pudo alcontrase sofitu pa RSA na to instalación QCA. Si la to "
+"distribución apurre paqutes separtaos pa QCA-ossl y QCA-gnupg, asegúrate de "
+"tenelos instalaos ya inténtalo de nueves."
+
+#: kdeconnectconfig.cpp:101
+#, kde-format
+msgid "Could not store private key file: %1"
+msgstr "Nun pudo atroxase'l ficheru de clave privada: %1"

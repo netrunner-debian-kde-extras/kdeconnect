@@ -1,15 +1,15 @@
 # Translation of kdeconnect-core.po to Ukrainian
-# Copyright (C) 2014 This_file_is_part_of_KDE
+# Copyright (C) 2014-2015 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2014.
+# Yuri Chornoivan <yurchor@ukr.net>, 2014, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeconnect-core\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2015-01-22 02:01+0000\n"
-"PO-Revision-Date: 2014-06-18 07:57+0300\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-10-20 19:15+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -20,69 +20,76 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: device.cpp:186
+#: device.cpp:193
 msgid "Already paired"
 msgstr "Вже пов’язано"
 
-#: device.cpp:189
+#: device.cpp:196
 msgid "Pairing already requested for this device"
 msgstr "Запит щодо пов’язування цього пристрою вже надійшов"
 
-#: device.cpp:193
+#: device.cpp:207
 msgid "Device not reachable"
 msgstr "Пристрій недоступний"
 
-#: device.cpp:206
+#: device.cpp:218
 msgid "Error contacting device"
 msgstr "Помилка під час спроби встановити зв’язок із пристроєм"
 
-#: device.cpp:244
+#: device.cpp:256
 msgid "Timed out"
 msgstr "Перевищено час очікування"
 
-#: device.cpp:343 device.cpp:395
+#: device.cpp:347 device.cpp:389
 msgid "Canceled by other peer"
 msgstr "Скасовано іншим вузлом"
 
-#: device.cpp:359
+#: device.cpp:363
 msgid "Received incorrect key"
 msgstr "Отримано помилковий ключ"
 
-#: device.cpp:376
-#, kde-format
-msgid "Pairing request from %1"
-msgstr "Запит щодо пов’язування від %1"
-
-#: device.cpp:377
-msgid "Accept"
-msgstr "Прийняти"
-
-#: device.cpp:377
-msgid "Reject"
-msgstr "Відхилити"
-
-#: device.cpp:437
+#: device.cpp:428
 msgid "Canceled by the user"
 msgstr "Скасовано користувачем"
 
-#: filetransferjob.cpp:59 filetransferjob.cpp:120
-msgid "Receiving file over KDE-Connect"
-msgstr "Отримуємо файл за допомогою KDE-Connect"
+#: filetransferjob.cpp:63 filetransferjob.cpp:80
+msgid "Receiving file over KDE Connect"
+msgstr "Отримуємо файл за допомогою KDE Connect"
 
-#: filetransferjob.cpp:60 filetransferjob.cpp:121
+#: filetransferjob.cpp:64 filetransferjob.cpp:81
 msgctxt "File transfer origin"
 msgid "From"
 msgstr "Звідки"
 
-#: filetransferjob.cpp:67
-msgid "Incoming file exists"
-msgstr "Вхідний файл вже існує"
+#: filetransferjob.cpp:69
+msgid "Filename already present"
+msgstr "Файл із такою назвою вже існує"
 
-#: filetransferjob.cpp:123
+#: filetransferjob.cpp:82
 msgctxt "File transfer destination"
 msgid "To"
 msgstr "Куди"
 
-#: filetransferjob.cpp:196
-msgid "Received incomplete file"
-msgstr "Файл отримано не повністю"
+#: filetransferjob.cpp:101
+#, kde-format
+msgid "Received incomplete file: %1"
+msgstr "Файл отримано не повністю: %1"
+
+#: kdeconnectconfig.cpp:64
+msgid "KDE Connect failed to start"
+msgstr "Не вдалося запустити засіб з’єднання KDE"
+
+#: kdeconnectconfig.cpp:65
+msgid ""
+"Could not find support for RSA in your QCA installation. If your "
+"distribution provides separate packages for QCA-ossl and QCA-gnupg, make "
+"sure you have them installed and try again."
+msgstr ""
+"Не вдалося виявити підтримки RSA у встановленій вами версії QCA. Якщо у "
+"вашому дистрибутиві передбачено окремі пакунки для QCA-ossl і QCA-gnupg, "
+"встановіть обидва і повторіть спробу."
+
+#: kdeconnectconfig.cpp:101
+#, kde-format
+msgid "Could not store private key file: %1"
+msgstr "Не вдалося зберегти файл закритого ключа: %1"

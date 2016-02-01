@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Eloy Cuadra <ecuadra@eloihr.net>, 2013, 2014.
-# Victor Rodrigo Cordoba <vrcordoba@gmail.com>, 2014.
+# Victor Rodrigo Cordoba <vrcordoba@gmail.com>, 2014, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-08-12 02:06+0000\n"
-"PO-Revision-Date: 2014-08-25 10:30+0200\n"
-"Last-Translator: Victor Rodrigo Cordoba <vrcordoba@gmail.com>\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-11-07 11:40+0100\n"
+"Last-Translator: Víctor Rodrigo Córdoba <vrcordoba@gmail.com>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -18,49 +18,115 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: kcm.cpp:152 kcm.cpp:236
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Víctor Rodrigo Córdoba"
+
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "vrcordoba@gmail.com"
+
+#: kcm.cpp:55
+msgid "KDE Connect Settings"
+msgstr "Preferencias de KDE Connect"
+
+#: kcm.cpp:57
+msgid "KDE Connect Settings module"
+msgstr "Módulo de preferencias de KDE Connect"
+
+#: kcm.cpp:59
+msgid "(C) 2015 Albert Vaca Cintora"
+msgstr "© 2015 Albert Vaca Cintora"
+
+#: kcm.cpp:63
+msgid "Albert Vaca Cintora"
+msgstr "Albert Vaca Cintora"
+
+#: kcm.cpp:209 kcm.cpp:268
 msgid "(paired)"
 msgstr "(vinculado)"
 
-#: kcm.cpp:152 kcm.cpp:208 kcm.cpp:219
+#: kcm.cpp:209 kcm.cpp:268
 msgid "(unpaired)"
 msgstr "(desvinculado)"
 
-#: kcm.cpp:166
+#: kcm.cpp:218
 msgid "Plugins"
 msgstr "Complementos"
 
-#: kcm.cpp:221
+#: kcm.cpp:255
 #, kde-format
 msgid "Error trying to pair: %1"
 msgstr "Ha ocurrido un error al tratar de vincular: %1"
 
+#. i18n: ectx: property (text), widget (QLabel, rename_label)
+#: kcm.ui:47
+msgid "KDE Connect"
+msgstr "KDE Connect"
+
 #. i18n: ectx: property (text), widget (QPushButton, refresh_button)
-#: kcm.ui:41
+#: kcm.ui:110
 msgid "Refresh"
 msgstr "Actualizar"
 
 #. i18n: ectx: property (text), widget (QLabel, name_label)
-#: kcm.ui:88
+#: kcm.ui:157
 msgid "Device"
 msgstr "Dispositivo"
 
 #. i18n: ectx: property (text), widget (QLabel, status_label)
-#: kcm.ui:101
+#: kcm.ui:170
 msgid "(status)"
 msgstr "(estado)"
 
 #. i18n: ectx: property (text), widget (QPushButton, pair_button)
-#: kcm.ui:146
+#: kcm.ui:215
 msgid "Request pair"
 msgstr "Solicitar vinculación"
 
 #. i18n: ectx: property (text), widget (QPushButton, unpair_button)
-#: kcm.ui:159
+#: kcm.ui:228
 msgid "Unpair"
 msgstr "Desvincular"
 
 #. i18n: ectx: property (text), widget (QPushButton, ping_button)
-#: kcm.ui:172
+#: kcm.ui:241
 msgid "Send ping"
 msgstr "Enviar ping"
+
+#. i18n: ectx: property (text), widget (QLabel, noDeviceLabel)
+#: kcm.ui:286
+msgid "No device selected."
+msgstr "Ningún dispositivo seleccionado."
+
+#. i18n: ectx: property (text), widget (QLabel, noDeviceLinks)
+#: kcm.ui:302
+msgid ""
+"<html><head/><body><p>If you own Android device, make sure to install the <a "
+"href=\"https://play.google.com/store/apps/details?id=org.kde.kdeconnect_tp"
+"\"><span style=\" text-decoration: underline; color:#0000ff;\">KDE Connect "
+"Android app</span></a> (also available <a href=\"https://f-droid.org/"
+"repository/browse/?fdid=org.kde.kdeconnect_tp\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">from F-Droid</span></a>) and it "
+"should appear in the list.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Si tiene un dispositivo Android, asegúrese de instalar "
+"<a href=\"https://play.google.com/store/apps/details?id=org.kde.kdeconnect_tp"
+"\"><span style=\"text-decoration: underline; color:#0000ff;\">la aplicación "
+"KDE Connect para Android</span></a> (también disponible <a href=\"https://f-"
+"droid.org/repository/browse/?fdid=org.kde.kdeconnect_tp\"><span style=\" "
+"text-decoration: underline; color:#0000ff;\">en F-Droid</span></a>) y "
+"debería aparecer en la lista.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QLabel, noDeviceTroubleshoot)
+#: kcm.ui:333
+msgid ""
+"<html><head/><body><p>If you are having problems, visit the <a href="
+"\"https://community.kde.org/KDEConnect\"><span style=\" text-decoration: "
+"underline; color:#0000ff;\">KDE Connect Community wiki</span></a> for help.</"
+"p></body></html>"
+msgstr ""
+"<html><head/><body><p>Si experimenta problemas, visite la <a href=\"https://"
+"community.kde.org/KDEConnect\"><span style=\" text-decoration: underline; "
+"color:#0000ff;\">wiki comunitaria de KDE Connect</span></a> para encontrar "
+"ayuda.</p></body></html>"

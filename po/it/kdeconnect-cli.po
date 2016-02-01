@@ -1,0 +1,142 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Vincenzo Reale <smart2128@baslug.org>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-09-17 15:40+0100\n"
+"Last-Translator: Vincenzo Reale <smart2128@baslug.org>\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
+
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Vincenzo Reale"
+
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "smart2128@baslug.org"
+
+#: kdeconnect-cli.cpp:41
+msgid "KDE Connect CLI tool"
+msgstr "Strumento CLI di KDE Connect"
+
+#: kdeconnect-cli.cpp:43
+msgid "(C) 2015 Aleix Pol Gonzalez"
+msgstr "(C) 2015 Aleix Pol Gonzalez"
+
+#: kdeconnect-cli.cpp:46
+msgid "Aleix Pol Gonzalez"
+msgstr "Aleix Pol Gonzalez"
+
+#: kdeconnect-cli.cpp:47
+msgid "Albert Vaca Cintora"
+msgstr "Albert Vaca Cintora"
+
+#: kdeconnect-cli.cpp:49
+msgid "List all devices"
+msgstr "Elenca tutti i dispositivi"
+
+#: kdeconnect-cli.cpp:50
+msgid "List available (paired and reachable) devices"
+msgstr "Elenca i dispositivi disponibili (associati e raggiungibili)"
+
+#: kdeconnect-cli.cpp:51
+msgid ""
+"Make --list-devices or --list-available print only the devices id, to ease "
+"scripting"
+msgstr ""
+"Fa stampare a --list-devices o --list-available solo gli identificatori dei "
+"dispositivi, per facilitare la creazione di script"
+
+#: kdeconnect-cli.cpp:52
+msgid "Search for devices in the network and re-establish connections"
+msgstr "Ricerca i dispositivi nella rete e ripristina le connessioni"
+
+#: kdeconnect-cli.cpp:53
+msgid "Request pairing to a said device"
+msgstr "Richiedi l'associazione a un dispositivo specificato"
+
+#: kdeconnect-cli.cpp:54
+msgid "Stop pairing to a said device"
+msgstr "Interrompi l'associazione a un dispositivo specificato"
+
+#: kdeconnect-cli.cpp:55
+msgid "Sends a ping to said device"
+msgstr "Invia un ping a un dispositivo specificato"
+
+#: kdeconnect-cli.cpp:56
+msgid "Same as ping but you can set the message to display"
+msgstr "Come il ping, ma puoi impostare il messaggio da visualizzare"
+
+#: kdeconnect-cli.cpp:56
+msgid "message"
+msgstr "messaggio"
+
+#: kdeconnect-cli.cpp:57
+msgid "Share a file to a said device"
+msgstr "Condividi un file con un dispositivo specificato"
+
+#: kdeconnect-cli.cpp:58
+msgid "Display the notifications on a said device"
+msgstr "Visualizza le notifiche su un dispositivo specificato"
+
+#: kdeconnect-cli.cpp:59
+msgid "Lock the specified device"
+msgstr "Blocca il dispositivo specificato"
+
+#: kdeconnect-cli.cpp:60
+msgid "Device ID"
+msgstr "ID dispositivo"
+
+#: kdeconnect-cli.cpp:85
+msgid "(paired and reachable)"
+msgstr "(associato e raggiungibile)"
+
+#: kdeconnect-cli.cpp:87
+msgid "(reachable)"
+msgstr "(raggiungibile)"
+
+#: kdeconnect-cli.cpp:89
+msgid "(paired)"
+msgstr "(associato)"
+
+#: kdeconnect-cli.cpp:95
+#, kde-format
+msgid "1 device found"
+msgid_plural "%1 devices found"
+msgstr[0] "Un dispositivo trovato"
+msgstr[1] "%1 dispositivi trovati"
+
+#: kdeconnect-cli.cpp:97
+msgid "No devices found"
+msgstr "Nessun dispositivo trovato"
+
+#: kdeconnect-cli.cpp:105
+msgid "No device specified"
+msgstr "Nessun dispositivo specificato"
+
+#: kdeconnect-cli.cpp:116
+#, kde-format
+msgid "Couldn't share %1"
+msgstr "Impossibile condividere %1"
+
+#: kdeconnect-cli.cpp:121
+msgid "Already paired"
+msgstr "Già associato"
+
+#: kdeconnect-cli.cpp:129
+msgid "Already not paired"
+msgstr "Già disassociato"
+
+#: kdeconnect-cli.cpp:150
+msgid "Nothing to be done"
+msgstr "Niente da fare"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeconnect-kcm\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-08-12 02:06+0000\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
 "PO-Revision-Date: 2014-05-19 00:20+0200\n"
 "Last-Translator: Svetoslav Stefanov <svetlisashkov@yahoo.com>\n"
 "Language-Team: BULGARIAN <kde-i18n-doc@kde.org>\n"
@@ -19,49 +19,104 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: kcm.cpp:152 kcm.cpp:236
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
+#: kcm.cpp:55
+msgid "KDE Connect Settings"
+msgstr ""
+
+#: kcm.cpp:57
+msgid "KDE Connect Settings module"
+msgstr ""
+
+#: kcm.cpp:59
+msgid "(C) 2015 Albert Vaca Cintora"
+msgstr ""
+
+#: kcm.cpp:63
+msgid "Albert Vaca Cintora"
+msgstr ""
+
+#: kcm.cpp:209 kcm.cpp:268
 msgid "(paired)"
 msgstr "(сдвоени)"
 
-#: kcm.cpp:152 kcm.cpp:208 kcm.cpp:219
+#: kcm.cpp:209 kcm.cpp:268
 msgid "(unpaired)"
 msgstr "(разкачени)"
 
-#: kcm.cpp:166
+#: kcm.cpp:218
 msgid "Plugins"
 msgstr "Приставки"
 
-#: kcm.cpp:221
+#: kcm.cpp:255
 #, kde-format
 msgid "Error trying to pair: %1"
 msgstr "Грешка при сдвояване: %1"
 
+#. i18n: ectx: property (text), widget (QLabel, rename_label)
+#: kcm.ui:47
+msgid "KDE Connect"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QPushButton, refresh_button)
-#: kcm.ui:41
+#: kcm.ui:110
 msgid "Refresh"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, name_label)
-#: kcm.ui:88
+#: kcm.ui:157
 msgid "Device"
 msgstr "Устройства"
 
 #. i18n: ectx: property (text), widget (QLabel, status_label)
-#: kcm.ui:101
+#: kcm.ui:170
 msgid "(status)"
 msgstr "(състояние)"
 
 #. i18n: ectx: property (text), widget (QPushButton, pair_button)
-#: kcm.ui:146
+#: kcm.ui:215
 msgid "Request pair"
 msgstr "Заявка за сдвояване"
 
 #. i18n: ectx: property (text), widget (QPushButton, unpair_button)
-#: kcm.ui:159
+#: kcm.ui:228
 msgid "Unpair"
 msgstr "Разкачване"
 
 #. i18n: ectx: property (text), widget (QPushButton, ping_button)
-#: kcm.ui:172
+#: kcm.ui:241
 msgid "Send ping"
 msgstr "Изпращане на пинг"
+
+#. i18n: ectx: property (text), widget (QLabel, noDeviceLabel)
+#: kcm.ui:286
+msgid "No device selected."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, noDeviceLinks)
+#: kcm.ui:302
+msgid ""
+"<html><head/><body><p>If you own Android device, make sure to install the <a "
+"href=\"https://play.google.com/store/apps/details?id=org.kde.kdeconnect_tp"
+"\"><span style=\" text-decoration: underline; color:#0000ff;\">KDE Connect "
+"Android app</span></a> (also available <a href=\"https://f-droid.org/"
+"repository/browse/?fdid=org.kde.kdeconnect_tp\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">from F-Droid</span></a>) and it "
+"should appear in the list.</p></body></html>"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, noDeviceTroubleshoot)
+#: kcm.ui:333
+msgid ""
+"<html><head/><body><p>If you are having problems, visit the <a href="
+"\"https://community.kde.org/KDEConnect\"><span style=\" text-decoration: "
+"underline; color:#0000ff;\">KDE Connect Community wiki</span></a> for help.</"
+"p></body></html>"
+msgstr ""
