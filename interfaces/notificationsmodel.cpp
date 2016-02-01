@@ -19,41 +19,48 @@
  */
 
 #include "notificationsmodel.h"
+#include "interfaces_debug.h"
 
+#include <QDebug>
 #include <QDBusInterface>
 
 #include <KSharedConfig>
 #include <KConfigGroup>
-#include <KIcon>
-
-#include <core/kdebugnamespace.h>
+#include <QIcon>
 
 //#include "modeltest.h"
 
-
 NotificationsModel::NotificationsModel(QObject* parent)
     : QAbstractListModel(parent)
-    , m_dbusInterface(0)
+    , m_dbusInterface(nullptr)
 {
 
     //new ModelTest(this, this);
 
-    connect(this, SIGNAL(rowsInserted(QModelIndex, int, int)),
+    connect(this, SIGNAL(rowsInserted(QModelIndex,int,int)),
             this, SIGNAL(rowsChanged()));
-    connect(this, SIGNAL(rowsRemoved(QModelIndex, int, int)),
+    connect(this, SIGNAL(rowsRemoved(QModelIndex,int,int)),
             this, SIGNAL(rowsChanged()));
 
-    connect(this, SIGNAL(dataChanged(QModelIndex, QModelIndex)),
+    connect(this, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
             this, SIGNAL(anyDismissableChanged()));
 
+
+    QDBusServiceWatcher* watcher = new QDBusServiceWatcher(DaemonDbusInterface::activatedService(),
+                                                           QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForOwnerChange, this);
+    connect(watcher, &QDBusServiceWatcher::serviceRegistered, this, &NotificationsModel::refreshNotificationList);
+    connect(watcher, &QDBusServiceWatcher::serviceUnregistered, this, &NotificationsModel::clearNotifications);
+}
+
+QHash<int, QByteArray> NotificationsModel::roleNames() const
+{
     //Role names for QML
-    QHash<int, QByteArray> names = roleNames();
+    QHash<int, QByteArray> names = QAbstractItemModel::roleNames();
     names.insert(DbusInterfaceRole,    "dbusInterface");
     names.insert(AppNameModelRole,     "appName");
     names.insert(IdModelRole,          "notificationId");
     names.insert(DismissableModelRole, "dismissable");
-    setRoleNames(names);
-
+    return names;
 }
 
 NotificationsModel::~NotificationsModel()
@@ -105,26 +112,33 @@ void NotificationsModel::refreshNotificationList()
         return;
     }
 
-    if (!m_notificationList.isEmpty()) {
-        beginRemoveRows(QModelIndex(), 0, m_notificationList.size() - 1);
-        qDeleteAll(m_notificationList);
-        m_notificationList.clear();
-        endRemoveRows();
-    }
+    clearNotifications();
 
     if (!m_dbusInterface->isValid()) {
-        kDebug(debugArea()) << "dbus interface not valid";
+        qCWarning(KDECONNECT_INTERFACES) << "dbus interface not valid";
         return;
     }
 
     QDBusPendingReply<QStringList> pendingNotificationIds = m_dbusInterface->activeNotifications();
-    pendingNotificationIds.waitForFinished();
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pendingNotificationIds, this);
+
+    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                     this, SLOT(receivedNotifications(QDBusPendingCallWatcher*)));
+}
+
+void NotificationsModel::receivedNotifications(QDBusPendingCallWatcher* watcher)
+{
+    watcher->deleteLater();
+    clearNotifications();
+    QDBusPendingReply<QStringList> pendingNotificationIds = *watcher;
+
+    clearNotifications();
     if (pendingNotificationIds.isError()) {
-        kDebug(debugArea()) << pendingNotificationIds.error();
+        qCWarning(KDECONNECT_INTERFACES) << pendingNotificationIds.error();
         return;
     }
-    const QStringList& notificationIds = pendingNotificationIds.value();
 
+    const QStringList notificationIds = pendingNotificationIds.value();
     if (notificationIds.isEmpty()) {
         return;
     }
@@ -135,8 +149,6 @@ void NotificationsModel::refreshNotificationList()
         m_notificationList.append(dbusInterface);
     }
     endInsertRows();
-
-    Q_EMIT dataChanged(index(0), index(notificationIds.size() - 1));
 }
 
 QVariant NotificationsModel::data(const QModelIndex& index, int role) const
@@ -158,15 +170,15 @@ QVariant NotificationsModel::data(const QModelIndex& index, int role) const
     //FIXME: This function gets called lots of times, producing lots of dbus calls. Add a cache?
     switch (role) {
         case IconModelRole:
-            return KIcon("device-notifier").pixmap(32, 32);
+            return QIcon::fromTheme("device-notifier");
         case IdModelRole:
-            return QString(notification->internalId());
+            return notification->internalId();
         case NameModelRole:
-            return QString(notification->ticker());
+            return notification->ticker();
         case ContentModelRole:
             return QString(); //To implement in the Android side
         case AppNameModelRole:
-            return QString(notification->appName());
+            return notification->appName();
         case DbusInterfaceRole:
             return qVariantFromValue<QObject*>(notification);
         case DismissableModelRole:
@@ -179,12 +191,12 @@ QVariant NotificationsModel::data(const QModelIndex& index, int role) const
 NotificationDbusInterface* NotificationsModel::getNotification(const QModelIndex& index) const
 {
     if (!index.isValid()) {
-        return NULL;
+        return nullptr;
     }
 
     int row = index.row();
     if (row < 0 || row >= m_notificationList.size()) {
-        return NULL;
+        return nullptr;
     }
 
     return m_notificationList[row];
@@ -216,5 +228,15 @@ void NotificationsModel::dismissAll()
         if (notification->dismissable()) {
             notification->dismiss();
         }
+    }
+}
+
+void NotificationsModel::clearNotifications()
+{
+    if (!m_notificationList.isEmpty()) {
+        beginRemoveRows(QModelIndex(), 0, m_notificationList.size() - 1);
+        qDeleteAll(m_notificationList);
+        m_notificationList.clear();
+        endRemoveRows();
     }
 }

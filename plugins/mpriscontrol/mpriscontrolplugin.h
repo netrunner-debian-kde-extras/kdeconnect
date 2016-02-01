@@ -23,10 +23,14 @@
 
 #include <QString>
 #include <QHash>
+#include <QLoggingCategory>
+#include <QDBusServiceWatcher>
 
 #include <core/kdeconnectplugin.h>
 
 #define PACKAGE_TYPE_MPRIS QLatin1String("kdeconnect.mpris")
+
+Q_DECLARE_LOGGING_CATEGORY(KDECONNECT_PLUGIN_MPRIS)
 
 class MprisControlPlugin
     : public KdeConnectPlugin
@@ -37,21 +41,24 @@ public:
     explicit MprisControlPlugin(QObject *parent, const QVariantList &args);
 
 public Q_SLOTS:
-    virtual bool receivePackage(const NetworkPackage& np);
-    virtual void connected() { }
+    virtual bool receivePackage(const NetworkPackage& np) override;
+    virtual void connected() override { }
 
 private Q_SLOTS:
-    void serviceOwnerChanged(const QString &name, const QString &oldOwner, const QString &newOwner);
     void propertiesChanged(const QString& propertyInterface, const QVariantMap& properties);
     void seeked(qlonglong);
 
 private:
+    void addService(const QString& service);
+    void removeService(const QString& service);
+
     void addPlayer(const QString& ifaceName);
     void removePlayer(const QString& ifaceName);
     void sendPlayerList();
 
     QHash<QString, QString> playerList;
     int prevVolume;
+    QDBusServiceWatcher* m_watcher;
 
 };
 

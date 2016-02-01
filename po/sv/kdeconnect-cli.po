@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2014.
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2014, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-11-11 02:05+0000\n"
-"PO-Revision-Date: 2014-12-30 21:23+0100\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-09-13 15:04+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 2.0\n"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
@@ -25,67 +25,118 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "stefan.asserhall@bredband.net"
 
-#: kdeconnect-cli.cpp:34
+#: kdeconnect-cli.cpp:41
 msgid "KDE Connect CLI tool"
 msgstr "KDE-anslut kommandoradsverktyg"
 
-#: kdeconnect-cli.cpp:35
-msgid "(C) 2013 Aleix Pol Gonzalez"
-msgstr "© 2013 Aleix Pol Gonzalez"
+#: kdeconnect-cli.cpp:43
+msgid "(C) 2015 Aleix Pol Gonzalez"
+msgstr "© 2015 Aleix Pol Gonzalez"
 
-#: kdeconnect-cli.cpp:36
+#: kdeconnect-cli.cpp:46
 msgid "Aleix Pol Gonzalez"
 msgstr "Aleix Pol Gonzalez"
 
-#: kdeconnect-cli.cpp:37
+#: kdeconnect-cli.cpp:47
 msgid "Albert Vaca Cintora"
 msgstr "Albert Vaca Cintora"
 
-#: kdeconnect-cli.cpp:41
-msgid "List all devices."
-msgstr "Lista alla enheter."
-
-#: kdeconnect-cli.cpp:42
-msgid "Search for devices in the network and re-establish connections."
-msgstr "Sök efter enheter på nätverket och återupprätta anslutningar."
-
-#: kdeconnect-cli.cpp:43
-msgid "Request pairing to a said device."
-msgstr "Begär ihopparning med sagd enhet."
-
-#: kdeconnect-cli.cpp:44
-msgid "Stop pairing to a said device."
-msgstr "Stoppa ihopparning med sagd enhet."
-
-#: kdeconnect-cli.cpp:45
-msgid "Send a ping to said device."
-msgstr "Skicka ping till sagd enhet."
-
-#: kdeconnect-cli.cpp:46
-msgid "Same as ping but you can customize the message shown."
-msgstr "Samma som ping, men det går  att anpassa det visade meddelandet."
-
-#: kdeconnect-cli.cpp:47
-msgid "Share a file to a said device."
-msgstr "Dela en fil med sagd enhet."
-
-#: kdeconnect-cli.cpp:48
-msgid "Display the notifications on a said device."
-msgstr "Visa underrättelser på sagd enhet."
+#: kdeconnect-cli.cpp:49
+msgid "List all devices"
+msgstr "Lista alla enheter"
 
 #: kdeconnect-cli.cpp:50
-msgid "Device ID."
-msgstr "Enhetsidentifierare."
+msgid "List available (paired and reachable) devices"
+msgstr "Lista tillgängliga enheter (ihopparade som går att nå)"
 
-#: kdeconnect-cli.cpp:80
+#: kdeconnect-cli.cpp:51
+msgid ""
+"Make --list-devices or --list-available print only the devices id, to ease "
+"scripting"
+msgstr ""
+"Låt --list-devices eller --list-available bara skriva ut "
+"enhetsidentifierare, för att göra det enklare att skriva skript."
+
+#: kdeconnect-cli.cpp:52
+msgid "Search for devices in the network and re-establish connections"
+msgstr "Sök efter enheter på nätverket och återupprätta anslutningar"
+
+#: kdeconnect-cli.cpp:53
+msgid "Request pairing to a said device"
+msgstr "Begär ihopparning med angiven enhet"
+
+#: kdeconnect-cli.cpp:54
+msgid "Stop pairing to a said device"
+msgstr "Stoppa ihopparning med angiven enhet"
+
+#: kdeconnect-cli.cpp:55
+msgid "Sends a ping to said device"
+msgstr "Skicka ping till angiven enhet"
+
+#: kdeconnect-cli.cpp:56
+msgid "Same as ping but you can set the message to display"
+msgstr "Samma som ping, men det går  att anpassa det visade meddelandet"
+
+#: kdeconnect-cli.cpp:56
+msgid "message"
+msgstr "meddelande"
+
+#: kdeconnect-cli.cpp:57
+msgid "Share a file to a said device"
+msgstr "Dela en fil med angiven enhet"
+
+#: kdeconnect-cli.cpp:58
+msgid "Display the notifications on a said device"
+msgstr "Visa underrättelser på angiven enhet"
+
+#: kdeconnect-cli.cpp:59
+msgid "Lock the specified device"
+msgstr "Lås angiven enhet"
+
+#: kdeconnect-cli.cpp:60
+msgid "Device ID"
+msgstr "Enhetsidentifierare"
+
+#: kdeconnect-cli.cpp:85
+msgid "(paired and reachable)"
+msgstr "(Ihopparad och kan nås)"
+
+#: kdeconnect-cli.cpp:87
+msgid "(reachable)"
+msgstr "(kan nås)"
+
+#: kdeconnect-cli.cpp:89
+msgid "(paired)"
+msgstr "(ihopparad)"
+
+#: kdeconnect-cli.cpp:95
+#, kde-format
+msgid "1 device found"
+msgid_plural "%1 devices found"
+msgstr[0] "1 enhet hittades"
+msgstr[1] "%1 enheter hittades"
+
+#: kdeconnect-cli.cpp:97
+msgid "No devices found"
+msgstr "Ingen enhet hittades"
+
+#: kdeconnect-cli.cpp:105
 msgid "No device specified"
 msgstr "Ingen enhet angiven"
 
-#: kdeconnect-cli.cpp:92
+#: kdeconnect-cli.cpp:116
 #, kde-format
 msgid "Couldn't share %1"
 msgstr "Kunde inte dela %1"
 
-#: kdeconnect-cli.cpp:125
-msgid "Nothing to be done with the device"
+#: kdeconnect-cli.cpp:121
+msgid "Already paired"
+msgstr "Redan ihopparade"
+
+#: kdeconnect-cli.cpp:129
+msgid "Already not paired"
+msgstr "Redan inte ihopparade"
+
+#: kdeconnect-cli.cpp:150
+msgid "Nothing to be done"
 msgstr "Ingenting att utföra med enheten"

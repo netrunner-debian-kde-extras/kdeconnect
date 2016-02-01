@@ -21,10 +21,12 @@
 #ifndef BATTERYPLUGIN_H
 #define BATTERYPLUGIN_H
 
+#include <QLoggingCategory>
 #include <core/kdeconnectplugin.h>
 
 #define PACKAGE_TYPE_BATTERY QLatin1String("kdeconnect.battery")
 
+Q_DECLARE_LOGGING_CATEGORY(KDECONNECT_PLUGIN_BATTERY)
 class BatteryDbusInterface;
 
 class BatteryPlugin
@@ -37,8 +39,8 @@ public:
     virtual ~BatteryPlugin();
 
 public Q_SLOTS:
-    virtual bool receivePackage(const NetworkPackage& np);
-    virtual void connected();
+    virtual bool receivePackage(const NetworkPackage& np) override;
+    virtual void connected() override;
 
 private:
     // Keep these values in sync with THRESHOLD* constants in

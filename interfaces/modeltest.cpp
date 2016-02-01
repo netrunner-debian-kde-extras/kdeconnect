@@ -21,9 +21,9 @@
 **
 ****************************************************************************/
 
-#include <QtGui/QtGui>
-
 #include "modeltest.h"
+
+#include <QtGui/QtGui>
 
 Q_DECLARE_METATYPE(QModelIndex)
 
@@ -34,28 +34,28 @@ ModelTest::ModelTest(QAbstractItemModel *_model, QObject *parent) : QObject(pare
 {
     Q_ASSERT(model);
 
-    connect(model, SIGNAL(columnsAboutToBeInserted(const QModelIndex &, int, int)),
+    connect(model, SIGNAL(columnsAboutToBeInserted(QModelIndex,int,int)),
             this, SLOT(runAllTests()));
-    connect(model, SIGNAL(columnsAboutToBeRemoved(const QModelIndex &, int, int)),
+    connect(model, SIGNAL(columnsAboutToBeRemoved(QModelIndex,int,int)),
             this, SLOT(runAllTests()));
-    connect(model, SIGNAL(columnsInserted(const QModelIndex &, int, int)),
+    connect(model, SIGNAL(columnsInserted(QModelIndex,int,int)),
             this, SLOT(runAllTests()));
-    connect(model, SIGNAL(columnsRemoved(const QModelIndex &, int, int)),
+    connect(model, SIGNAL(columnsRemoved(QModelIndex,int,int)),
             this, SLOT(runAllTests()));
-    connect(model, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
+    connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
             this, SLOT(runAllTests()));
-    connect(model, SIGNAL(headerDataChanged(Qt::Orientation, int, int)),
+    connect(model, SIGNAL(headerDataChanged(Qt::Orientation,int,int)),
             this, SLOT(runAllTests()));
-    connect(model, SIGNAL(layoutAboutToBeChanged ()), this, SLOT(runAllTests()));
-    connect(model, SIGNAL(layoutChanged ()), this, SLOT(runAllTests()));
-    connect(model, SIGNAL(modelReset ()), this, SLOT(runAllTests()));
-    connect(model, SIGNAL(rowsAboutToBeInserted(const QModelIndex &, int, int)),
+    connect(model, SIGNAL(layoutAboutToBeChanged()), this, SLOT(runAllTests()));
+    connect(model, SIGNAL(layoutChanged()), this, SLOT(runAllTests()));
+    connect(model, SIGNAL(modelReset()), this, SLOT(runAllTests()));
+    connect(model, SIGNAL(rowsAboutToBeInserted(QModelIndex,int,int)),
             this, SLOT(runAllTests()));
-    connect(model, SIGNAL(rowsAboutToBeRemoved(const QModelIndex &, int, int)),
+    connect(model, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)),
             this, SLOT(runAllTests()));
-    connect(model, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
+    connect(model, SIGNAL(rowsInserted(QModelIndex,int,int)),
             this, SLOT(runAllTests()));
-    connect(model, SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
+    connect(model, SIGNAL(rowsRemoved(QModelIndex,int,int)),
             this, SLOT(runAllTests()));
 
     // Special checks for inserting/removing
@@ -64,14 +64,14 @@ ModelTest::ModelTest(QAbstractItemModel *_model, QObject *parent) : QObject(pare
     connect(model, SIGNAL(layoutChanged()),
             this, SLOT(layoutChanged()));
 
-    connect(model, SIGNAL(rowsAboutToBeInserted(const QModelIndex &, int, int)),
-            this, SLOT(rowsAboutToBeInserted(const QModelIndex &, int, int)));
-    connect(model, SIGNAL(rowsAboutToBeRemoved(const QModelIndex &, int, int)),
-            this, SLOT(rowsAboutToBeRemoved(const QModelIndex &, int, int)));
-    connect(model, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
-            this, SLOT(rowsInserted(const QModelIndex &, int, int)));
-    connect(model, SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
-            this, SLOT(rowsRemoved(const QModelIndex &, int, int)));
+    connect(model, SIGNAL(rowsAboutToBeInserted(QModelIndex,int,int)),
+            this, SLOT(rowsAboutToBeInserted(QModelIndex,int,int)));
+    connect(model, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)),
+            this, SLOT(rowsAboutToBeRemoved(QModelIndex,int,int)));
+    connect(model, SIGNAL(rowsInserted(QModelIndex,int,int)),
+            this, SLOT(rowsInserted(QModelIndex,int,int)));
+    connect(model, SIGNAL(rowsRemoved(QModelIndex,int,int)),
+            this, SLOT(rowsRemoved(QModelIndex,int,int)));
 
     runAllTests();
 }
@@ -359,7 +359,7 @@ void ModelTest::checkChildren(const QModelIndex &parent, int currentDepth)
             //qDebug() << "child:" << index;
             //qDebug() << p;
             //qDebug() << parent;
-            Q_ASSERT(model->parent(index) == parent);
+            Q_ASSERT(p == parent);
 
             // recursively go down the children
             if (model->hasChildren(index) && currentDepth < 10 ) {
@@ -394,27 +394,27 @@ void ModelTest::data()
     // General Purpose roles that should return a QString
     QVariant variant = model->data(model->index(0, 0), Qt::ToolTipRole);
     if (variant.isValid()) {
-        Q_ASSERT(qVariantCanConvert<QString>(variant));
+        Q_ASSERT(variant.canConvert<QString>());
     }
     variant = model->data(model->index(0, 0), Qt::StatusTipRole);
     if (variant.isValid()) {
-        Q_ASSERT(qVariantCanConvert<QString>(variant));
+        Q_ASSERT(variant.canConvert<QString>());
     }
     variant = model->data(model->index(0, 0), Qt::WhatsThisRole);
     if (variant.isValid()) {
-        Q_ASSERT(qVariantCanConvert<QString>(variant));
+        Q_ASSERT(variant.canConvert<QString>());
     }
 
     // General Purpose roles that should return a QSize
     variant = model->data(model->index(0, 0), Qt::SizeHintRole);
     if (variant.isValid()) {
-        Q_ASSERT(qVariantCanConvert<QSize>(variant));
+        Q_ASSERT(variant.canConvert<QSize>());
     }
 
     // General Purpose roles that should return a QFont
     QVariant fontVariant = model->data(model->index(0, 0), Qt::FontRole);
     if (fontVariant.isValid()) {
-        Q_ASSERT(qVariantCanConvert<QFont>(fontVariant));
+        Q_ASSERT(fontVariant.canConvert<QFont>());
     }
 
     // Check that the alignment is one we know about
@@ -437,12 +437,12 @@ void ModelTest::data()
     // General Purpose roles that should return a QColor
     QVariant colorVariant = model->data(model->index(0, 0), Qt::BackgroundColorRole);
     if (colorVariant.isValid()) {
-        Q_ASSERT(qVariantCanConvert<QColor>(colorVariant));
+        Q_ASSERT(colorVariant.canConvert<QColor>());
     }
 
     colorVariant = model->data(model->index(0, 0), Qt::TextColorRole);
     if (colorVariant.isValid()) {
-        Q_ASSERT(qVariantCanConvert<QColor>(colorVariant));
+        Q_ASSERT(colorVariant.canConvert<QColor>());
     }
 
     // Check that the "check state" is one we know about.

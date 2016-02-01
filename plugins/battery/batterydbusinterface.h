@@ -46,8 +46,10 @@ Q_SIGNALS:
 
 private:
     int mCharge;
-    bool mIsCharging : 1;
+    bool mIsCharging;
 
+    // Map to save current BatteryDbusInterface for each device.
+    static QMap<QString, BatteryDbusInterface *> s_dbusInterfaces;
 };
 
 #endif

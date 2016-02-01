@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeconnect-kded\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-06-18 01:56+0000\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
 "PO-Revision-Date: 2013-09-13 00:14-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -14,18 +14,15 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
+#: kdeconnectd.cpp:80
+#, kde-format
+msgid "Pairing request from %1"
 msgstr ""
 
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
+#: kdeconnectd.cpp:81
+msgid "Accept"
 msgstr ""
 
-#: kdeconnectd.cpp:63
-msgid "kdeconnect"
-msgstr ""
-
-#: kdeconnectd.cpp:65
-msgid "Connect your devices and KDE"
+#: kdeconnectd.cpp:81
+msgid "Reject"
 msgstr ""

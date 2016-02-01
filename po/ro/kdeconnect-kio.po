@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-10-11 01:54+0000\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
 "PO-Revision-Date: 2014-03-25 16:44+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -18,30 +18,18 @@ msgstr ""
 "20)) ? 1 : 2;\n"
 "X-Generator: Lokalize 1.5\n"
 
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Sergiu Bivol"
-
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "sergiu@ase.md"
-
-#: kiokdeconnect.cpp:39
-msgid "kiokdeconnect"
-msgstr "kiokdeconnect"
-
-#: kiokdeconnect.cpp:93
+#: kiokdeconnect.cpp:84
 msgid "Listing devices..."
 msgstr "Se enumeră dispozitivele..."
 
-#: kiokdeconnect.cpp:131
+#: kiokdeconnect.cpp:121
 msgid "Accessing device..."
 msgstr "Se accesează dispozitivul..."
 
-#: kiokdeconnect.cpp:144
+#: kiokdeconnect.cpp:134
 msgid "Could not mount device filesystem"
 msgstr "Sistemul de fișiere de pe dispozitiv nu a putut fi montat"
 
-#: kiokdeconnect.cpp:189
+#: kiokdeconnect.cpp:178
 msgid "Could not contact background service."
 msgstr "Serviciul de fundal nu a putut fi contactat."

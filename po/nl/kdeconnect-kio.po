@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-10-11 01:54+0000\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
 "PO-Revision-Date: 2014-02-15 16:59+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -17,30 +17,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.5\n"
 
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Freek de Kruijf"
-
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "freekdekruijf@kde.nl"
-
-#: kiokdeconnect.cpp:39
-msgid "kiokdeconnect"
-msgstr "kiokdeconnect"
-
-#: kiokdeconnect.cpp:93
+#: kiokdeconnect.cpp:84
 msgid "Listing devices..."
 msgstr "Lijst met apparaten maken..."
 
-#: kiokdeconnect.cpp:131
+#: kiokdeconnect.cpp:121
 msgid "Accessing device..."
 msgstr "Toegang tot apparaat proberen..."
 
-#: kiokdeconnect.cpp:144
+#: kiokdeconnect.cpp:134
 msgid "Could not mount device filesystem"
 msgstr "Kon het bestandssysteem van het apparaat niet aankoppelen"
 
-#: kiokdeconnect.cpp:189
+#: kiokdeconnect.cpp:178
 msgid "Could not contact background service."
 msgstr "Kon geen contact maken met de achtergrondservice."

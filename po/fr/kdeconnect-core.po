@@ -1,0 +1,97 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Sebastien Renard <renard@kde.org>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-09-18 19:31+0200\n"
+"Last-Translator: Sebastien Renard <renard@kde.org>\n"
+"Language-Team: French <kde-francophone@kde.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 1.5\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: device.cpp:193
+msgid "Already paired"
+msgstr "Déjà apparié"
+
+#: device.cpp:196
+msgid "Pairing already requested for this device"
+msgstr "Appariement déjà demandé pour ce périphérique"
+
+#: device.cpp:207
+msgid "Device not reachable"
+msgstr "Périphérique non accessible"
+
+#: device.cpp:218
+msgid "Error contacting device"
+msgstr "Erreur lors du contact du périphérique"
+
+#: device.cpp:256
+msgid "Timed out"
+msgstr "Délai expiré"
+
+#: device.cpp:347 device.cpp:389
+msgid "Canceled by other peer"
+msgstr "Annulé par l'autre périphérique"
+
+#: device.cpp:363
+msgid "Received incorrect key"
+msgstr "Clé incorrecte reçue"
+
+#: device.cpp:428
+msgid "Canceled by the user"
+msgstr "Annulé par l'utilisateur"
+
+#: filetransferjob.cpp:63 filetransferjob.cpp:80
+#, fuzzy
+#| msgid "Receiving file over KDE-Connect"
+msgid "Receiving file over KDE Connect"
+msgstr "Réception d'un fichier par KDE-Connect"
+
+#: filetransferjob.cpp:64 filetransferjob.cpp:81
+msgctxt "File transfer origin"
+msgid "From"
+msgstr "Depuis"
+
+#: filetransferjob.cpp:69
+msgid "Filename already present"
+msgstr "Fichier déjà présent"
+
+#: filetransferjob.cpp:82
+msgctxt "File transfer destination"
+msgid "To"
+msgstr "Vers"
+
+#: filetransferjob.cpp:101
+#, kde-format
+msgid "Received incomplete file: %1"
+msgstr "Fichier incomplet reçu : %1"
+
+#: kdeconnectconfig.cpp:64
+msgid "KDE Connect failed to start"
+msgstr "Impossible de démarrer KDE Connect"
+
+#: kdeconnectconfig.cpp:65
+msgid ""
+"Could not find support for RSA in your QCA installation. If your "
+"distribution provides separate packages for QCA-ossl and QCA-gnupg, make "
+"sure you have them installed and try again."
+msgstr ""
+"Votre installation QCA ne prend pas en charge RSA. Si votre distribution "
+"propose des paquets distincts pour QCA-ossl et QCA-gnupg, vérifiez bien que "
+"les deux sont installés et essayez à nouveau."
+
+#: kdeconnectconfig.cpp:101
+#, kde-format
+msgid "Could not store private key file: %1"
+msgstr "Impossible de stocker le fichier de clé privée : %1"

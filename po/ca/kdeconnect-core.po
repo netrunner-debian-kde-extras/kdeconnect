@@ -1,15 +1,16 @@
 # Translation of kdeconnect-core.po to Catalan
-# Copyright (C) 2014 This_file_is_part_of_KDE
+# Copyright (C) 2014-2015 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Antoni Bella Pérez <antonibella5@yahoo.com>, 2014.
+# Antoni Bella Pérez <antonibella5@yahoo.com>, 2014, 2015.
+# Josep Ma. Ferrer <txemaq@gmail.com>, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeconnect-core\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2015-01-22 02:01+0000\n"
-"PO-Revision-Date: 2014-06-19 17:39+0200\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-10-21 10:55+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -17,71 +18,79 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Accelerator-Marker: &\n"
+"X-Generator: Lokalize 2.0\n"
 
-#: device.cpp:186
+#: device.cpp:193
 msgid "Already paired"
 msgstr "Ja està aparellat"
 
-#: device.cpp:189
+#: device.cpp:196
 msgid "Pairing already requested for this device"
 msgstr "Ja s'ha demanat aparellar aquest dispositiu"
 
-#: device.cpp:193
+#: device.cpp:207
 msgid "Device not reachable"
 msgstr "No es pot accedir al dispositiu"
 
-#: device.cpp:206
+#: device.cpp:218
 msgid "Error contacting device"
 msgstr "Error en contactar amb el dispositiu"
 
-#: device.cpp:244
+#: device.cpp:256
 msgid "Timed out"
 msgstr "Ha excedit el temps"
 
-#: device.cpp:343 device.cpp:395
+#: device.cpp:347 device.cpp:389
 msgid "Canceled by other peer"
 msgstr "Cancel·lat per l'altre parell"
 
-#: device.cpp:359
+#: device.cpp:363
 msgid "Received incorrect key"
 msgstr "S'ha rebut una clau incorrecta"
 
-#: device.cpp:376
-#, kde-format
-msgid "Pairing request from %1"
-msgstr "S'ha demanat aparellar des de %1"
-
-#: device.cpp:377
-msgid "Accept"
-msgstr "Accepta"
-
-#: device.cpp:377
-msgid "Reject"
-msgstr "Rebutja"
-
-#: device.cpp:437
+#: device.cpp:428
 msgid "Canceled by the user"
 msgstr "Cancel·lat per l'usuari"
 
-#: filetransferjob.cpp:59 filetransferjob.cpp:120
-msgid "Receiving file over KDE-Connect"
-msgstr "S'estan rebent fitxers a través del KDE-Connect"
+#: filetransferjob.cpp:63 filetransferjob.cpp:80
+msgid "Receiving file over KDE Connect"
+msgstr "S'estan rebent fitxers a través del KDE Connect"
 
-#: filetransferjob.cpp:60 filetransferjob.cpp:121
+#: filetransferjob.cpp:64 filetransferjob.cpp:81
 msgctxt "File transfer origin"
 msgid "From"
 msgstr "Des de"
 
-#: filetransferjob.cpp:67
-msgid "Incoming file exists"
-msgstr "El fitxer entrant ja existeix"
+#: filetransferjob.cpp:69
+msgid "Filename already present"
+msgstr "El nom de fitxer ja està present"
 
-#: filetransferjob.cpp:123
+#: filetransferjob.cpp:82
 msgctxt "File transfer destination"
 msgid "To"
 msgstr "A"
 
-#: filetransferjob.cpp:196
-msgid "Received incomplete file"
-msgstr "S'ha rebut un fitxer incomplet"
+#: filetransferjob.cpp:101
+#, kde-format
+msgid "Received incomplete file: %1"
+msgstr "S'ha rebut un fitxer incomplet: %1"
+
+#: kdeconnectconfig.cpp:64
+msgid "KDE Connect failed to start"
+msgstr "El KDE Connect ha fallat en iniciar"
+
+#: kdeconnectconfig.cpp:65
+msgid ""
+"Could not find support for RSA in your QCA installation. If your "
+"distribution provides separate packages for QCA-ossl and QCA-gnupg, make "
+"sure you have them installed and try again."
+msgstr ""
+"No s'ha pogut trobar la implementació RSA en la vostra instal·lació del QCA. "
+"Si la vostra distribució ofereix paquets separats per a QCA-ossl i QCA-"
+"gnupg, assegureu-vos que els heu instal·lat i torneu-ho a intentar."
+
+#: kdeconnectconfig.cpp:101
+#, kde-format
+msgid "Could not store private key file: %1"
+msgstr "No s'ha pogut emmagatzemar el fitxer de clau privada: %1"

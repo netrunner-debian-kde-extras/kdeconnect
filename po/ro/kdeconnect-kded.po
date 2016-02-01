@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-06-18 01:56+0000\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
 "PO-Revision-Date: 2013-10-24 14:20+0300\n"
 "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -18,44 +18,15 @@ msgstr ""
 "20)) ? 1 : 2;\n"
 "X-Generator: Lokalize 1.5\n"
 
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
+#: kdeconnectd.cpp:80
+#, kde-format
+msgid "Pairing request from %1"
 msgstr ""
 
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr ""
+#: kdeconnectd.cpp:81
+msgid "Accept"
+msgstr "Acceptă"
 
-#: kdeconnectd.cpp:63
-msgid "kdeconnect"
-msgstr ""
-
-#: kdeconnectd.cpp:65
-msgid "Connect your devices and KDE"
-msgstr ""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#, fuzzy
-
-
-
-
-
-
-
-#, fuzzy
+#: kdeconnectd.cpp:81
+msgid "Reject"
+msgstr "Refuză"

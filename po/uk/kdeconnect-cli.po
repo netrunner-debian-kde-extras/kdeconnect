@@ -1,15 +1,15 @@
 # Translation of kdeconnect-cli.po to Ukrainian
-# Copyright (C) 2014 This_file_is_part_of_KDE
+# Copyright (C) 2014-2015 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2014.
+# Yuri Chornoivan <yurchor@ukr.net>, 2014, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeconnect-cli\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-11-11 02:05+0000\n"
-"PO-Revision-Date: 2014-11-11 09:14+0200\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-09-13 16:28+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -28,69 +28,122 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "yurchor@ukr.net"
 
-#: kdeconnect-cli.cpp:34
+#: kdeconnect-cli.cpp:41
 msgid "KDE Connect CLI tool"
 msgstr "Інструмент керування KDE Connect з командного рядка"
 
-#: kdeconnect-cli.cpp:35
-msgid "(C) 2013 Aleix Pol Gonzalez"
-msgstr "© Aleix Pol Gonzalez, 2013"
+#: kdeconnect-cli.cpp:43
+msgid "(C) 2015 Aleix Pol Gonzalez"
+msgstr "© Aleix Pol Gonzalez, 2015"
 
-#: kdeconnect-cli.cpp:36
+#: kdeconnect-cli.cpp:46
 msgid "Aleix Pol Gonzalez"
 msgstr "Aleix Pol Gonzalez"
 
-#: kdeconnect-cli.cpp:37
+#: kdeconnect-cli.cpp:47
 msgid "Albert Vaca Cintora"
 msgstr "Albert Vaca Cintora"
 
-#: kdeconnect-cli.cpp:41
-msgid "List all devices."
-msgstr "Вивести список усіх пристроїв."
-
-#: kdeconnect-cli.cpp:42
-msgid "Search for devices in the network and re-establish connections."
-msgstr "Виконати пошук пристроїв у мережі і повторно встановити з’єднання."
-
-#: kdeconnect-cli.cpp:43
-msgid "Request pairing to a said device."
-msgstr "Надіслати запит щодо встановлення зв’язку із вказаним пристроєм."
-
-#: kdeconnect-cli.cpp:44
-msgid "Stop pairing to a said device."
-msgstr "Розірвати зв’язок із вказаним пристроєм."
-
-#: kdeconnect-cli.cpp:45
-msgid "Send a ping to said device."
-msgstr "Надіслати луна-імпульс підтримання зв’язку до вказаного пристрою"
-
-#: kdeconnect-cli.cpp:46
-msgid "Same as ping but you can customize the message shown."
-msgstr ""
-"Те саме, що і надсилання луна-імпульсу, але можна налаштувати показане "
-"повідомлення."
-
-#: kdeconnect-cli.cpp:47
-msgid "Share a file to a said device."
-msgstr "Надати файл у спільне зі вказаним пристроєм користування."
-
-#: kdeconnect-cli.cpp:48
-msgid "Display the notifications on a said device."
-msgstr "Показувати сповіщення щодо вказаного пристрою."
+#: kdeconnect-cli.cpp:49
+msgid "List all devices"
+msgstr "Вивести список усіх пристроїв"
 
 #: kdeconnect-cli.cpp:50
-msgid "Device ID."
-msgstr "Ідентифікатор пристрою."
+msgid "List available (paired and reachable) devices"
+msgstr "Список доступних (пов’язаних і придатних до пов’язування) пристроїв"
 
-#: kdeconnect-cli.cpp:80
+#: kdeconnect-cli.cpp:51
+msgid ""
+"Make --list-devices or --list-available print only the devices id, to ease "
+"scripting"
+msgstr ""
+"Зробити, щоб параметри --list-devices і --list-available виводили лише "
+"ідентифікатори пристроїв для спрощення використання у скриптах"
+
+#: kdeconnect-cli.cpp:52
+msgid "Search for devices in the network and re-establish connections"
+msgstr "Виконати пошук пристроїв у мережі і повторно встановити з’єднання"
+
+#: kdeconnect-cli.cpp:53
+msgid "Request pairing to a said device"
+msgstr "Надіслати запит щодо встановлення зв’язку із вказаним пристроєм"
+
+#: kdeconnect-cli.cpp:54
+msgid "Stop pairing to a said device"
+msgstr "Розірвати зв’язок із вказаним пристроєм"
+
+#: kdeconnect-cli.cpp:55
+msgid "Sends a ping to said device"
+msgstr "Надіслати луна-імпульс підтримання зв’язку до вказаного пристрою"
+
+#: kdeconnect-cli.cpp:56
+msgid "Same as ping but you can set the message to display"
+msgstr ""
+"Те саме, що і надсилання луна-імпульсу, але можна налаштувати показане "
+"повідомлення"
+
+#: kdeconnect-cli.cpp:56
+msgid "message"
+msgstr "повідомлення"
+
+#: kdeconnect-cli.cpp:57
+msgid "Share a file to a said device"
+msgstr "Надати файл у спільне зі вказаним пристроєм користування"
+
+#: kdeconnect-cli.cpp:58
+msgid "Display the notifications on a said device"
+msgstr "Показувати сповіщення щодо вказаного пристрою"
+
+#: kdeconnect-cli.cpp:59
+msgid "Lock the specified device"
+msgstr "Заблокувати вказаний пристрій"
+
+#: kdeconnect-cli.cpp:60
+msgid "Device ID"
+msgstr "Ід. пристрою"
+
+#: kdeconnect-cli.cpp:85
+msgid "(paired and reachable)"
+msgstr "(пов’язаний і придатний до пов’язуваний)"
+
+#: kdeconnect-cli.cpp:87
+msgid "(reachable)"
+msgstr "(придатний до зв’язування)"
+
+#: kdeconnect-cli.cpp:89
+msgid "(paired)"
+msgstr "(пов’язано)"
+
+#: kdeconnect-cli.cpp:95
+#, kde-format
+msgid "1 device found"
+msgid_plural "%1 devices found"
+msgstr[0] "Виявлено %1 пристрій"
+msgstr[1] "Виявлено %1 пристрої"
+msgstr[2] "Виявлено %1 пристроїв"
+msgstr[3] "Виявлено %1 пристрій"
+
+#: kdeconnect-cli.cpp:97
+msgid "No devices found"
+msgstr "Пристроїв не виявлено"
+
+#: kdeconnect-cli.cpp:105
 msgid "No device specified"
 msgstr "Не вказано пристрій"
 
-#: kdeconnect-cli.cpp:92
+#: kdeconnect-cli.cpp:116
 #, kde-format
 msgid "Couldn't share %1"
 msgstr "Не вдалося надати у спільне користування %1"
 
-#: kdeconnect-cli.cpp:125
-msgid "Nothing to be done with the device"
-msgstr "Дій із пристроєм не передбачено"
+#: kdeconnect-cli.cpp:121
+msgid "Already paired"
+msgstr "Вже пов’язано"
+
+#: kdeconnect-cli.cpp:129
+msgid "Already not paired"
+msgstr "Вже не пов’язано"
+
+#: kdeconnect-cli.cpp:150
+msgid "Nothing to be done"
+msgstr "Ніяких дій не передбачено"

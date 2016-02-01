@@ -5,82 +5,87 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: l 10n\n"
+"Project-Id-Version: kdeconnect\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2015-01-22 02:01+0000\n"
-"PO-Revision-Date: 2014-06-18 01:56+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: \n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-09-18 18:01+0100\n"
+"Last-Translator: Andrius Štikonas <andrius@stikonas.eu>\n"
+"Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Poedit 1.5.5\n"
 
-#: device.cpp:186
+#: device.cpp:193
 msgid "Already paired"
-msgstr ""
+msgstr "Jau suporuota"
 
-#: device.cpp:189
+#: device.cpp:196
 msgid "Pairing already requested for this device"
 msgstr ""
 
-#: device.cpp:193
+#: device.cpp:207
 msgid "Device not reachable"
-msgstr ""
+msgstr "Įrenginys nepasiekiamas"
 
-#: device.cpp:206
+#: device.cpp:218
 msgid "Error contacting device"
-msgstr ""
+msgstr "Klaida, jungiantis prie įrenginio"
 
-#: device.cpp:244
+#: device.cpp:256
 msgid "Timed out"
 msgstr ""
 
-#: device.cpp:343 device.cpp:395
+#: device.cpp:347 device.cpp:389
 msgid "Canceled by other peer"
 msgstr ""
 
-#: device.cpp:359
+#: device.cpp:363
 msgid "Received incorrect key"
-msgstr ""
+msgstr "Gautas netinkamas raktas"
 
-#: device.cpp:376
-#, kde-format
-msgid "Pairing request from %1"
-msgstr ""
-
-#: device.cpp:377
-msgid "Accept"
-msgstr ""
-
-#: device.cpp:377
-msgid "Reject"
-msgstr ""
-
-#: device.cpp:437
+#: device.cpp:428
 msgid "Canceled by the user"
 msgstr ""
 
-#: filetransferjob.cpp:59 filetransferjob.cpp:120
-msgid "Receiving file over KDE-Connect"
+#: filetransferjob.cpp:63 filetransferjob.cpp:80
+msgid "Receiving file over KDE Connect"
 msgstr ""
 
-#: filetransferjob.cpp:60 filetransferjob.cpp:121
+#: filetransferjob.cpp:64 filetransferjob.cpp:81
 msgctxt "File transfer origin"
 msgid "From"
+msgstr "Nuo"
+
+#: filetransferjob.cpp:69
+msgid "Filename already present"
 msgstr ""
 
-#: filetransferjob.cpp:67
-msgid "Incoming file exists"
-msgstr ""
-
-#: filetransferjob.cpp:123
+#: filetransferjob.cpp:82
 msgctxt "File transfer destination"
 msgid "To"
 msgstr ""
 
-#: filetransferjob.cpp:196
-msgid "Received incomplete file"
+#: filetransferjob.cpp:101
+#, kde-format
+msgid "Received incomplete file: %1"
+msgstr "Gautas nepilnas failas: %1"
+
+#: kdeconnectconfig.cpp:64
+msgid "KDE Connect failed to start"
 msgstr ""
+
+#: kdeconnectconfig.cpp:65
+msgid ""
+"Could not find support for RSA in your QCA installation. If your "
+"distribution provides separate packages for QCA-ossl and QCA-gnupg, make "
+"sure you have them installed and try again."
+msgstr ""
+
+#: kdeconnectconfig.cpp:101
+#, kde-format
+msgid "Could not store private key file: %1"
+msgstr "Nepavyksta išsaugoti privataus rakto failo: %1"

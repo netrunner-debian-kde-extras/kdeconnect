@@ -1,11 +1,11 @@
 # translation of kdeconnect-kded.po to Slovak
-# Roman Paholik <wizzardsk@gmail.com>, 2013, 2014.
+# Roman Paholik <wizzardsk@gmail.com>, 2013, 2014, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeconnect-kded\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-06-18 01:56+0000\n"
-"PO-Revision-Date: 2014-06-19 08:57+0200\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-03-28 11:04+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
@@ -15,18 +15,15 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Roman Paholík"
+#: kdeconnectd.cpp:80
+#, kde-format
+msgid "Pairing request from %1"
+msgstr "Požiadavka spárovania od %1"
 
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "wizzardsk@gmail.com"
+#: kdeconnectd.cpp:81
+msgid "Accept"
+msgstr "Prijať"
 
-#: kdeconnectd.cpp:63
-msgid "kdeconnect"
-msgstr "kdeconnect"
-
-#: kdeconnectd.cpp:65
-msgid "Connect your devices and KDE"
-msgstr "Prepojiť vaše zariadenia a KDE"
+#: kdeconnectd.cpp:81
+msgid "Reject"
+msgstr "Odmietnuť"

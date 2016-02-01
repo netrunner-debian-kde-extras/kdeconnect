@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-10-11 01:54+0000\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
 "PO-Revision-Date: 2014-02-16 19:46+0100\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -17,30 +17,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 1.5\n"
 
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Úr Balázs"
-
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "urbalazs@gmail.com"
-
-#: kiokdeconnect.cpp:39
-msgid "kiokdeconnect"
-msgstr "kiokdeconnect"
-
-#: kiokdeconnect.cpp:93
+#: kiokdeconnect.cpp:84
 msgid "Listing devices..."
 msgstr "Eszközök listázása…"
 
-#: kiokdeconnect.cpp:131
+#: kiokdeconnect.cpp:121
 msgid "Accessing device..."
 msgstr "Hozzáférés az eszközhöz…"
 
-#: kiokdeconnect.cpp:144
+#: kiokdeconnect.cpp:134
 msgid "Could not mount device filesystem"
 msgstr "Nem sikerült csatolni az eszköz fájlrendszerét"
 
-#: kiokdeconnect.cpp:189
+#: kiokdeconnect.cpp:178
 msgid "Could not contact background service."
 msgstr "Nem sikerült csatlakozni a háttérszolgáltatáshoz."

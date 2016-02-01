@@ -26,69 +26,70 @@
 #include <qdbusconnectioninterface.h>
 #include <QDBusReply>
 #include <QDBusMessage>
+#include <QDBusServiceWatcher>
 
-#include <core/kdebugnamespace.h>
+#include <KPluginFactory>
+
 #include <core/device.h>
 #include "mprisdbusinterface.h"
 #include "propertiesdbusinterface.h"
 
-K_PLUGIN_FACTORY( KdeConnectPluginFactory, registerPlugin< MprisControlPlugin >(); )
-K_EXPORT_PLUGIN( KdeConnectPluginFactory("kdeconnect_mpriscontrol", "kdeconnect-plugins") )
+K_PLUGIN_FACTORY_WITH_JSON( KdeConnectPluginFactory, "kdeconnect_mpriscontrol.json", registerPlugin< MprisControlPlugin >(); )
+
+Q_LOGGING_CATEGORY(KDECONNECT_PLUGIN_MPRIS, "kdeconnect.plugin.mpris")
 
 MprisControlPlugin::MprisControlPlugin(QObject* parent, const QVariantList& args)
     : KdeConnectPlugin(parent, args)
+    , prevVolume(-1)
 {
+    m_watcher = new QDBusServiceWatcher(QString(), QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForOwnerChange, this);
 
-    //Detect new interfaces
-    connect(QDBusConnection::sessionBus().interface(), SIGNAL(serviceOwnerChanged(QString,QString,QString)),
-            this, SLOT(serviceOwnerChanged(QString,QString,QString)));
+    connect(m_watcher, &QDBusServiceWatcher::serviceRegistered, this, &MprisControlPlugin::addService);
+    connect(m_watcher, &QDBusServiceWatcher::serviceUnregistered, this, &MprisControlPlugin::removeService);
 
     //Add existing interfaces
-    QStringList interfaces = QDBusConnection::sessionBus().interface()->registeredServiceNames().value();
-    Q_FOREACH (const QString& iface, interfaces) {
-        if (iface.startsWith("org.mpris.MediaPlayer2")) {
-            addPlayer(iface);
-        }
+    QStringList services = QDBusConnection::sessionBus().interface()->registeredServiceNames().value();
+    Q_FOREACH (const QString& service, services) {
+        addService(service);
     }
-
 }
 
-void MprisControlPlugin::serviceOwnerChanged(const QString &name,
-                                              const QString &oldOwner,
-                                              const QString &newOwner)
+void MprisControlPlugin::addService(const QString& service)
 {
-    Q_UNUSED(oldOwner);
-
-    if (name.startsWith("org.mpris.MediaPlayer2")) {
-
-        kDebug(debugArea()) << "Mpris (un)registered in bus" << name << oldOwner << newOwner;
-
-        if (oldOwner.isEmpty()) {
-            addPlayer(name);
-        } else if (newOwner.isEmpty()) {
-            removePlayer(name);
-        }
+    if (service.startsWith(QLatin1String("org.mpris.MediaPlayer2"))) {
+        addPlayer(service);
     }
 }
+
+void MprisControlPlugin::removeService(const QString& service)
+{
+    if (service.startsWith(QLatin1String("org.mpris.MediaPlayer2"))) {
+        removePlayer(service);
+    }
+}
+
 
 void MprisControlPlugin::addPlayer(const QString& service)
 {
     QDBusInterface mprisInterface(service, "/org/mpris/MediaPlayer2", "org.mpris.MediaPlayer2");
     //FIXME: This call hangs and returns an empty string if KDED is still starting!
-    const QString identity = mprisInterface.property("Identity").toString();
+    QString identity = mprisInterface.property("Identity").toString();
+    if (identity.isEmpty()) {
+        identity = service.mid(sizeof("org.mpris.MediaPlayer2"));
+    }
     playerList[identity] = service;
-    kDebug(debugArea()) << "Mpris addPlayer" << service << "->" << identity;
+    qCDebug(KDECONNECT_PLUGIN_MPRIS) << "Mpris addPlayer" << service << "->" << identity;
     sendPlayerList();
 
     OrgFreedesktopDBusPropertiesInterface* freedesktopInterface = new OrgFreedesktopDBusPropertiesInterface(service, "/org/mpris/MediaPlayer2", QDBusConnection::sessionBus(), this);
-    connect(freedesktopInterface, SIGNAL(PropertiesChanged(QString, QVariantMap, QStringList)), this, SLOT(propertiesChanged(QString, QVariantMap)));
+    connect(freedesktopInterface, SIGNAL(PropertiesChanged(QString,QVariantMap,QStringList)), this, SLOT(propertiesChanged(QString,QVariantMap)));
 
     OrgMprisMediaPlayer2PlayerInterface* mprisInterface0  = new OrgMprisMediaPlayer2PlayerInterface(service, "/org/mpris/MediaPlayer2", QDBusConnection::sessionBus());
     connect(mprisInterface0, SIGNAL(Seeked(qlonglong)), this, SLOT(seeked(qlonglong)));
 }
 
 void MprisControlPlugin::seeked(qlonglong position){
-    kDebug(debugArea()) << "Seeked in player";
+    //qCDebug(KDECONNECT_PLUGIN_MPRIS) << "Seeked in player";
     NetworkPackage np(PACKAGE_TYPE_MPRIS);
     np.set("pos", position/1000); //Send milis instead of nanos
     OrgFreedesktopDBusPropertiesInterface* interface = (OrgFreedesktopDBusPropertiesInterface*)sender();
@@ -101,7 +102,7 @@ void MprisControlPlugin::seeked(qlonglong position){
 void MprisControlPlugin::propertiesChanged(const QString& propertyInterface, const QVariantMap& properties)
 {
     Q_UNUSED(propertyInterface);
-    
+
     NetworkPackage np(PACKAGE_TYPE_MPRIS);
     bool somethingToSend = false;
     if (properties.contains("Volume")) {
@@ -145,7 +146,7 @@ void MprisControlPlugin::propertiesChanged(const QString& propertyInterface, con
         const QString& player = playerList.key(service);
         np.set("player", player);
         // Always also update the position
-        OrgMprisMediaPlayer2PlayerInterface mprisInterface(playerList[player], "/org/mpris/MediaPlayer2", QDBusConnection::sessionBus());
+        OrgMprisMediaPlayer2PlayerInterface mprisInterface(service, "/org/mpris/MediaPlayer2", QDBusConnection::sessionBus());
         if (mprisInterface.canSeek()) {
             long long pos = mprisInterface.position();
             np.set("pos", pos/1000); //Send milis instead of nanos
@@ -157,7 +158,7 @@ void MprisControlPlugin::propertiesChanged(const QString& propertyInterface, con
 void MprisControlPlugin::removePlayer(const QString& ifaceName)
 {
     const QString identity = playerList.key(ifaceName);
-    kDebug(debugArea()) << "Mpris removePlayer" << ifaceName << "->" << identity;
+    qCDebug(KDECONNECT_PLUGIN_MPRIS) << "Mpris removePlayer" << ifaceName << "->" << identity;
     playerList.remove(identity);
     sendPlayerList();
 }
@@ -180,27 +181,28 @@ bool MprisControlPlugin::receivePackage (const NetworkPackage& np)
 
     //Do something to the mpris interface
     OrgMprisMediaPlayer2PlayerInterface mprisInterface(playerList[player], "/org/mpris/MediaPlayer2", QDBusConnection::sessionBus());
+    mprisInterface.setTimeout(500);
     if (np.has("action")) {
         const QString& action = np.get<QString>("action");
-        kDebug(debugArea()) << "Calling action" << action << "in" << playerList[player];
+        //qCDebug(KDECONNECT_PLUGIN_MPRIS) << "Calling action" << action << "in" << playerList[player];
         //TODO: Check for valid actions, currently we trust anything the other end sends us
         mprisInterface.call(action);
     }
     if (np.has("setVolume")) {
         double volume = np.get<int>("setVolume")/100.f;
-        kDebug(debugArea()) << "Setting volume" << volume << "to" << playerList[player];
+        qCDebug(KDECONNECT_PLUGIN_MPRIS) << "Setting volume" << volume << "to" << playerList[player];
         mprisInterface.setVolume(volume);
     }
     if (np.has("Seek")) {
         int offset = np.get<int>("Seek");
-        kDebug(debugArea()) << "Seeking" << offset << "to" << playerList[player];
+        //qCDebug(KDECONNECT_PLUGIN_MPRIS) << "Seeking" << offset << "to" << playerList[player];
         mprisInterface.Seek(offset);
     }
 
     if (np.has("SetPosition")){
         qlonglong position = np.get<qlonglong>("SetPosition",0)*1000;
         qlonglong seek = position - mprisInterface.position();
-        kDebug(debugArea()) << "Setting position by seeking" << seek << "to" << playerList[player];
+        //qCDebug(KDECONNECT_PLUGIN_MPRIS) << "Setting position by seeking" << seek << "to" << playerList[player];
         mprisInterface.Seek(seek);
     }
 
@@ -213,14 +215,15 @@ bool MprisControlPlugin::receivePackage (const NetworkPackage& np)
         QString nowPlaying = nowPlayingMap["xesam:title"].toString();
         if (nowPlayingMap.contains("xesam:artist")) {
             nowPlaying = nowPlayingMap["xesam:artist"].toString() + " - " + nowPlaying;
-        }if (nowPlayingMap.contains("mpris:length")) {
+        }
+        answer.set("nowPlaying",nowPlaying);
+
+        if (nowPlayingMap.contains("mpris:length")) {
             qlonglong length = nowPlayingMap["mpris:length"].toLongLong();
             answer.set("length",length/1000);
         }
         qlonglong pos = mprisInterface.position();
         answer.set("pos", pos/1000);
-
-        answer.set("nowPlaying",nowPlaying);
 
         bool playing = (mprisInterface.playbackStatus() == QLatin1String("Playing"));
         answer.set("isPlaying", playing);
@@ -246,3 +249,5 @@ void MprisControlPlugin::sendPlayerList()
     np.set("playerList",playerList.keys());
     sendPackage(np);
 }
+
+#include "mpriscontrolplugin.moc"

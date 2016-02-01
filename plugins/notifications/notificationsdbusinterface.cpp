@@ -19,16 +19,16 @@
  */
 
 #include "notificationsdbusinterface.h"
+#include "notification_debug.h"
 
 #include <QDBusConnection>
 
 #include <KNotification>
-#include <KIcon>
-#include <KMD5>
+#include <QIcon>
+#include <QCryptographicHash>
 
 #include <core/device.h>
 #include <core/kdeconnectplugin.h>
-#include <core/kdebugnamespace.h>
 #include <core/filetransferjob.h>
 
 #include "notificationsplugin.h"
@@ -41,10 +41,13 @@ NotificationsDbusInterface::NotificationsDbusInterface(KdeConnectPlugin* plugin)
     , imagesDir(QDir::temp().absoluteFilePath("kdeconnect"))
 {
     imagesDir.mkpath(imagesDir.absolutePath());
-
 }
 
 NotificationsDbusInterface::~NotificationsDbusInterface()
+{
+}
+
+void NotificationsDbusInterface::clearNotifications()
 {
     qDeleteAll(mNotifications);
 }
@@ -59,7 +62,6 @@ void NotificationsDbusInterface::processPackage(const NetworkPackage& np)
     if (np.get<bool>("isCancel")) {
         removeNotification(np.get<QString>("id"));
     } else {
-
 
         //TODO: Uncoment when we are able to display app icon on plasmoid
         QString destination;
@@ -77,15 +79,14 @@ void NotificationsDbusInterface::processPackage(const NetworkPackage& np)
         //Do not show updates to existent notification nor answers to a initialization request
         if (!mInternalIdToPublicId.contains(noti->internalId()) && !np.get<bool>("requestAnswer", false) && !np.get<bool>("silent", false)) {
             KNotification* notification = new KNotification("notification", KNotification::CloseOnTimeout, this);
-            notification->setPixmap(KIcon("preferences-desktop-notification").pixmap(48, 48));
-            notification->setComponentData(KComponentData("kdeconnect", "kdeconnect"));
+            notification->setIconName(QStringLiteral("preferences-desktop-notification"));
+            notification->setComponentName("kdeconnect");
             notification->setTitle(mDevice->name());
             notification->setText(noti->appName() + ": " + noti->ticker());
             notification->sendEvent();
         }
 
         addNotification(noti);
-
     }
 }
 
@@ -97,8 +98,8 @@ void NotificationsDbusInterface::addNotification(Notification* noti)
         removeNotification(internalId);
     }
 
-    connect(noti, SIGNAL(dismissRequested(Notification*)),
-            this, SLOT(dismissRequested(Notification*)));
+    connect(noti, &Notification::dismissRequested,
+            this, &NotificationsDbusInterface::dismissRequested);
 
     const QString& publicId = newId();
     mNotifications[publicId] = noti;
@@ -106,15 +107,14 @@ void NotificationsDbusInterface::addNotification(Notification* noti)
 
     QDBusConnection::sessionBus().registerObject(mDevice->dbusPath()+"/notifications/"+publicId, noti, QDBusConnection::ExportScriptableContents);
     Q_EMIT notificationPosted(publicId);
-
 }
 
 void NotificationsDbusInterface::removeNotification(const QString& internalId)
 {
-    kDebug(debugArea()) << "removeNotification" << internalId;
+    qCDebug(KDECONNECT_PLUGIN_NOTIFICATION) << "removeNotification" << internalId;
 
     if (!mInternalIdToPublicId.contains(internalId)) {
-        kDebug(debugArea()) << "Not found";
+        qCDebug(KDECONNECT_PLUGIN_NOTIFICATION) << "Not found";
         return;
     }
 
@@ -122,7 +122,7 @@ void NotificationsDbusInterface::removeNotification(const QString& internalId)
 
     Notification* noti = mNotifications.take(publicId);
     if (!noti) {
-        kDebug(debugArea()) << "Not found";
+        qCDebug(KDECONNECT_PLUGIN_NOTIFICATION) << "Not found";
         return;
     }
 
@@ -133,10 +133,8 @@ void NotificationsDbusInterface::removeNotification(const QString& internalId)
     Q_EMIT notificationRemoved(publicId);
 }
 
-void NotificationsDbusInterface::dismissRequested(Notification* notification)
+void NotificationsDbusInterface::dismissRequested(const QString& internalId)
 {
-    const QString& internalId = notification->internalId();
-
     NetworkPackage np(PACKAGE_TYPE_NOTIFICATION);
     np.set<QString>("cancel", internalId);
     mPlugin->sendPackage(np);
@@ -152,4 +150,3 @@ QString NotificationsDbusInterface::newId()
 {
     return QString::number(++mLastId);
 }
-

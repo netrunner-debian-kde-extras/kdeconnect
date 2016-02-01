@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeconnect-plugins\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2015-01-22 02:01+0000\n"
-"PO-Revision-Date: 2015-01-07 09:23+0200\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-09-13 16:29+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -20,16 +20,24 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: battery/batteryplugin.cpp:77
+#: battery/batteryplugin.cpp:78
 #, kde-format
 msgctxt "device name: low battery"
-msgid "%1: low battery"
+msgid "%1: Low Battery"
 msgstr "%1: низький рівень заряду"
 
-#: battery/batteryplugin.cpp:78
+#: battery/batteryplugin.cpp:79
 #, kde-format
 msgid "Battery at %1%"
 msgstr "Рівень заряду — %1%"
+
+#: mousepad/mousepadplugin.cpp:116
+msgid "KDE Connect"
+msgstr "KDE Connect"
+
+#: mousepad/mousepadplugin.cpp:116
+msgid "Use your phone as a touchpad and keyboard"
+msgstr "Скористайтеся телефоном як замінником сенсорної панелі і клавіатури"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, PauseMusicConfigUi)
 #: pausemusic/pausemusic_config.ui:17
@@ -66,65 +74,38 @@ msgstr "Призупинити відтворення мультимедійни
 msgid "Mute system sound"
 msgstr "Вимкнути звук у системі"
 
-#: ping/pingplugin.cpp:51
+#: ping/pingplugin.cpp:54
 msgid "Ping!"
 msgstr "Перевірити!"
 
-#: sftp/mounter.cpp:176
+#: sftp/mounter.cpp:156
 msgid "Failed to start sshfs"
 msgstr "Не вдалося запустити sshfs"
 
-#: sftp/mounter.cpp:198
+#: sftp/mounter.cpp:170
 msgid "Error when accessing to filesystem"
 msgstr "Помилка під час спроби доступу до файлової системи"
 
-#: sftp/mounter.cpp:209
+#: sftp/mounter.cpp:179
 msgid "Failed to mount filesystem: device not responding"
 msgstr "Не вдалося змонтувати файлову систему: пристрій не відповідає"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, ShareConfigUi)
-#. i18n: ectx: property (windowTitle), widget (QWidget, SftpConfigUi)
-#: sftp/sftp_config.ui:17 share/share_config.ui:17
-msgid "Share plugin settings"
-msgstr "Параметри додатка спільного користування"
-
-#. i18n: ectx: property (title), widget (QGroupBox, error)
-#: sftp/sftp_config.ui:23
-msgid "Error"
-msgstr "Помилка"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: sftp/sftp_config.ui:45
-msgid "sshfs not found in PATH"
-msgstr "sshfs не знайдено у каталогах PATH"
-
-#. i18n: ectx: property (text), widget (QCheckBox, idle)
-#: sftp/sftp_config.ui:86
-msgid "Disconnect when idle"
-msgstr "Від’єднуватися за бездіяльності"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: sftp/sftp_config.ui:115
-msgid "Timeout:"
-msgstr "Час очікування:"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, timeout)
-#: sftp/sftp_config.ui:131
-msgid " min"
-msgstr " хв"
-
-#: sftp/sftpplugin.cpp:160
+#: sftp/sftpplugin.cpp:150
 msgid "All files"
 msgstr "Усі файли"
 
-#: sftp/sftpplugin.cpp:161
+#: sftp/sftpplugin.cpp:151
 msgid "Camera pictures"
 msgstr "Знімки фотоапарата"
 
-#: sftp/sftpplugin.cpp:208
-#, kde-format
-msgid "Device %1"
-msgstr "Пристрій %1"
+#: share/share_config.cpp:38
+msgid "&percnt;1 in the path will be replaced with the specific device name."
+msgstr "&percnt;1 у записі шляху буде замінено на специфічну назву пристрою."
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, ShareConfigUi)
+#: share/share_config.ui:17
+msgid "Share plugin settings"
+msgstr "Параметри додатка спільного користування"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: share/share_config.ui:23
@@ -136,44 +117,30 @@ msgstr "Отримання"
 msgid "Save files in:"
 msgstr "Зберігати файли до:"
 
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: share/share_config.ui:53
-#, no-c-format, kde-format
-msgid "%1  in the path will be replaced with the specific device name."
-msgstr "%1 у записі шляху буде замінено на специфічну назву пристрою."
-
-#: share/shareplugin.cpp:135
-msgid "Transfer finished"
-msgstr "Передавання завершено"
-
-#: share/shareplugin.cpp:137
-msgid "Open destination folder"
-msgstr "Відкрити теку призначення"
-
-#: telephony/telephonyplugin.cpp:41
+#: telephony/telephonyplugin.cpp:44
 msgid "unknown number"
 msgstr "невідоме число"
 
-#: telephony/telephonyplugin.cpp:50
+#: telephony/telephonyplugin.cpp:54
 #, kde-format
 msgid "Incoming call from %1"
 msgstr "Вхідний дзвінок від %1"
 
-#: telephony/telephonyplugin.cpp:54
+#: telephony/telephonyplugin.cpp:58
 #, kde-format
 msgid "Missed call from %1"
 msgstr "Пропущено дзвінок від %1"
 
-#: telephony/telephonyplugin.cpp:59
+#: telephony/telephonyplugin.cpp:64
 #, kde-format
-msgid "SMS from %1: %2"
-msgstr "SMS від %1: %2"
+msgid "SMS from %1<br>%2"
+msgstr "SMS від %1<br>%2"
 
-#: telephony/telephonyplugin.cpp:68
+#: telephony/telephonyplugin.cpp:74
 #, kde-format
-msgid "Unknown telephony event: %2"
-msgstr "Невідома подія телефонії: %2"
+msgid "Unknown telephony event: %1"
+msgstr "Невідома подія телефонії: %1"
 
-#: telephony/telephonyplugin.cpp:81
-msgid "Mute call"
+#: telephony/telephonyplugin.cpp:87
+msgid "Mute Call"
 msgstr "Вимкнути звук"

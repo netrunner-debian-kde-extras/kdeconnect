@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Park Shinjo <peremen@gmail.com>, 2014, 2015.
+# Shinjo Park <kde@peremen.name>, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-06-18 01:56+0000\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
 "PO-Revision-Date: 2015-01-02 01:02+0900\n"
-"Last-Translator: Park Shinjo <kde@peremen.name>\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde@peremen.name>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -17,114 +17,15 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 1.5\n"
 
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Park Shinjo"
-
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "kde@peremen.name"
-
-#: kdeconnectd.cpp:63
-msgid "kdeconnect"
-msgstr "kdeconnect"
-
-#: kdeconnectd.cpp:65
-msgid "Connect your devices and KDE"
-msgstr "내 장치와 KDE 연결"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#, fuzzy
+#: kdeconnectd.cpp:80
+#, kde-format
+msgid "Pairing request from %1"
+msgstr "%1에서 페어링 요청"
+
+#: kdeconnectd.cpp:81
+msgid "Accept"
+msgstr "수락"
+
+#: kdeconnectd.cpp:81
+msgid "Reject"
+msgstr "거부"

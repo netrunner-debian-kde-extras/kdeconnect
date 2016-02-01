@@ -20,31 +20,21 @@
 
 #include "daemon.h"
 
-#include <QUuid>
-#include <QFile>
-#include <QFileInfo>
 #include <QDBusConnection>
-#include <QNetworkSession>
-#include <QNetworkConfigurationManager>
-#include <QtCrypto>
 #include <QNetworkAccessManager>
+#include <QDebug>
+#include <QPointer>
 
-#include <KConfig>
-#include <KConfigGroup>
-#include <KStandardDirs>
-
-#include "dbushelper.h"
-#include "kdebugnamespace.h"
+#include "core_debug.h"
+#include "kdeconnectconfig.h"
 #include "networkpackage.h"
 #include "backends/lan/lanlinkprovider.h"
 #include "backends/loopback/loopbacklinkprovider.h"
 #include "device.h"
-#include "networkpackage.h"
 #include "backends/devicelink.h"
 #include "backends/linkprovider.h"
 
-static const KCatalogLoader loader("kdeconnect-core");
-static const KCatalogLoader loaderPlugins("kdeconnect-plugins");
+Q_GLOBAL_STATIC(Daemon*, s_instance)
 
 struct DaemonPrivate
 {
@@ -54,108 +44,48 @@ struct DaemonPrivate
     //Every known device
     QMap<QString, Device*> mDevices;
 
-    // The Initializer object sets things up, and also does cleanup when it goes out of scope
-    // Note it's not being used anywhere. That's inteneded
-    QCA::Initializer mQcaInitializer;
 };
+
+Daemon* Daemon::instance()
+{
+    Q_ASSERT(s_instance.exists());
+    return *s_instance;
+}
 
 Daemon::Daemon(QObject *parent)
     : QObject(parent)
     , d(new DaemonPrivate)
 {
-    kDebug(debugArea()) << "KdeConnect daemon starting";
+    Q_ASSERT(!s_instance.exists());
+    *s_instance = this;
+    qCDebug(KDECONNECT_CORE) << "KdeConnect daemon starting";
 
-    KSharedConfigPtr config = KSharedConfig::openConfig("kdeconnectrc");
-
-    if (!config->group("myself").hasKey("id")) {
-        QString uuid = QUuid::createUuid().toString();
-        DbusHelper::filterNonExportableCharacters(uuid);
-        config->group("myself").writeEntry("id", uuid);
-        config->sync();
-        kDebug(debugArea()) << "My id:" << uuid;
-    }
-
-    //kDebug(debugArea()) << "QCA supported capabilities:" << QCA::supportedFeatures().join(",");
-    if(!QCA::isSupported("rsa")) {
-        //TODO: Display this in a notification or another visible way
-        kWarning(debugArea()) << "Error: KDE Connect could not find support for RSA in your QCA installation, if your distribution provides"
-                   << "separate packages for QCA-ossl and QCA-gnupg plugins, make sure you have them installed and try again.";
-        return;
-    }
-
-    const QFile::Permissions strict = QFile::ReadOwner | QFile::WriteOwner | QFile::ReadUser | QFile::WriteUser;
-    if (!config->group("myself").hasKey("privateKeyPath"))
-    {
-        const QString privateKeyPath = KStandardDirs::locateLocal("appdata", "key.pem", true, KComponentData("kdeconnect", "kdeconnect"));
-        
-        QFile privKey(privateKeyPath);
-        
-        if (!privKey.open(QIODevice::ReadWrite | QIODevice::Truncate))
-        {
-            kWarning(debugArea()) << "Error: KDE Connect could not create private keys file: " << privateKeyPath;
-            return;
-        }
-        
-        if (!privKey.setPermissions(strict))
-        {
-            kWarning(debugArea()) << "Error: KDE Connect could not set permissions for private file: " << privateKeyPath;
-        }
-
-        //http://delta.affinix.com/docs/qca/rsatest_8cpp-example.html
-        if (config->group("myself").hasKey("privateKey")) {
-            //Migration from older versions of KDE Connect
-            privKey.write(config->group("myself").readEntry<QString>("privateKey",QCA::KeyGenerator().createRSA(2048).toPEM()).toAscii());
-        } else {
-            privKey.write(QCA::KeyGenerator().createRSA(2048).toPEM().toAscii());
-        }
-        privKey.close();
-
-        //TODO: This should not store an absolute path: it will cause problems if the home folder changes, .kde4 becomes .kde (debian?), or similar...
-        config->group("myself").writeEntry("privateKeyPath", privateKeyPath);
-        config->sync();
-    }
-    if (QFile::permissions(config->group("myself").readEntry("privateKeyPath")) != strict)
-    {
-        kWarning(debugArea()) << "Error: KDE Connect detects wrong permissions for private file " << config->group("myself").readEntry("privateKeyPath");
-    }
-
-    //Register on DBus
-    QDBusConnection::sessionBus().registerService("org.kde.kdeconnect");
-    QDBusConnection::sessionBus().registerObject("/modules/kdeconnect", this, QDBusConnection::ExportScriptableContents);
-
-    //Load backends (hardcoded by now, should be plugins in a future)
+    //Load backends
     d->mLinkProviders.insert(new LanLinkProvider());
     //d->mLinkProviders.insert(new LoopbackLinkProvider());
 
     //Read remebered paired devices
-    const KConfigGroup& known = config->group("trusted_devices");
-    const QStringList& list = known.groupList();
+    const QStringList& list = KdeConnectConfig::instance()->trustedDevices();
     Q_FOREACH(const QString& id, list) {
         Device* device = new Device(this, id);
-        connect(device, SIGNAL(reachableStatusChanged()),
-                this, SLOT(onDeviceReachableStatusChanged()));
+        connect(device, SIGNAL(reachableStatusChanged()), this, SLOT(onDeviceStatusChanged()));
+        connect(device, SIGNAL(pairingChanged(bool)), this, SLOT(onDeviceStatusChanged()));
         d->mDevices[id] = device;
         Q_EMIT deviceAdded(id);
     }
 
     //Listen to new devices
     Q_FOREACH (LinkProvider* a, d->mLinkProviders) {
-        connect(a, SIGNAL(onConnectionReceived(NetworkPackage, DeviceLink*)),
-                this, SLOT(onNewDeviceLink(NetworkPackage, DeviceLink*)));
+        connect(a, SIGNAL(onConnectionReceived(NetworkPackage,DeviceLink*)),
+                this, SLOT(onNewDeviceLink(NetworkPackage,DeviceLink*)));
     }
     setDiscoveryEnabled(true);
 
-    //Listen to connectivity changes
-    QNetworkConfigurationManager* manager = new QNetworkConfigurationManager();
-    QNetworkSession* network = new QNetworkSession(manager->defaultConfiguration());
-    connect(manager, SIGNAL(configurationAdded(QNetworkConfiguration)),
-            this, SLOT(forceOnNetworkChange()));
-    Q_FOREACH (LinkProvider* a, d->mLinkProviders) {
-        connect(network, SIGNAL(stateChanged(QNetworkSession::State)),
-                a, SLOT(onNetworkChange(QNetworkSession::State)));
-    }
+    //Register on DBus
+    QDBusConnection::sessionBus().registerService("org.kde.kdeconnect");
+    QDBusConnection::sessionBus().registerObject("/modules/kdeconnect", this, QDBusConnection::ExportScriptableContents);
 
-    kDebug(debugArea()) << "KdeConnect daemon started";
+    qCDebug(KDECONNECT_CORE) << "KdeConnect daemon started";
 }
 
 void Daemon::setDiscoveryEnabled(bool b)
@@ -166,13 +96,13 @@ void Daemon::setDiscoveryEnabled(bool b)
         else
             a->onStop();
     }
-
 }
 
 void Daemon::forceOnNetworkChange()
 {
+    qCDebug(KDECONNECT_CORE) << "Sending onNetworkChange to " << d->mLinkProviders.size() << " LinkProviders";
     Q_FOREACH (LinkProvider* a, d->mLinkProviders) {
-        a->onNetworkChange(QNetworkSession::Connected);
+        a->onNetworkChange();
     }
 }
 
@@ -189,50 +119,67 @@ QStringList Daemon::devices(bool onlyReachable, bool onlyVisible) const
 
 void Daemon::onNewDeviceLink(const NetworkPackage& identityPackage, DeviceLink* dl)
 {
-
     const QString& id = identityPackage.get<QString>("deviceId");
 
-    //kDebug(debugArea()) << "Device discovered" << id << "via" << dl->provider()->name();
+    //qCDebug(KDECONNECT_CORE) << "Device discovered" << id << "via" << dl->provider()->name();
 
     if (d->mDevices.contains(id)) {
-        //kDebug(debugArea()) << "It is a known device";
+        //qCDebug(KDECONNECT_CORE) << "It is a known device";
         Device* device = d->mDevices[id];
+        bool wasReachable = device->isReachable();
         device->addLink(identityPackage, dl);
+        if (!wasReachable) {
+            Q_EMIT deviceVisibilityChanged(id, true);
+        }
     } else {
-        //kDebug(debugArea()) << "It is a new device";
+        //qCDebug(KDECONNECT_CORE) << "It is a new device";
 
         Device* device = new Device(this, identityPackage, dl);
-        connect(device, SIGNAL(reachableStatusChanged()), this, SLOT(onDeviceReachableStatusChanged()));
+        connect(device, SIGNAL(reachableStatusChanged()), this, SLOT(onDeviceStatusChanged()));
+        connect(device, SIGNAL(pairingChanged(bool)), this, SLOT(onDeviceStatusChanged()));
         d->mDevices[id] = device;
 
         Q_EMIT deviceAdded(id);
     }
-
-    Q_EMIT deviceVisibilityChanged(id, true);
-
 }
 
-void Daemon::onDeviceReachableStatusChanged()
+void Daemon::onDeviceStatusChanged()
 {
-
     Device* device = (Device*)sender();
     QString id = device->id();
 
-    Q_EMIT deviceVisibilityChanged(id, device->isReachable());
+    qCDebug(KDECONNECT_CORE) << "Device" << device->name() << "status changed. Reachable:" << device->isReachable() << ". Paired: " << device->isPaired();
 
-    //kDebug(debugArea()) << "Device" << device->name() << "reachable status changed:" << device->isReachable();
-
-    if (!device->isReachable()) {
-
-        if (!device->isPaired()) {
-            kDebug(debugArea()) << "Destroying device" << device->name();
-            Q_EMIT deviceRemoved(id);
-            d->mDevices.remove(id);
-            device->deleteLater();
-        }
-
+    if (!device->isReachable() && !device->isPaired()) {
+        qCDebug(KDECONNECT_CORE) << "Destroying device" << device->name();
+        d->mDevices.remove(id);
+        device->deleteLater();
+        Q_EMIT deviceRemoved(id);
+    } else {
+        Q_EMIT deviceVisibilityChanged(id, device->isReachable());
     }
 
+}
+
+void Daemon::setAnnouncedName(QString name)
+{
+    qCDebug(KDECONNECT_CORE()) << "Announcing name";
+    KdeConnectConfig::instance()->setName(name);
+    forceOnNetworkChange();
+}
+
+QString Daemon::announcedName()
+{
+    return KdeConnectConfig::instance()->name();
+}
+
+QNetworkAccessManager* Daemon::networkAccessManager()
+{
+    static QPointer<QNetworkAccessManager> manager;
+    if (!manager) {
+        manager = new QNetworkAccessManager(this);
+    }
+    return manager;
 }
 
 Daemon::~Daemon()

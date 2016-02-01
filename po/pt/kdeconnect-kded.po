@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeconnect-kded\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-06-18 01:56+0000\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
 "PO-Revision-Date: 2014-06-10 14:03+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -13,18 +13,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-POFile-SpellExtra: sshfs sshfsf kdeconnect min Connect\n"
 
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "José Nuno Pires"
+#: kdeconnectd.cpp:80
+#, kde-format
+msgid "Pairing request from %1"
+msgstr "Pedido de emparelhamento de %1"
 
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "zepires@gmail.com"
+#: kdeconnectd.cpp:81
+msgid "Accept"
+msgstr "Aceitar"
 
-#: kdeconnectd.cpp:63
-msgid "kdeconnect"
-msgstr "kdeconnect"
-
-#: kdeconnectd.cpp:65
-msgid "Connect your devices and KDE"
-msgstr "Ligar os seus dispositivos ao KDE"
+#: kdeconnectd.cpp:81
+msgid "Reject"
+msgstr "Rejeitar"

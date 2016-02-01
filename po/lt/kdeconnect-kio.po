@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l 10n\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-10-11 01:54+0000\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
 "PO-Revision-Date: 2014-02-15 01:46+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -18,30 +18,18 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
 
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr ""
-
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr ""
-
-#: kiokdeconnect.cpp:39
-msgid "kiokdeconnect"
-msgstr ""
-
-#: kiokdeconnect.cpp:93
+#: kiokdeconnect.cpp:84
 msgid "Listing devices..."
 msgstr ""
 
-#: kiokdeconnect.cpp:131
+#: kiokdeconnect.cpp:121
 msgid "Accessing device..."
 msgstr ""
 
-#: kiokdeconnect.cpp:144
+#: kiokdeconnect.cpp:134
 msgid "Could not mount device filesystem"
 msgstr ""
 
-#: kiokdeconnect.cpp:189
+#: kiokdeconnect.cpp:178
 msgid "Could not contact background service."
 msgstr ""

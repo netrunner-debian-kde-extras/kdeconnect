@@ -1,10 +1,9 @@
+#include "responsewaiter.h"
 
 #include <QDBusPendingCall>
 #include <QDBusPendingReply>
 #include <QDebug>
 #include <QCoreApplication>
-
-#include "responsewaiter.h"
 
 Q_DECLARE_METATYPE(QDBusPendingReply<>)
 Q_DECLARE_METATYPE(QDBusPendingReply<QVariant>)
@@ -12,7 +11,7 @@ Q_DECLARE_METATYPE(QDBusPendingReply<bool>)
 Q_DECLARE_METATYPE(QDBusPendingReply<int>)
 Q_DECLARE_METATYPE(QDBusPendingReply<QString>)
 
-DBusResponseWaiter* DBusResponseWaiter::m_instance = 0;
+DBusResponseWaiter* DBusResponseWaiter::m_instance = nullptr;
 
 DBusResponseWaiter* DBusResponseWaiter::instance()
 {
@@ -125,7 +124,7 @@ const QDBusPendingCall* DBusResponseWaiter::extractPendingCall(QVariant& variant
         }
     }
     
-    return 0;
+    return nullptr;
 }
 
 

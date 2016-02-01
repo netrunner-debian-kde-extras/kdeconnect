@@ -1,0 +1,142 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# enolp <enolp@softastur.org>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-09-30 01:12+0100\n"
+"Last-Translator: enolp <enolp@softastur.org>\n"
+"Language-Team: Spanish <kde-i18n-doc@kde.org>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
+
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Softastur"
+
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "alministradores@softastur.org"
+
+#: kdeconnect-cli.cpp:41
+msgid "KDE Connect CLI tool"
+msgstr "Ferramienta CLI de KDE Connect"
+
+#: kdeconnect-cli.cpp:43
+msgid "(C) 2015 Aleix Pol Gonzalez"
+msgstr "(C) 2013 Aleix Pol Gonzalez"
+
+#: kdeconnect-cli.cpp:46
+msgid "Aleix Pol Gonzalez"
+msgstr "Aleix Pol Gonzalez"
+
+#: kdeconnect-cli.cpp:47
+msgid "Albert Vaca Cintora"
+msgstr "Albert Vaca Cintora"
+
+#: kdeconnect-cli.cpp:49
+msgid "List all devices"
+msgstr "Llista tolos preseos"
+
+#: kdeconnect-cli.cpp:50
+msgid "List available (paired and reachable) devices"
+msgstr "Llista los preseos (empareyaos y algamables) disponibles"
+
+#: kdeconnect-cli.cpp:51
+msgid ""
+"Make --list-devices or --list-available print only the devices id, to ease "
+"scripting"
+msgstr ""
+"Facer que --list-devices o --list-available amuesen namái la ID de los "
+"preseos p'acencellar la creación de scripts"
+
+#: kdeconnect-cli.cpp:52
+msgid "Search for devices in the network and re-establish connections"
+msgstr "Gueta preseos na rede y reafita les conexones"
+
+#: kdeconnect-cli.cpp:53
+msgid "Request pairing to a said device"
+msgstr "Solicita l'empareyamientu al preséu dichu"
+
+#: kdeconnect-cli.cpp:54
+msgid "Stop pairing to a said device"
+msgstr "Para l'empareyamientu al preséu dichu"
+
+#: kdeconnect-cli.cpp:55
+msgid "Sends a ping to said device"
+msgstr "Unvia un ping al ficheru dichu"
+
+#: kdeconnect-cli.cpp:56
+msgid "Same as ping but you can set the message to display"
+msgstr "Como'l ping pero pues afitar el mensaxe p'amosar"
+
+#: kdeconnect-cli.cpp:56
+msgid "message"
+msgstr "mensaxe"
+
+#: kdeconnect-cli.cpp:57
+msgid "Share a file to a said device"
+msgstr "Comparte un ficheru al preséu dichu"
+
+#: kdeconnect-cli.cpp:58
+msgid "Display the notifications on a said device"
+msgstr "Amuesa les notificaciones nel preséu dichu"
+
+#: kdeconnect-cli.cpp:59
+msgid "Lock the specified device"
+msgstr "Bloquiar el preséu especificáu"
+
+#: kdeconnect-cli.cpp:60
+msgid "Device ID"
+msgstr "ID de preséu"
+
+#: kdeconnect-cli.cpp:85
+msgid "(paired and reachable)"
+msgstr "(empareyáu y algamable)"
+
+#: kdeconnect-cli.cpp:87
+msgid "(reachable)"
+msgstr "(algamable)"
+
+#: kdeconnect-cli.cpp:89
+msgid "(paired)"
+msgstr "(empareyáu)"
+
+#: kdeconnect-cli.cpp:95
+#, kde-format
+msgid "1 device found"
+msgid_plural "%1 devices found"
+msgstr[0] "Alcontróse un preséu"
+msgstr[1] "Alcontráronse %1 preseos"
+
+#: kdeconnect-cli.cpp:97
+msgid "No devices found"
+msgstr "Nun s'alcontraron preseos"
+
+#: kdeconnect-cli.cpp:105
+msgid "No device specified"
+msgstr "Nun s'especificó'l preséu"
+
+#: kdeconnect-cli.cpp:116
+#, kde-format
+msgid "Couldn't share %1"
+msgstr "Nun pudo compartise %1"
+
+#: kdeconnect-cli.cpp:121
+msgid "Already paired"
+msgstr "Yá ta empareyáu"
+
+#: kdeconnect-cli.cpp:129
+msgid "Already not paired"
+msgstr "Yá nun ta empareyáu"
+
+#: kdeconnect-cli.cpp:150
+msgid "Nothing to be done"
+msgstr "Nada pa facer"

@@ -1,13 +1,10 @@
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-#
 # Burkhard Lück <lueck@hube-lueck.de>, 2013, 2014.
 # Frederik Schwarzer <schwarzer@kde.org>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-06-18 01:56+0000\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
 "PO-Revision-Date: 2014-07-18 22:34+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -18,114 +15,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.5\n"
 
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Burkhard Lück"
-
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "lueck@hube-lueck.de"
-
-#: kdeconnectd.cpp:63
-msgid "kdeconnect"
-msgstr "KdeConnect"
-
-#: kdeconnectd.cpp:65
-msgid "Connect your devices and KDE"
-msgstr "Verbinden Sie Ihre Geräte mit KDE"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#, fuzzy
+#: kdeconnectd.cpp:80
+#, kde-format
+msgid "Pairing request from %1"
+msgstr "Verbindungsanfrage von %1 "
+
+#: kdeconnectd.cpp:81
+msgid "Accept"
+msgstr "Annehmen"
+
+#: kdeconnectd.cpp:81
+msgid "Reject"
+msgstr "Ablehnen"

@@ -19,6 +19,7 @@
  */
 
 #include "lanlinkprovider.h"
+#include "core_debug.h"
 
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -28,41 +29,16 @@
 #include <QHostInfo>
 #include <QTcpServer>
 #include <QUdpSocket>
+#include <QtGlobal>
+#include <QNetworkSession>
+#include <QNetworkConfigurationManager>
 
-#include <KSharedConfig>
-#include <KConfigGroup>
-
-#include "../../kdebugnamespace.h"
 #include "landevicelink.h"
-
-void LanLinkProvider::configureSocket(QTcpSocket* socket)
-{
-    int fd = socket->socketDescriptor();
-
-    socket->setSocketOption(QAbstractSocket::KeepAliveOption, QVariant(1));
-
-    #ifdef TCP_KEEPIDLE
-        // time to start sending keepalive packets (seconds)
-        int maxIdle = 10;
-        setsockopt(fd, IPPROTO_TCP, TCP_KEEPIDLE, &maxIdle, sizeof(maxIdle));
-    #endif
-
-    #ifdef TCP_KEEPINTVL
-        // interval between keepalive packets after the initial period (seconds)
-        int interval = 5;
-        setsockopt(fd, IPPROTO_TCP, TCP_KEEPINTVL, &interval, sizeof(interval));
-    #endif
-
-    #ifdef TCP_KEEPCNT
-        // number of missed keepalive packets before disconnecting
-        int count = 3;
-        setsockopt(fd, IPPROTO_TCP, TCP_KEEPCNT, &count, sizeof(count));
-    #endif
-
-}
+#include <kdeconnectconfig.h>
 
 LanLinkProvider::LanLinkProvider()
 {
+    mTcpPort = 0;
 
     mUdpServer = new QUdpSocket(this);
     connect(mUdpServer, SIGNAL(readyRead()), this, SLOT(newUdpConnection()));
@@ -70,19 +46,37 @@ LanLinkProvider::LanLinkProvider()
     mTcpServer = new QTcpServer(this);
     connect(mTcpServer,SIGNAL(newConnection()),this, SLOT(newConnection()));
 
+    //Detect when a network interface changes status, so we announce ourelves in the new network
+    QNetworkConfigurationManager* networkManager;
+    networkManager = new QNetworkConfigurationManager(this);
+    connect(networkManager, &QNetworkConfigurationManager::configurationChanged, [this, networkManager](QNetworkConfiguration config) {
+        Q_UNUSED(config);
+        //qCDebug(KDECONNECT_CORE) << config.name() << " state changed to " << config.state();
+        //qCDebug(KDECONNECT_CORE) << "Online status: " << (networkManager->isOnline()? "online":"offline");
+        onNetworkChange();
+    });
+}
+
+LanLinkProvider::~LanLinkProvider()
+{
+
 }
 
 void LanLinkProvider::onStart()
 {
-    bool buildSucceed = mUdpServer->bind(QHostAddress::Any, port, QUdpSocket::ShareAddress);
-    Q_ASSERT(buildSucceed);
+    mUdpServer->bind(QHostAddress::Any, port, QUdpSocket::ShareAddress);
 
     mTcpPort = port;
     while (!mTcpServer->listen(QHostAddress::Any, mTcpPort)) {
         mTcpPort++;
+        if (mTcpPort > 1764) { //No ports available?
+            qCritical(KDECONNECT_CORE) << "Error opening a port in range 1714-1764";
+            mTcpPort = 0;
+            return;
+        }
     }
 
-    onNetworkChange(QNetworkSession::Connected);
+    onNetworkChange();
 }
 
 void LanLinkProvider::onStop()
@@ -92,14 +86,16 @@ void LanLinkProvider::onStop()
 }
 
 //I'm in a new network, let's be polite and introduce myself
-void LanLinkProvider::onNetworkChange(QNetworkSession::State state)
+void LanLinkProvider::onNetworkChange()
 {
-    Q_UNUSED(state);
-
     if (!mTcpServer->isListening()) {
+        //Not started
         return;
     }
 
+    Q_ASSERT(mTcpPort != 0);
+
+    qCDebug(KDECONNECT_CORE()) << "Broadcasting identity packet";
     NetworkPackage np("");
     NetworkPackage::createIdentityPackage(&np);
     np.set("tcpPort", mTcpPort);
@@ -122,21 +118,18 @@ void LanLinkProvider::newUdpConnection()
 
         if (!success || receivedPackage->type() != PACKAGE_TYPE_IDENTITY) {
             delete receivedPackage;
-            return;
+            continue;
         }
 
-        KSharedConfigPtr config = KSharedConfig::openConfig("kdeconnectrc");
-        const QString myId = config->group("myself").readEntry<QString>("id","");
-
-        if (receivedPackage->get<QString>("deviceId") == myId) {
-            //kDebug(debugArea()) << "Ignoring my own broadcast";
+        if (receivedPackage->get<QString>("deviceId") == KdeConnectConfig::instance()->deviceId()) {
+            //qCDebug(KDECONNECT_CORE) << "Ignoring my own broadcast";
             delete receivedPackage;
-            return;
+            continue;
         }
 
         int tcpPort = receivedPackage->get<int>("tcpPort", port);
 
-        //kDebug(debugArea()) << "Received Udp identity package from" << sender << " asking for a tcp connection on port " << tcpPort;
+        //qCDebug(KDECONNECT_CORE) << "Received Udp identity package from" << sender << " asking for a tcp connection on port " << tcpPort;
 
         QTcpSocket* socket = new QTcpSocket(this);
         receivedIdentityPackages[socket].np = receivedPackage;
@@ -154,7 +147,7 @@ void LanLinkProvider::connectError()
     disconnect(socket, SIGNAL(connected()), this, SLOT(connected()));
     disconnect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(connectError()));
 
-    kDebug(debugArea()) << "Fallback (1), try reverse connection";
+    qCDebug(KDECONNECT_CORE) << "Fallback (1), try reverse connection (send udp packet)";
     NetworkPackage np("");
     NetworkPackage::createIdentityPackage(&np);
     np.set("tcpPort", mTcpPort);
@@ -178,7 +171,7 @@ void LanLinkProvider::connected()
 
     NetworkPackage* receivedPackage = receivedIdentityPackages[socket].np;
     const QString& deviceId = receivedPackage->get<QString>("deviceId");
-    //kDebug(debugArea()) << "Connected" << socket->isWritable();
+    //qCDebug(KDECONNECT_CORE) << "Connected" << socket->isWritable();
 
     LanDeviceLink* deviceLink = new LanDeviceLink(deviceId, this, socket);
 
@@ -188,7 +181,7 @@ void LanLinkProvider::connected()
 
     if (success) {
 
-        kDebug(debugArea()) << "Handshaking done (i'm the existing device)";
+        //qCDebug(KDECONNECT_CORE) << "Handshaking done (i'm the existing device)";
 
         connect(deviceLink, SIGNAL(destroyed(QObject*)),
                 this, SLOT(deviceLinkDestroyed(QObject*)));
@@ -211,8 +204,7 @@ void LanLinkProvider::connected()
         //I think this will never happen, but if it happens the deviceLink
         //(or the socket that is now inside it) might not be valid. Delete them.
         delete deviceLink;
-
-        kDebug(debugArea()) << "Fallback (2), try reverse connection";
+        qCDebug(KDECONNECT_CORE) << "Fallback (2), try reverse connection (send udp packet)";
         mUdpSocket.writeDatagram(np2.serialize(), receivedIdentityPackages[socket].sender, port);
     }
 
@@ -224,14 +216,14 @@ void LanLinkProvider::connected()
 //I'm the new device and this is the answer to my UDP identity package (no data received yet)
 void LanLinkProvider::newConnection()
 {
-    //kDebug(debugArea()) << "LanLinkProvider newConnection";
+    //qCDebug(KDECONNECT_CORE) << "LanLinkProvider newConnection";
 
-    while(mTcpServer->hasPendingConnections()) {
+    while (mTcpServer->hasPendingConnections()) {
         QTcpSocket* socket = mTcpServer->nextPendingConnection();
         configureSocket(socket);
         //This socket is still managed by us (and child of the QTcpServer), if
         //it disconnects before we manage to pass it to a LanDeviceLink, it's
-        //our responsability to delete it. We do so with this connection.
+        //our responsibility to delete it. We do so with this connection.
         connect(socket, SIGNAL(disconnected()),
                 socket, SLOT(deleteLater()));
         connect(socket, SIGNAL(readyRead()),
@@ -247,16 +239,19 @@ void LanLinkProvider::dataReceived()
     QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
 
     const QByteArray data = socket->readLine();
+
+    //qCDebug(KDECONNECT_CORE) << "LanLinkProvider received reply:" << data;
+
     NetworkPackage np("");
     bool success = NetworkPackage::unserialize(data, &np);
-    //kDebug(debugArea()) << "LanLinkProvider received reply:" << data;
+    //qCDebug(KDECONNECT_CORE) << "LanLinkProvider received reply:" << data;
 
     if (!success || np.type() != PACKAGE_TYPE_IDENTITY) {
-        kDebug(debugArea()) << "LanLinkProvider/newConnection: Not an identification package (wuh?)";
+        qCDebug(KDECONNECT_CORE) << "LanLinkProvider/newConnection: Not an identification package (wuh?)";
         return;
     }
 
-    kDebug(debugArea()) << "Handshaking done (i'm the new device)";
+    //qCDebug(KDECONNECT_CORE) << "Handshaking done (i'm the new device)";
 
     //This socket will now be owned by the LanDeviceLink, forget about it
     disconnect(socket, SIGNAL(readyRead()),
@@ -286,7 +281,7 @@ void LanLinkProvider::dataReceived()
 
 void LanLinkProvider::deviceLinkDestroyed(QObject* destroyedDeviceLink)
 {
-    //kDebug(debugArea()) << "deviceLinkDestroyed";
+    //qCDebug(KDECONNECT_CORE) << "deviceLinkDestroyed";
     const QString id = destroyedDeviceLink->property("deviceId").toString();
     QMap< QString, DeviceLink* >::iterator oldLinkIterator = mLinks.find(id);
     if (oldLinkIterator != mLinks.end() && oldLinkIterator.value() == destroyedDeviceLink) {
@@ -295,7 +290,28 @@ void LanLinkProvider::deviceLinkDestroyed(QObject* destroyedDeviceLink)
 
 }
 
-LanLinkProvider::~LanLinkProvider()
+void LanLinkProvider::configureSocket(QTcpSocket* socket)
 {
+    int fd = socket->socketDescriptor();
+
+    socket->setSocketOption(QAbstractSocket::KeepAliveOption, QVariant(1));
+
+    #ifdef TCP_KEEPIDLE
+        // time to start sending keepalive packets (seconds)
+        int maxIdle = 10;
+        setsockopt(fd, IPPROTO_TCP, TCP_KEEPIDLE, &maxIdle, sizeof(maxIdle));
+    #endif
+
+    #ifdef TCP_KEEPINTVL
+        // interval between keepalive packets after the initial period (seconds)
+        int interval = 5;
+        setsockopt(fd, IPPROTO_TCP, TCP_KEEPINTVL, &interval, sizeof(interval));
+    #endif
+
+    #ifdef TCP_KEEPCNT
+        // number of missed keepalive packets before disconnecting
+        int count = 3;
+        setsockopt(fd, IPPROTO_TCP, TCP_KEEPCNT, &count, sizeof(count));
+    #endif
 
 }

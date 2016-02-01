@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Vít Pelčák <vit@pelcak.org>, 2014.
+# Vít Pelčák <vit@pelcak.org>, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2014-11-11 02:05+0000\n"
-"PO-Revision-Date: 2014-11-12 15:58+0100\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-09-15 10:05+0100\n"
 "Last-Translator: Vít Pelčák <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 2.0\n"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
@@ -25,67 +25,119 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "vit@pelcak.org"
 
-#: kdeconnect-cli.cpp:34
+#: kdeconnect-cli.cpp:41
 msgid "KDE Connect CLI tool"
 msgstr "CLI nástroj pro KDE Connect"
 
-#: kdeconnect-cli.cpp:35
-msgid "(C) 2013 Aleix Pol Gonzalez"
-msgstr "(C) 2013 Aleix Pol Gonzalez"
+#: kdeconnect-cli.cpp:43
+msgid "(C) 2015 Aleix Pol Gonzalez"
+msgstr "(C) 2015 Aleix Pol Gonzalez"
 
-#: kdeconnect-cli.cpp:36
+#: kdeconnect-cli.cpp:46
 msgid "Aleix Pol Gonzalez"
 msgstr "Aleix Pol Gonzalez"
 
-#: kdeconnect-cli.cpp:37
+#: kdeconnect-cli.cpp:47
 msgid "Albert Vaca Cintora"
 msgstr "Albert Vaca Cintora"
 
-#: kdeconnect-cli.cpp:41
-msgid "List all devices."
-msgstr "Vypsat všechna zařízení."
-
-#: kdeconnect-cli.cpp:42
-msgid "Search for devices in the network and re-establish connections."
-msgstr "Hledat zařízení v síti a znovu navázat spojení."
-
-#: kdeconnect-cli.cpp:43
-msgid "Request pairing to a said device."
-msgstr "Vyžádat párování s daným zařízením."
-
-#: kdeconnect-cli.cpp:44
-msgid "Stop pairing to a said device."
-msgstr "Zastavit párování s daným zařízením."
-
-#: kdeconnect-cli.cpp:45
-msgid "Send a ping to said device."
-msgstr "Poslat na dané zařízení ping."
-
-#: kdeconnect-cli.cpp:46
-msgid "Same as ping but you can customize the message shown."
-msgstr "Stejné jako ping, ale můžete si vybrat zobrazenou zprávu."
-
-#: kdeconnect-cli.cpp:47
-msgid "Share a file to a said device."
-msgstr "Sdílet soubor s daným zařízením."
-
-#: kdeconnect-cli.cpp:48
-msgid "Display the notifications on a said device."
-msgstr "Zobrazit upozornění na daném zařízení."
+#: kdeconnect-cli.cpp:49
+msgid "List all devices"
+msgstr "Vypsat všechna zařízení"
 
 #: kdeconnect-cli.cpp:50
-msgid "Device ID."
-msgstr "ID zařízení."
+msgid "List available (paired and reachable) devices"
+msgstr "Vypsat dostupná (spárovaná a dosažitelná) zařízení"
 
-#: kdeconnect-cli.cpp:80
+#: kdeconnect-cli.cpp:51
+msgid ""
+"Make --list-devices or --list-available print only the devices id, to ease "
+"scripting"
+msgstr ""
+"Pro zjednodušení skriptování zapnout aby --list-devices nebo --list-"
+"available vypsal pouze id zařízení"
+
+#: kdeconnect-cli.cpp:52
+msgid "Search for devices in the network and re-establish connections"
+msgstr "Hledat zařízení v síti a znovu navázat spojení"
+
+#: kdeconnect-cli.cpp:53
+msgid "Request pairing to a said device"
+msgstr "Vyžádat párování s daným zařízením"
+
+#: kdeconnect-cli.cpp:54
+msgid "Stop pairing to a said device"
+msgstr "Zastavit párování s daným zařízením"
+
+#: kdeconnect-cli.cpp:55
+msgid "Sends a ping to said device"
+msgstr "Pošle na dané zařízení ping"
+
+#: kdeconnect-cli.cpp:56
+msgid "Same as ping but you can set the message to display"
+msgstr "Stejné jako ping, ale můžete nastavit zobrazenou zprávu."
+
+#: kdeconnect-cli.cpp:56
+msgid "message"
+msgstr "zpráva"
+
+#: kdeconnect-cli.cpp:57
+msgid "Share a file to a said device"
+msgstr "Sdílet soubor s daným zařízením"
+
+#: kdeconnect-cli.cpp:58
+msgid "Display the notifications on a said device"
+msgstr "Zobrazit upozornění na daném zařízení"
+
+#: kdeconnect-cli.cpp:59
+msgid "Lock the specified device"
+msgstr "Uzamknout zadané zařízení"
+
+#: kdeconnect-cli.cpp:60
+msgid "Device ID"
+msgstr "ID zařízení"
+
+#: kdeconnect-cli.cpp:85
+msgid "(paired and reachable)"
+msgstr "(spárovaná a dosažitelná)"
+
+#: kdeconnect-cli.cpp:87
+msgid "(reachable)"
+msgstr "(nedostupná)"
+
+#: kdeconnect-cli.cpp:89
+msgid "(paired)"
+msgstr "(spárovaná)"
+
+#: kdeconnect-cli.cpp:95
+#, kde-format
+msgid "1 device found"
+msgid_plural "%1 devices found"
+msgstr[0] "Nalezeno 1 zařízení"
+msgstr[1] "Nalezena %1 zařízení"
+msgstr[2] "Nalezeno %1 zařízení"
+
+#: kdeconnect-cli.cpp:97
+msgid "No devices found"
+msgstr "Nenalezena žádná zařízení"
+
+#: kdeconnect-cli.cpp:105
 msgid "No device specified"
 msgstr "Nebylo zadáno žádné zařízení"
 
-#: kdeconnect-cli.cpp:92
+#: kdeconnect-cli.cpp:116
 #, kde-format
 msgid "Couldn't share %1"
 msgstr "Nelze sdílet %1"
 
-#: kdeconnect-cli.cpp:125
-msgid "Nothing to be done with the device"
-msgstr "Se zařízením není co provádět"
+#: kdeconnect-cli.cpp:121
+msgid "Already paired"
+msgstr "Již spárované"
+
+#: kdeconnect-cli.cpp:129
+msgid "Already not paired"
+msgstr "Již nespárované"
+
+#: kdeconnect-cli.cpp:150
+msgid "Nothing to be done"
+msgstr "Nebude nic provedeno"

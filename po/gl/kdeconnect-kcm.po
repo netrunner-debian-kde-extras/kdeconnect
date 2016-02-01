@@ -1,0 +1,133 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-12-07 14:08+0100\n"
+"Last-Translator: Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail."
+"com>\n"
+"Language-Team: Galician <kde-i18n-doc@kde.org>\n"
+"Language: gl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"com>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
+
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Adrián Chaves Fernández"
+
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "adriyetichaves@gmail.com"
+
+#: kcm.cpp:55
+msgid "KDE Connect Settings"
+msgstr "Configuración de KDE Connect"
+
+#: kcm.cpp:57
+msgid "KDE Connect Settings module"
+msgstr "Mdulo de configuración de KDE Connect"
+
+#: kcm.cpp:59
+msgid "(C) 2015 Albert Vaca Cintora"
+msgstr "© 2015 Albert Vaca Cintora"
+
+#: kcm.cpp:63
+msgid "Albert Vaca Cintora"
+msgstr "Albert Vaca Cintora"
+
+#: kcm.cpp:209 kcm.cpp:268
+msgid "(paired)"
+msgstr "(emparellado)"
+
+#: kcm.cpp:209 kcm.cpp:268
+msgid "(unpaired)"
+msgstr "(desemparellado)"
+
+#: kcm.cpp:218
+msgid "Plugins"
+msgstr "Complementos"
+
+#: kcm.cpp:255
+#, kde-format
+msgid "Error trying to pair: %1"
+msgstr "Produciuse un erro ao intentar emparellarse: %1"
+
+#. i18n: ectx: property (text), widget (QLabel, rename_label)
+#: kcm.ui:47
+msgid "KDE Connect"
+msgstr "KDE Connect"
+
+#. i18n: ectx: property (text), widget (QPushButton, refresh_button)
+#: kcm.ui:110
+msgid "Refresh"
+msgstr "Actualizar"
+
+#. i18n: ectx: property (text), widget (QLabel, name_label)
+#: kcm.ui:157
+msgid "Device"
+msgstr "Dispositivo"
+
+#. i18n: ectx: property (text), widget (QLabel, status_label)
+#: kcm.ui:170
+msgid "(status)"
+msgstr "(estado)"
+
+#. i18n: ectx: property (text), widget (QPushButton, pair_button)
+#: kcm.ui:215
+msgid "Request pair"
+msgstr "Solicitar emparellarse"
+
+#. i18n: ectx: property (text), widget (QPushButton, unpair_button)
+#: kcm.ui:228
+msgid "Unpair"
+msgstr "Desemparellarse"
+
+#. i18n: ectx: property (text), widget (QPushButton, ping_button)
+#: kcm.ui:241
+msgid "Send ping"
+msgstr "Enviar un ping"
+
+#. i18n: ectx: property (text), widget (QLabel, noDeviceLabel)
+#: kcm.ui:286
+msgid "No device selected."
+msgstr "Non se seleccionou ningún dispositivo."
+
+#. i18n: ectx: property (text), widget (QLabel, noDeviceLinks)
+#: kcm.ui:302
+msgid ""
+"<html><head/><body><p>If you own Android device, make sure to install the <a "
+"href=\"https://play.google.com/store/apps/details?id=org.kde.kdeconnect_tp"
+"\"><span style=\" text-decoration: underline; color:#0000ff;\">KDE Connect "
+"Android app</span></a> (also available <a href=\"https://f-droid.org/"
+"repository/browse/?fdid=org.kde.kdeconnect_tp\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">from F-Droid</span></a>) and it "
+"should appear in the list.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Se ten un dispositivo con Android, instale <a href="
+"\"https://play.google.com/store/apps/details?id=org.kde.kdeconnect_tp"
+"\"><span style=\" text-decoration: underline; color:#0000ff;\">KDE Connect "
+"para Android</span></a> (tamén <a href=\"https://f-droid.org/repository/"
+"browse/?fdid=org.kde.kdeconnect_tp\"><span style=\" text-decoration: "
+"underline; color:#0000ff;\">dispoñíbel en F-Droid</span></a>) e debería "
+"aparecer na lista.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QLabel, noDeviceTroubleshoot)
+#: kcm.ui:333
+msgid ""
+"<html><head/><body><p>If you are having problems, visit the <a href="
+"\"https://community.kde.org/KDEConnect\"><span style=\" text-decoration: "
+"underline; color:#0000ff;\">KDE Connect Community wiki</span></a> for help.</"
+"p></body></html>"
+msgstr ""
+"<html><head/><body><p>Se ten problemas, busque axuda no <a href=\"https://"
+"community.kde.org/KDEConnect\"><span style=\" text-decoration: underline; "
+"color:#0000ff;\">wiki da comunidade de KDE Connect</span></a>.</p></body></"
+"html>"

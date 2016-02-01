@@ -20,19 +20,19 @@
 
 #include "kdeconnectdeclarativeplugin.h"
 
-#include <QtDeclarative/QDeclarativeItem>
-#include <QtDeclarative/QDeclarativeEngine>
-#include <QtDeclarative/QDeclarativeContext>
+#include <QQmlEngine>
+#include <QQmlContext>
 #include <QDBusPendingCall>
 #include <QDBusPendingReply>
+#include <QtQml>
 
 #include "objectfactory.h"
 #include "responsewaiter.h"
+#include "processrunner.h"
 
+#include "interfaces/devicessortproxymodel.h"
 #include "interfaces/devicesmodel.h"
 #include "interfaces/notificationsmodel.h"
-
-Q_EXPORT_PLUGIN2(kdeconnectdeclarativeplugin, KdeConnectDeclarativePlugin)
 
 QObject* createDeviceDbusInterface(QVariant deviceId)
 {
@@ -49,6 +49,22 @@ QObject* createSftpInterface(QVariant deviceId)
     return new SftpDbusInterface(deviceId.toString());
 }
 
+QObject* createRemoteControlInterface(QVariant deviceId)
+{
+    return new RemoteControlDbusInterface(deviceId.toString());
+}
+
+QObject* createMprisInterface(QVariant deviceId)
+{
+    return new MprisDbusInterface(deviceId.toString());
+}
+
+QObject* createDeviceLockInterface(QVariant deviceId)
+{
+    Q_ASSERT(!deviceId.toString().isEmpty());
+    return new LockDeviceDbusInterface(deviceId.toString());
+}
+
 QObject* createDBusResponse()
 {
     return new DBusAsyncResponse();
@@ -56,16 +72,19 @@ QObject* createDBusResponse()
 
 void KdeConnectDeclarativePlugin::registerTypes(const char* uri)
 {
-    Q_UNUSED(uri);
-    
-    qmlRegisterType<DevicesModel>("org.kde.kdeconnect", 1, 0, "DevicesModel");
-    qmlRegisterType<NotificationsModel>("org.kde.kdeconnect", 1, 0, "NotificationsModel");
-    qmlRegisterType<DBusAsyncResponse>("org.kde.kdeconnect", 1, 0, "DBusAsyncResponse");
+    qmlRegisterType<DevicesModel>(uri, 1, 0, "DevicesModel");
+    qmlRegisterType<NotificationsModel>(uri, 1, 0, "NotificationsModel");
+    qmlRegisterType<DBusAsyncResponse>(uri, 1, 0, "DBusAsyncResponse");
+    qmlRegisterType<ProcessRunner>(uri, 1, 0, "ProcessRunner");
+    qmlRegisterType<DevicesSortProxyModel>(uri, 1, 0, "DevicesSortProxyModel");
+    qmlRegisterUncreatableType<MprisDbusInterface>(uri, 1, 0, "MprisDbusInterface", QStringLiteral("You're not supposed to instantiate interfacess"));
+    qmlRegisterUncreatableType<LockDeviceDbusInterface>(uri, 1, 0, "LockDeviceDbusInterface", QStringLiteral("You're not supposed to instantiate interfacess"));
+    qmlRegisterUncreatableType<DeviceDbusInterface>(uri, 1, 0, "DeviceDbusInterface", QStringLiteral("You're not supposed to instantiate interfacess"));
 }
 
-void KdeConnectDeclarativePlugin::initializeEngine(QDeclarativeEngine* engine, const char* uri)
+void KdeConnectDeclarativePlugin::initializeEngine(QQmlEngine* engine, const char* uri)
 {
-    QDeclarativeExtensionPlugin::initializeEngine(engine, uri);
+    QQmlExtensionPlugin::initializeEngine(engine, uri);
  
     engine->rootContext()->setContextProperty("DeviceDbusInterfaceFactory"
       , new ObjectFactory(engine, createDeviceDbusInterface));
@@ -75,10 +94,19 @@ void KdeConnectDeclarativePlugin::initializeEngine(QDeclarativeEngine* engine, c
     
     engine->rootContext()->setContextProperty("SftpDbusInterfaceFactory"
       , new ObjectFactory(engine, createSftpInterface));
+
+    engine->rootContext()->setContextProperty("MprisDbusInterfaceFactory"
+      , new ObjectFactory(engine, createMprisInterface));
+
+    engine->rootContext()->setContextProperty("RemoteControlDbusInterfaceFactory"
+      , new ObjectFactory(engine, createRemoteControlInterface));
+
+    engine->rootContext()->setContextProperty("LockDeviceDbusInterfaceFactory"
+      , new ObjectFactory(engine, createDeviceLockInterface));
     
     engine->rootContext()->setContextProperty("DBusResponseFactory"
       , new ObjectFactory(engine, createDBusResponse));    
     
     engine->rootContext()->setContextProperty("DBusResponseWaiter"
-      , DBusResponseWaiter::instance());    
+      , DBusResponseWaiter::instance());
 }

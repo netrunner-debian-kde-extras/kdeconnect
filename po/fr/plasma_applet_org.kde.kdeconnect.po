@@ -1,0 +1,49 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Sebastien Renard <renard@kde.org>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-09-18 19:23+0200\n"
+"Last-Translator: Sebastien Renard <renard@kde.org>\n"
+"Language-Team: French <kde-francophone@kde.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 1.5\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: package/contents/ui/Battery.qml:36
+msgid "Charging: %1%"
+msgstr "En charge: %1 %"
+
+#: package/contents/ui/Battery.qml:36
+msgid "Discharging: %1%"
+msgstr "En décharge: %1 %"
+
+#: package/contents/ui/Battery.qml:36
+msgid "No info"
+msgstr "aucune information"
+
+#: package/contents/ui/DeviceDelegate.qml:77
+msgid "Battery"
+msgstr "Batterie"
+
+#: package/contents/ui/DeviceDelegate.qml:92
+msgid "Notifications"
+msgstr "Notifications"
+
+#: package/contents/ui/FullRepresentation.qml:35
+msgid "No Paired Devices Available"
+msgstr "Pas de Périphérique disponible"
+
+#: package/contents/ui/main.qml:64
+msgid "KDE Connect Settings..."
+msgstr "Paramètres de KDE Connect..."

@@ -21,13 +21,16 @@
 #ifndef KDECONNECTDECLARATIVEPLUGIN_H
 #define KDECONNECTDECLARATIVEPLUGIN_H
 
-#include <QDeclarativeExtensionPlugin>
+#include <QQmlExtensionPlugin>
 
-class KdeConnectDeclarativePlugin : public QDeclarativeExtensionPlugin
+class KdeConnectDeclarativePlugin : public QQmlExtensionPlugin
 {
-    virtual void registerTypes(const char* uri);
-    virtual void initializeEngine(QDeclarativeEngine *engine, const char *uri);
+    Q_OBJECT
+
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
+
+    virtual void registerTypes(const char* uri) override;
+    virtual void initializeEngine(QQmlEngine *engine, const char *uri) override;
 };
 
-
-#endif
+#endif // KDECONNECTDECLARATIVEPLUGIN_H

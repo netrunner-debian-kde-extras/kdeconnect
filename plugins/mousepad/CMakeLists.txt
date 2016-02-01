@@ -5,17 +5,18 @@ set(kdeconnect_mousepad_SRCS
 find_package(XTest REQUIRED)
 find_package(X11 REQUIRED)
 find_package(LibFakeKey REQUIRED)
+find_package(Qt5X11Extras REQUIRED)
+find_package(KF5Wayland 5.3.90)
 
-kde4_add_plugin(kdeconnect_mousepad ${kdeconnect_mousepad_SRCS})
+set(HAVE_WAYLAND ${KF5Wayland_FOUND})
+configure_file(config-mousepad.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-mousepad.h )
+
+kdeconnect_add_plugin(kdeconnect_mousepad JSON kdeconnect_mousepad.json SOURCES  ${kdeconnect_mousepad_SRCS})
 
 include_directories(${XTEST_INCLUDE_DIRS} ${X11_INCLUDE_DIR} ${LibFakeKey_INCLUDE_DIRS})
 
-target_link_libraries(kdeconnect_mousepad kdeconnectcore
-    ${QT_QTGUI_LIBRARY}
-    ${X11_LIBRARIES}
-    ${XTEST_LIBRARIES}
-    ${LibFakeKey_LIBRARIES}
-)
+target_link_libraries(kdeconnect_mousepad kdeconnectcore Qt5::Gui Qt5::X11Extras ${X11_LIBRARIES} ${XTEST_LIBRARIES} ${LibFakeKey_LIBRARIES} KF5::I18n)
 
-install(TARGETS kdeconnect_mousepad DESTINATION ${PLUGIN_INSTALL_DIR} )
-install(FILES kdeconnect_mousepad.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+if(HAVE_WAYLAND)
+    target_link_libraries(kdeconnect_mousepad KF5::WaylandClient)
+endif()

@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Vít Pelčák <vit@pelcak.org>, 2014.
+# Vít Pelčák <vit@pelcak.org>, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2015-01-22 02:01+0000\n"
-"PO-Revision-Date: 2014-06-23 10:25+0200\n"
+"POT-Creation-Date: 2015-10-27 13:29+0000\n"
+"PO-Revision-Date: 2015-05-11 13:06+0100\n"
 "Last-Translator: Vít Pelčák <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,71 +15,80 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 2.0\n"
 
-#: device.cpp:186
+#: device.cpp:193
 msgid "Already paired"
 msgstr "Již spárováno"
 
-#: device.cpp:189
+#: device.cpp:196
 msgid "Pairing already requested for this device"
 msgstr "Pro toto zařízení již bylo párování vyžádáno"
 
-#: device.cpp:193
+#: device.cpp:207
 msgid "Device not reachable"
 msgstr "Zařízení je nedostupné"
 
-#: device.cpp:206
+#: device.cpp:218
 msgid "Error contacting device"
 msgstr "Chyba při kontaktování zařízení"
 
-#: device.cpp:244
+#: device.cpp:256
 msgid "Timed out"
 msgstr "Čas vypršel"
 
-#: device.cpp:343 device.cpp:395
+#: device.cpp:347 device.cpp:389
 msgid "Canceled by other peer"
 msgstr "Přerušeno druhým uživatelem"
 
-#: device.cpp:359
+#: device.cpp:363
 msgid "Received incorrect key"
 msgstr "Přijat nesprávný klíč"
 
-#: device.cpp:376
-#, kde-format
-msgid "Pairing request from %1"
-msgstr "Požadavek na párování od %1"
-
-#: device.cpp:377
-msgid "Accept"
-msgstr "Přijmout"
-
-#: device.cpp:377
-msgid "Reject"
-msgstr "Odmítnout"
-
-#: device.cpp:437
+#: device.cpp:428
 msgid "Canceled by the user"
 msgstr "Zrušeno uživatelem"
 
-#: filetransferjob.cpp:59 filetransferjob.cpp:120
-msgid "Receiving file over KDE-Connect"
+#: filetransferjob.cpp:63 filetransferjob.cpp:80
+#, fuzzy
+#| msgid "Receiving file over KDE-Connect"
+msgid "Receiving file over KDE Connect"
 msgstr "Přijímání souboru přes KDE Connect"
 
-#: filetransferjob.cpp:60 filetransferjob.cpp:121
+#: filetransferjob.cpp:64 filetransferjob.cpp:81
 msgctxt "File transfer origin"
 msgid "From"
 msgstr "Od"
 
-#: filetransferjob.cpp:67
-msgid "Incoming file exists"
-msgstr "Příchozí soubor existuje"
+#: filetransferjob.cpp:69
+msgid "Filename already present"
+msgstr "Název souboru již existuje"
 
-#: filetransferjob.cpp:123
+#: filetransferjob.cpp:82
 msgctxt "File transfer destination"
 msgid "To"
 msgstr "Komu"
 
-#: filetransferjob.cpp:196
-msgid "Received incomplete file"
-msgstr "Přijat nekompletní soubor"
+#: filetransferjob.cpp:101
+#, kde-format
+msgid "Received incomplete file: %1"
+msgstr "Přijat nekompletní soubor: %1"
+
+#: kdeconnectconfig.cpp:64
+msgid "KDE Connect failed to start"
+msgstr "Start aplikace KDE Connect selhal"
+
+#: kdeconnectconfig.cpp:65
+msgid ""
+"Could not find support for RSA in your QCA installation. If your "
+"distribution provides separate packages for QCA-ossl and QCA-gnupg, make "
+"sure you have them installed and try again."
+msgstr ""
+"Ve vaší instalaci QCA nebylo nalezeno RSA. Pokud vaše distribuce poskytuje "
+"QCA-ossl a QCA-gnupg ujistěte se, že máte nainstalované obě a zkuste to "
+"znovu."
+
+#: kdeconnectconfig.cpp:101
+#, kde-format
+msgid "Could not store private key file: %1"
+msgstr "Nelze uložit soubor soukromého klíče: %1"
