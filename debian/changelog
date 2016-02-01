@@ -1,3 +1,9 @@
+kdeconnect (0.8-1.1) UNRELEASED; urgency=medium
+
+  * Team upload.
+
+ -- Lisandro Damián Nicanor Pérez Meyer <lisandro@debian.org>  Mon, 01 Feb 2016 17:49:26 -0300
+
 kdeconnect (0.8-1) unstable; urgency=medium
 
   * New upstream version.
