@@ -12,6 +12,7 @@ kdeconnect (0.9g-1) UNRELEASED; urgency=medium
   * Update README.md installation.
   * Disable NetworkPackageTests::networkPackageIdentityTest as it seems to
     run fine with network access but fail without it (and thus on sbuild).
+  * Add libqca-qt5-2-plugins as a build dependency, it is needed by the tests.
 
  -- Lisandro Damián Nicanor Pérez Meyer <lisandro@debian.org>  Mon, 01 Feb 2016 17:49:26 -0300
 
