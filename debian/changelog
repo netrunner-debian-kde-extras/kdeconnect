@@ -8,6 +8,7 @@ kdeconnect (0.9g-1) UNRELEASED; urgency=medium
     - Add new build dependencies and dependencies as required. Thanks to the
       Ubuntu folks for they work! I have taken most of the correct build deps
       names from your packaging.
+    - Remove unnecesary removals in debian/rules.
   * Update README.md installation.
 
  -- Lisandro Damián Nicanor Pérez Meyer <lisandro@debian.org>  Mon, 01 Feb 2016 17:49:26 -0300

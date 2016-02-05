@@ -14,9 +14,3 @@ export LDFLAGS := $(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed
 
 override_dh_auto_install:
 	dh_auto_install
-	
-	# remove '-dev' related files
-	$(RM) debian/kdeconnect/usr/lib/libkdeconnectcore.so
-	$(RM) debian/kdeconnect/usr/lib/libkdeconnectinterfaces.so
-	$(RM) -R debian/kdeconnect/usr/include
-	$(RM) -R debian/kdeconnect/usr/lib/cmake/
