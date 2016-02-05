@@ -1,5 +1,4 @@
-kdeconnect: package-name-doesnt-match-sonames libkdeconnectcore1 libkdeconnectinterfaces1
-
+# We are shipping a private lib, no headers.
+kdeconnect: package-name-doesnt-match-sonames
 # no '-dev' pkg provided
-kdeconnect: no-symbols-control-file usr/lib/libkdeconnectcore.so.1.0.1
-kdeconnect: no-symbols-control-file usr/lib/libkdeconnectinterfaces.so.1.0.1
+kdeconnect: no-symbols-control-file usr/lib/*/*
