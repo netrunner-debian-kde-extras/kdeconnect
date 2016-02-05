@@ -32,7 +32,7 @@ private Q_SLOTS:
 
     void dummyTest();
     void networkPackageTest();
-    void networkPackageIdentityTest();
+    //void networkPackageIdentityTest();
     void networkPackageEncryptionTest();
 
     void cleanupTestCase();
