@@ -4,14 +4,23 @@ Priority: optional
 Maintainer: David Suárez <david.sephirot@gmail.com>
 Build-Depends: cmake,
                debhelper (>= 9.0.0),
-               kdelibs5-dev,
-               libqca2-dev,
-               libqca2-plugin-ossl,
-               libqjson-dev,
-               libxtst-dev,
-               pkg-kde-tools,
+               extra-cmake-modules,
+               kio-dev,
+               kwayland-dev,
                libfakekey-dev,
-               libdbus-1-dev
+               libkf5configwidgets-dev,
+               libkf5dbusaddons-dev,
+               libkf5i18n-dev,
+               libkf5iconthemes-dev,
+               libkf5kcmutils-dev,
+               libkf5notifications-dev,
+               libqca-qt5-2-dev,
+               libqt5x11extras5-dev,
+               libxtst-dev,
+               pkg-config,
+               pkg-kde-tools,
+               qtbase5-dev,
+               qtdeclarative5-dev
 Standards-Version: 3.9.6
 Homepage: https://projects.kde.org/projects/playground/base/kdeconnect-kde
 Vcs-Git: git://anonscm.debian.org/pkg-kde/kde-extras/kdeconnect.git
@@ -19,8 +28,9 @@ Vcs-Browser: https://anonscm.debian.org/cgit/pkg-kde/kde-extras/kdeconnect.git
 
 Package: kdeconnect
 Architecture: any
-Depends: libqca2,
-         libqca2-plugins,
+Depends: kde-cli-tools,
+         libqca-qt5-2-plugins,
+         plasma-workspace,
          sshfs,
          ${misc:Depends},
          ${shlibs:Depends}
